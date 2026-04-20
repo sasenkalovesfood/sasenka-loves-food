@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instagram button, preview, Sasenka Loves Food</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    /* Preview-only chrome, not part of the site */
+    .preview-wrap {
+      max-width: 960px;
+      margin: 56px auto 120px;
+      padding: 0 var(--gutter);
+    }
+    .preview-wrap > h1 {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      letter-spacing: -0.015em;
+      margin-bottom: 8px;
+    }
+    .preview-wrap > p.lead {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--ink-muted);
+      max-width: 62ch;
+      margin-bottom: 56px;
+    }
+    .preview-card {
+      border-top: 1px solid var(--rule);
+      padding: 40px 0 44px;
+    }
+    .preview-card__label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .preview-card__label .tag {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--tomato);
+    }
+    .preview-card__label .desc {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ink-muted);
+      max-width: 54ch;
+      text-align: right;
+    }
+    .preview-card__stage {
+      background: var(--paper);
+      padding: 40px 28px;
+      border: 1px solid var(--rule-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .preview-card__stage--dark {
+      background: var(--ink);
+    }
+
+    /* ---------- Variant 1: ink pill (matches existing .btn family) ---------- */
+    .ig-btn-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 22px 14px 20px;
+      background: var(--ink);
+      color: var(--paper);
+      border-bottom: none;
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: background .18s ease;
+    }
+    .ig-btn-pill:hover {
+      background: var(--tomato);
+      color: var(--paper);
+      border-bottom: none;
+    }
+    .ig-btn-pill .ig-glyph { width: 16px; height: 16px; }
+    .ig-btn-pill .handle {
+      font-family: var(--font-body);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      opacity: 0.78;
+    }
+
+    /* ---------- Variant 2: hairline, quieter, editorial ---------- */
+    .ig-btn-hairline {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 22px;
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: color .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .ig-btn-hairline:hover {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+    .ig-btn-hairline .ig-glyph { width: 15px; height: 15px; }
+
+    /* ---------- Variant 3: tomato bar, loud ---------- */
+    .ig-btn-tomato {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 26px;
+      background: var(--tomato);
+      color: var(--paper);
+      border-bottom: none;
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      transition: background .18s ease;
+    }
+    .ig-btn-tomato:hover {
+      background: var(--tomato-ink);
+      color: var(--paper);
+      border-bottom: none;
+    }
+    .ig-btn-tomato .ig-glyph { width: 18px; height: 18px; }
+    .ig-btn-tomato .handle {
+      font-family: var(--font-body);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      opacity: 0.88;
+    }
+
+    /* ---------- Variant 4: inline serif link, minimal ---------- */
+    .ig-link-serif {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      color: var(--ink);
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.35rem;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 4px;
+      letter-spacing: -0.005em;
+    }
+    .ig-link-serif:hover {
+      color: var(--tomato);
+      border-bottom-color: var(--tomato);
+    }
+    .ig-link-serif .ig-glyph {
+      width: 18px;
+      height: 18px;
+      position: relative;
+      top: 3px;
+    }
+
+    /* ---------- Variant 5: "card" mark with handle + follow pill ---------- */
+    .ig-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      padding: 14px 18px 14px 16px;
+      background: var(--warm-cream);
+      color: var(--ink);
+      border-bottom: none;
+      transition: background .18s ease;
+    }
+    .ig-card:hover {
+      background: var(--cream);
+      color: var(--ink);
+      border-bottom: none;
+    }
+    .ig-card__mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--paper);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ig-card__mark .ig-glyph { width: 18px; height: 18px; }
+    .ig-card__text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      line-height: 1.1;
+    }
+    .ig-card__text .kicker {
+      font-family: var(--font-display);
+      font-size: 9.5px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .ig-card__text .handle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--ink);
+    }
+    .ig-card__follow {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--tomato);
+      margin-left: 6px;
+      padding-left: 14px;
+      border-left: 1px solid var(--rule);
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Dark-stage helpers (so we can preview on the ink footer background) */
+    .preview-card__stage--dark .ig-btn-hairline {
+      color: var(--paper);
+      border-color: var(--paper);
+    }
+    .preview-card__stage--dark .ig-btn-hairline:hover {
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--paper);
+    }
+    .preview-card__stage--dark .ig-link-serif {
+      color: var(--paper);
+      border-bottom-color: rgba(250, 247, 238, 0.3);
+    }
+    .preview-card__stage--dark .ig-link-serif:hover {
+      color: var(--tomato);
+      border-bottom-color: var(--tomato);
+    }
+
+    .note-footer {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--ink-soft);
+      text-align: center;
+      margin-top: 14px;
+      letter-spacing: 0.02em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="preview-wrap">
+    <span class="eyebrow">Preview, not live</span>
+    <h1>Instagram button, five takes.</h1>
+    <p class="lead">A quick sampler before we commit one to the footer of every page. Hover them to see the interaction. Each stage uses paper (the site's default background); variant two also shown on ink, in case the footer ever darkens.</p>
+
+    <!-- Shared SVG symbol so each variant renders the same mark -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="ig-glyph" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/>
+      </symbol>
+    </svg>
+
+    <!-- Variant 1 -->
+    <div class="preview-card">
+      <div class="preview-card__label">
+        <span class="tag">01 &middot; Ink pill</span>
+        <span class="desc">Matches your existing "Browse the reviews" button. Quiet, confident, clearly a CTA.</span>
+      </div>
+      <div class="preview-card__stage">
+        <a class="ig-btn-pill" href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener">
+          <svg class="ig-glyph" aria-hidden="true"><use href="#ig-glyph"/></svg>
+          <span>Follow on Instagram</span>
+          <span class="handle">@sasenkalovesfood</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Variant 2 -->
+    <div class="preview-card">
+      <div class="preview-card__label">
+        <span class="tag">02 &middot; Hairline outline</span>
+        <span class="desc">Editorial and quiet; reads like a masthead mark. Flips to solid ink on hover.</span>
+      </div>
+      <div class="preview-card__stage">
+        <a class="ig-btn-hairline" href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener">
+          <svg class="ig-glyph" aria-hidden="true"><use href="#ig-glyph"/></svg>
+          <span>@sasenkalovesfood</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Variant 3 -->
+    <div class="preview-card">
+      <div class="preview-card__label">
+        <span class="tag">03 &middot; Tomato bar</span>
+        <span class="desc">Louder. Uses your accent red, so the button borrows the die-happy energy.</span>
+      </div>
+      <div class="preview-card__stage">
+        <a class="ig-btn-tomato" href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener">
+          <svg class="ig-glyph" aria-hidden="true"><use href="#ig-glyph"/></svg>
+          <span>Follow on Instagram</span>
+          <span class="handle">@sasenkalovesfood</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Variant 4 -->
+    <div class="preview-card">
+      <div class="preview-card__label">
+        <span class="tag">04 &middot; Italic serif link</span>
+        <span class="desc">The most restrained, magazine-style. Feels like a sign-off in a column.</span>
+      </div>
+      <div class="preview-card__stage">
+        <a class="ig-link-serif" href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener">
+          <svg class="ig-glyph" aria-hidden="true"><use href="#ig-glyph"/></svg>
+          <span>Find me on Instagram, @sasenkalovesfood</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Variant 5 -->
+    <div class="preview-card">
+      <div class="preview-card__label">
+        <span class="tag">05 &middot; Calling card</span>
+        <span class="desc">Small warm-cream card with a circular ink mark, handle in italic serif, and a "Follow" tab in tomato. A bit more personality.</span>
+      </div>
+      <div class="preview-card__stage">
+        <a class="ig-card" href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener">
+          <span class="ig-card__mark" aria-hidden="true">
+            <svg class="ig-glyph"><use href="#ig-glyph"/></svg>
+          </span>
+          <span class="ig-card__text">
+            <span class="kicker">On Instagram</span>
+            <span class="handle">@sasenkalovesfood</span>
+          </span>
+          <span class="ig-card__follow">Follow &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <p class="note-footer">Tell me the number you want; I'll wire it into the footer on every page.</p>
+  </div>
+
+</body>
+</html>

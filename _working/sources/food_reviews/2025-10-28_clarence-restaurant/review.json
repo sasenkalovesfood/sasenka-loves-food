@@ -1,0 +1,54 @@
+{
+  "review_number": 23,
+  "date": "Oct 28, 2025 1:40 am",
+  "date_iso": "2025-10-28T01:40:00",
+  "restaurant": "Clarence Restaurant",
+  "handle": "clarence.restaurant",
+  "all_mentions": [
+    "clarence.restaurant"
+  ],
+  "hashtags": [
+    "SasenkaLovesFood",
+    "ClarenceBrisbane",
+    "FishLane",
+    "BrisbaneEats",
+    "ComfortFood"
+  ],
+  "ratings": {},
+  "caption": "@clarence.restaurant has settled into its new Fish Lane digs nicely. Fairly casual yet confident. I dropped in for a quick dinner with a couple of friends. No tasting menu or long affair, just a few plates and good chat.\n\nLet’s start with what might just be Brisbane’s best bar snack right now: the so-called ‘Singapore’ mud crab on a fried mantou. Tiny but absolutely bursting with flavour. That glossy, spicy-sweet sauce clings to the soft bun like it was made for it. If you go, don’t skip this. In fact, I’d happily come back for these alone.\n\nMy grass-fed scotch steak was shared  unfortunately, with a friend who prefers it medium. Even then, the flavour held up beautifully. Rich, juicy, and properly seasoned. The duck fat potatoes alongside were golden perfection. Together, it was a winning combination.\n\nLook I am not much of a dessert kinda guy and after that crab, nothing else stood a chance. So I did the only logical thing. I ordered another round of the mini crab buns. Zero regrets.\n\nPictured 📸:\n\t1. Grass-fed scotch steak\n  2. ‘Singapore’ mud crab with fried mantou\n\t3. Duck fat potatoes\n\nRating out of 10:\nComfort: 7.5\nSoul: 7.5\nMastery: 8\nTaste: 8.5\nWould I die happy: 8\n\n#SasenkaLovesFood #ClarenceBrisbane #FishLane #BrisbaneEats #ComfortFood",
+  "media_files": [
+    {
+      "order": 1,
+      "filename": "01_18082253117053257.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202510/18082253117053257.jpg"
+    },
+    {
+      "order": 2,
+      "filename": "02_18086601122495745.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202510/18086601122495745.jpg"
+    },
+    {
+      "order": 3,
+      "filename": "03_18066241613376732.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202510/18066241613376732.jpg"
+    },
+    {
+      "order": 4,
+      "filename": "04_18061308899569552.mp4",
+      "is_video": true,
+      "original_path": "media/posts/202510/18061308899569552.mp4"
+    },
+    {
+      "order": 5,
+      "filename": "05_17912710551232292.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202510/17912710551232292.jpg"
+    }
+  ],
+  "photo_count": 4,
+  "video_count": 1,
+  "folder": "2025-10-28_clarence-restaurant"
+}

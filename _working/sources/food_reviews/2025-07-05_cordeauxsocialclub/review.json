@@ -1,0 +1,44 @@
+{
+  "review_number": 45,
+  "date": "Jul 05, 2025 4:00 pm",
+  "date_iso": "2025-07-05T16:00:00",
+  "restaurant": "Cordeauxsocialclub",
+  "handle": "cordeauxsocialclub_.",
+  "all_mentions": [
+    "cordeauxsocialclub_."
+  ],
+  "hashtags": [
+    "BrisbaneEats",
+    "TunaMelt",
+    "BrisbaneFoodie",
+    "CoffeeBrisbane",
+    "HiddenGemsBrisbane",
+    "CafesOfBrisbane",
+    "SasenkaLovesFood"
+  ],
+  "ratings": {},
+  "caption": "Calling it: the best tuna melt in Brisbane you'll find at @cordeauxsocialclub_. Sample size is pushing 20 now, so I feel qualified. Coffee’s fire too.\n\n#BrisbaneEats #TunaMelt #BrisbaneFoodie #CoffeeBrisbane #HiddenGemsBrisbane #CafesOfBrisbane #SasenkaLovesFood",
+  "media_files": [
+    {
+      "order": 1,
+      "filename": "01_17886148161299488.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202507/17886148161299488.jpg"
+    },
+    {
+      "order": 2,
+      "filename": "02_18519161380012641.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202507/18519161380012641.jpg"
+    },
+    {
+      "order": 3,
+      "filename": "03_18104087197545785.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202507/18104087197545785.jpg"
+    }
+  ],
+  "photo_count": 3,
+  "video_count": 0,
+  "folder": "2025-07-05_cordeauxsocialclub"
+}

@@ -1,0 +1,2948 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All reviews &mdash; Sasenka Loves Food</title>
+  <meta name="description" content="Every review on Sasenka Loves Food, grouped by month. Filter by cuisine or suburb, or flip to list view to scan fast.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    /* Archive-specific styles (mock) */
+    .archive-head {
+      padding: 56px 0 8px;
+      max-width: 48ch;
+    }
+    .archive-head .eyebrow {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--tomato);
+      display: block;
+      margin-bottom: 18px;
+    }
+    .archive-head h1 {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(2.6rem, 6vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin: 0 0 14px;
+    }
+    .archive-head p {
+      color: var(--ink-muted);
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      line-height: 1.5;
+    }
+
+    .archive-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 28px 44px;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 18px 0;
+      margin: 40px 0 0;
+    }
+    .toolbar-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 10px;
+    }
+    .toolbar-label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .toolbar-btn {
+      font-family: var(--font-body);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      padding: 6px 14px;
+      border: 1px solid var(--rule);
+      background: transparent;
+      color: var(--ink-muted);
+      cursor: pointer;
+      border-radius: 999px;
+      transition: all .18s ease;
+    }
+    .toolbar-btn:hover { color: var(--ink); border-color: var(--ink); }
+    .toolbar-btn.is-active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    .filter-chips {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 24px 0 6px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 10px;
+    }
+    .chip-label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      min-width: 72px;
+      margin-right: 6px;
+    }
+    .chip {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      letter-spacing: 0.02em;
+      padding: 5px 12px;
+      border: 1px solid var(--rule);
+      background: transparent;
+      color: var(--ink-muted);
+      cursor: pointer;
+      border-radius: 999px;
+      transition: all .18s ease;
+    }
+    .chip:hover { color: var(--ink); border-color: var(--ink); }
+    .chip.is-active {
+      background: var(--tomato);
+      color: var(--paper);
+      border-color: var(--tomato);
+    }
+
+    .month-head {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.4rem;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+      padding: 56px 0 4px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 4px;
+    }
+    .month-group[hidden] { display: none; }
+
+    /* Grid view inherits existing .review-grid styles */
+    .archive-reviews[data-view="grid"] .month-group .archive-list { display: none; }
+    .archive-reviews[data-view="list"] .month-group .review-grid { display: none; }
+
+    /* List view */
+    .archive-list {
+      margin: 28px 0 8px;
+      border-top: 1px solid var(--rule);
+    }
+    .archive-row {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.3fr) minmax(0, 1.8fr) auto;
+      align-items: center;
+      gap: 16px 24px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--rule-soft);
+      color: var(--ink);
+      text-decoration: none;
+      border-left: none; border-right: none; border-top: none;
+    }
+    .archive-row:hover { background: var(--cream); color: var(--ink); border-bottom-color: var(--rule); }
+    .archive-row .row-title {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.4rem;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+    .archive-row .row-sub {
+      font-family: var(--font-body);
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      color: var(--ink-soft);
+      margin-top: 3px;
+    }
+    .archive-row .row-cuisine,
+    .archive-row .row-suburb {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+    .archive-row .row-scores {
+      display: flex;
+      gap: 16px;
+      align-items: baseline;
+      justify-self: end;
+    }
+    .archive-row .row-scores .rs {
+      font-family: var(--font-body);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      min-width: 44px;
+    }
+    .archive-row .row-scores .rs strong {
+      font-family: var(--font-display);
+      font-size: 14px;
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+    .archive-row .row-scores .rs.die strong { color: var(--tomato); }
+    @media (max-width: 760px) {
+      .archive-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .archive-row .row-scores { justify-self: start; flex-wrap: wrap; }
+    }
+
+    .archive-card[hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand-mark" href="index.html" aria-label="Sasenka Loves Food, home">
+        <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <text x="0" y="78" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">SASENKA</text>
+          <text x="0" y="160" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">L</text>
+          <g transform="translate(44 105) scale(0.47)">
+            <path d="M134.756 39.507C134.756 90.727 67.378 117.057 67.378 117.057C67.378 117.057 0 90.727 0 39.507C0 17.681 16.28 0 36.376 0C49.472 0 60.965 7.523 67.378 18.785C73.791 7.523 85.284 0 98.38 0C118.499 0 134.756 17.681 134.756 39.507Z" fill="#BD112E"/>
+          </g>
+          <text x="108" y="160" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">VES</text>
+          <text x="0" y="218" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">FOOD.</text>
+        </svg>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="reviews-archive.html" class="is-active">Reviews</a>
+        <a href="rating-system.html">Rating system</a>
+        <a href="about.html">About</a>
+        <a href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener">Instagram</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container">
+
+      <header class="archive-head">
+        <span class="eyebrow">Archive</span>
+        <h1>All reviews</h1>
+        <p>Every place I've reviewed, grouped by month. Filter by cuisine or suburb, or flip to list view to scan fast.</p>
+      </header>
+
+      <div class="archive-toolbar" role="toolbar" aria-label="View and sort">
+        <div class="toolbar-group">
+          <span class="toolbar-label">View</span>
+          <button type="button" class="toolbar-btn is-active" data-view="grid">Grid</button>
+          <button type="button" class="toolbar-btn" data-view="list">List</button>
+        </div>
+        <div class="toolbar-group">
+          <span class="toolbar-label">Sort</span>
+          <button type="button" class="toolbar-btn is-active" data-sort="date">Most recent</button>
+          <button type="button" class="toolbar-btn" data-sort="comfort">Comfort</button>
+          <button type="button" class="toolbar-btn" data-sort="soul">Soul</button>
+          <button type="button" class="toolbar-btn" data-sort="mastery">Mastery</button>
+          <button type="button" class="toolbar-btn" data-sort="taste">Taste</button>
+          <button type="button" class="toolbar-btn" data-sort="die">Die happy</button>
+        </div>
+      </div>
+
+      <div class="filter-chips" aria-label="Filters">
+        <div class="chip-row" role="group" aria-label="Cuisine">
+          <span class="chip-label">Cuisine</span>
+          <button type="button" class="chip is-active" data-category="cuisine" data-filter="all">All</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="italian-degustation">Italian degustation</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="nepali">Nepali / Himalayan</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="european-brasserie">European brasserie</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="french-bistro">French bistro</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="cantonese">Cantonese</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="modern-middle-eastern">Modern Middle Eastern</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="creole">Creole</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="modern-australian">Modern Australian</button>
+                  <button type="button" class="chip" data-category="cuisine" data-filter="chinese">Chinese</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="french">French</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="greek">Greek</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="italian">Italian</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="japanese">Japanese</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="korean">Korean</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="malaysian">Malaysian</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="mediterranean">Mediterranean</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="middle-eastern">Middle Eastern</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="modern-asian">Modern Asian</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="nordic">Nordic</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="seafood">Seafood</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="singaporean">Singaporean</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="sri-lankan">Sri Lankan</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="steakhouse">Steakhouse</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="thai">Thai</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="wood-fired">Wood-fired</button>
+        </div>
+        <div class="chip-row" role="group" aria-label="Suburb">
+          <span class="chip-label">Suburb</span>
+          <button type="button" class="chip is-active" data-category="suburb" data-filter="all">All</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="paddington">Paddington</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="new-farm">New Farm</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="brisbane-cbd">Brisbane CBD</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="james-street">James Street</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="fortitude-valley">Fortitude Valley</button>
+                  <button type="button" class="chip" data-category="suburb" data-filter="ballina">Ballina</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="carlton">Carlton</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="coorparoo">Coorparoo</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="delft">Delft</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="greenslopes">Greenslopes</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="hobart">Hobart</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="maleny">Maleny</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="melbourne">Melbourne</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="montville">Montville</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="morningside">Morningside</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="newstead">Newstead</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="noosa">Noosa</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="rhodes">Rhodes</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="singapore">Singapore</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="southbank">South Bank</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="south-brisbane">South Brisbane</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="spring-hill">Spring Hill</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="west-end">West End</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="woolloongabba">Woolloongabba</button>
+        </div>
+      </div>
+
+      <div class="archive-reviews" data-view="grid">
+
+        <!-- April 2026 -->
+        <section class="month-group" data-month="2026-04">
+          <h2 class="month-head">April 2026</h2>
+
+          <!-- Grid view -->
+          <div class="review-grid">
+            <a class="review-card archive-card" href="reviews/20260409-Aunty.html"
+               data-cuisine="cantonese" data-suburb="fortitude-valley"
+               data-date="2026-04-09"
+               data-comfort="8.0" data-soul="8.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2026-04-09_auntyonwandoo/01_18087311645194797.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Fortitude Valley &middot; Cantonese</span><span class="dot">&bull;</span><span>9 Apr 2026</span></div>
+                <h3>Aunty</h3>
+                <p class="blurb">Growing up with Sri Lankan family, &quot;aunty&quot; means one thing: unsolicited opinions delivered with a smile.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- List view -->
+          <div class="archive-list">
+            <a class="archive-row archive-card" href="reviews/20260409-Aunty.html"
+               data-cuisine="cantonese" data-suburb="fortitude-valley"
+               data-date="2026-04-09"
+               data-comfort="8.0" data-soul="8.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div>
+                <div class="row-title">Aunty</div>
+                <div class="row-sub">9 April 2026</div>
+              </div>
+              <div class="row-cuisine">Cantonese</div>
+              <div class="row-suburb">Fortitude Valley</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>8.0</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- March 2026 -->
+        <section class="month-group" data-month="2026-03">
+          <h2 class="month-head">March 2026</h2>
+
+          <!-- Grid view -->
+          <div class="review-grid">
+            <a class="review-card archive-card" href="reviews/20260331-MonalDining.html"
+               data-cuisine="nepali" data-suburb="newstead"
+               data-date="2026-03-31"
+               data-comfort="8.0" data-soul="9.0" data-mastery="8.0" data-taste="8.5" data-die="8.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2026-03-31_monaldining/01_18432584782141051.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Newstead &middot; Nepali / Himalayan</span><span class="dot">&bull;</span><span>31 Mar 2026</span></div>
+                <h3>Monal Dining</h3>
+                <p class="blurb">Located on Skyring Terrace that looks, from the outside, like a place you could easily walk past.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20260310-LilongRestaurant.html"
+               data-cuisine="chinese" data-suburb="west-end"
+               data-date="2026-03-10"
+               data-comfort="7.5" data-soul="8.0" data-mastery="7.0" data-taste="8.0" data-die="7.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2026-03-10_lilongrestaurant/01_17868807885579339.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>West End &middot; Chinese</span><span class="dot">&bull;</span><span>10 Mar 2026</span></div>
+                <h3>Lilong Restaurant</h3>
+                <p class="blurb">West End has no shortage of good food, but sometimes you just want something simple, comforting, and full of flavour.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>7.5</strong></span>
+                  <span class="score-pill">Soul <strong>8.0</strong></span>
+                  <span class="score-pill">Mastery <strong>7.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>7.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20260304-Venner.html"
+               data-cuisine="nordic" data-suburb="west-end"
+               data-date="2026-03-04"
+               data-comfort="8.5" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="8.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2026-03-04_WestEndBrisbane/01_18017961773650161.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>West End &middot; Nordic</span><span class="dot">&bull;</span><span>4 Mar 2026</span></div>
+                <h3>Venner</h3>
+                <p class="blurb">Best restaurant opening of 2026?</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.5</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.5</strong></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- List view -->
+          <div class="archive-list">
+            <a class="archive-row archive-card" href="reviews/20260331-MonalDining.html"
+               data-cuisine="nepali" data-suburb="newstead"
+               data-date="2026-03-31"
+               data-comfort="8.0" data-soul="9.0" data-mastery="8.0" data-taste="8.5" data-die="8.5">
+              <div>
+                <div class="row-title">Monal Dining</div>
+                <div class="row-sub">31 March 2026</div>
+              </div>
+              <div class="row-cuisine">Nepali / Himalayan</div>
+              <div class="row-suburb">Newstead</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>8.5</strong></span>
+                <span class="rs die">Die happy <strong>8.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20260310-LilongRestaurant.html"
+               data-cuisine="chinese" data-suburb="west-end"
+               data-date="2026-03-10"
+               data-comfort="7.5" data-soul="8.0" data-mastery="7.0" data-taste="8.0" data-die="7.5">
+              <div>
+                <div class="row-title">Lilong Restaurant</div>
+                <div class="row-sub">10 March 2026</div>
+              </div>
+              <div class="row-cuisine">Chinese</div>
+              <div class="row-suburb">West End</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>7.5</strong></span>
+                <span class="rs">Soul <strong>8.0</strong></span>
+                <span class="rs">Mastery <strong>7.0</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>7.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20260304-Venner.html"
+               data-cuisine="nordic" data-suburb="west-end"
+               data-date="2026-03-04"
+               data-comfort="8.5" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="8.5">
+              <div>
+                <div class="row-title">Venner</div>
+                <div class="row-sub">4 March 2026</div>
+              </div>
+              <div class="row-cuisine">Nordic</div>
+              <div class="row-suburb">West End</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.5</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>8.5</strong></span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- February 2026 -->
+        <section class="month-group" data-month="2026-02">
+          <h2 class="month-head">February 2026</h2>
+
+          <!-- Grid view -->
+          <div class="review-grid">
+            <a class="review-card archive-card" href="reviews/20260224-BoscoWineGrill.html"
+               data-cuisine="mediterranean" data-suburb="newstead"
+               data-date="2026-02-24"
+               data-comfort="8.5" data-soul="9.0" data-mastery="8.5" data-taste="9.0" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2026-02-24_bosco-winegrill/01_18120847072606652.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Newstead &middot; Mediterranean</span><span class="dot">&bull;</span><span>24 Feb 2026</span></div>
+                <h3>Bosco Wine Grill</h3>
+                <p class="blurb">@bosco_winegrill sits in what feels like a dark industrial warehouse, almost a shed, and somehow that makes the whole experience better.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.5</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.5</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20260219-Marlowe.html"
+               data-cuisine="modern-australian" data-suburb="south-brisbane"
+               data-date="2026-02-19"
+               data-comfort="9.0" data-soul="8.5" data-mastery="9.0" data-taste="9.5" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2026-02-19_davidsflynn/01_17883731508354569.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>South Brisbane &middot; Modern Australian</span><span class="dot">&bull;</span><span>19 Feb 2026</span></div>
+                <h3>Marlowe</h3>
+                <p class="blurb">Another polished hit from @davidsflynn with @chef_ollie_ in charge.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.5</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20260210-Darkshepherd.html"
+               data-cuisine="greek" data-suburb="brisbane-cbd"
+               data-date="2026-02-10"
+               data-comfort="8.5" data-soul="8.0" data-mastery="8.5" data-taste="9.0" data-die="8.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2026-02-10_darkshepherd-bne/01_18111596410725670.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Brisbane CBD &middot; Greek</span><span class="dot">&bull;</span><span>10 Feb 2026</span></div>
+                <h3>Darkshepherd</h3>
+                <p class="blurb">@darkshepherd_bne sits inside @thestarbrisbane and immediately signals that this is not your loud, blue-and-white, plate-smashing take on Greek food.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.5</strong></span>
+                  <span class="score-pill">Soul <strong>8.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.5</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20260205-RaRestaurantAndBar.html"
+               data-cuisine="sri-lankan" data-suburb="noosa"
+               data-date="2026-02-05"
+               data-comfort="9.0" data-soul="10.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2026-02-05_ra-restaurant-and-bar/01_17848571763638378.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Noosa &middot; Sri Lankan</span><span class="dot">&bull;</span><span>5 Feb 2026</span></div>
+                <h3>Ra Restaurant And Bar</h3>
+                <p class="blurb">@ra_restaurant_and_bar sits right by the beach, which already puts you in a good mood.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.0</strong></span>
+                  <span class="score-pill">Soul <strong>10.0</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20260202-SupernormalBrisbane.html"
+               data-cuisine="modern-asian" data-suburb="brisbane-cbd"
+               data-date="2026-02-02"
+               data-comfort="6.5" data-soul="7.0" data-mastery="7.0" data-taste="8.0" data-die="7.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2026-02-02_supernormal-brisbane/01_17914463352125975.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Brisbane CBD &middot; Modern Asian</span><span class="dot">&bull;</span><span>2 Feb 2026</span></div>
+                <h3>Supernormal Brisbane</h3>
+                <p class="blurb">Back at @supernormal_brisbane, this time without the opening buzz and with a bit more reality baked in.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>6.5</strong></span>
+                  <span class="score-pill">Soul <strong>7.0</strong></span>
+                  <span class="score-pill">Mastery <strong>7.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>7.0</strong></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- List view -->
+          <div class="archive-list">
+            <a class="archive-row archive-card" href="reviews/20260224-BoscoWineGrill.html"
+               data-cuisine="mediterranean" data-suburb="newstead"
+               data-date="2026-02-24"
+               data-comfort="8.5" data-soul="9.0" data-mastery="8.5" data-taste="9.0" data-die="8.0">
+              <div>
+                <div class="row-title">Bosco Wine Grill</div>
+                <div class="row-sub">24 February 2026</div>
+              </div>
+              <div class="row-cuisine">Mediterranean</div>
+              <div class="row-suburb">Newstead</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.5</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>8.5</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20260219-Marlowe.html"
+               data-cuisine="modern-australian" data-suburb="south-brisbane"
+               data-date="2026-02-19"
+               data-comfort="9.0" data-soul="8.5" data-mastery="9.0" data-taste="9.5" data-die="9.0">
+              <div>
+                <div class="row-title">Marlowe</div>
+                <div class="row-sub">19 February 2026</div>
+              </div>
+              <div class="row-cuisine">Modern Australian</div>
+              <div class="row-suburb">South Brisbane</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.0</strong></span>
+                <span class="rs">Soul <strong>8.5</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>9.5</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20260210-Darkshepherd.html"
+               data-cuisine="greek" data-suburb="brisbane-cbd"
+               data-date="2026-02-10"
+               data-comfort="8.5" data-soul="8.0" data-mastery="8.5" data-taste="9.0" data-die="8.5">
+              <div>
+                <div class="row-title">Darkshepherd</div>
+                <div class="row-sub">10 February 2026</div>
+              </div>
+              <div class="row-cuisine">Greek</div>
+              <div class="row-suburb">Brisbane CBD</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.5</strong></span>
+                <span class="rs">Soul <strong>8.0</strong></span>
+                <span class="rs">Mastery <strong>8.5</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>8.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20260205-RaRestaurantAndBar.html"
+               data-cuisine="sri-lankan" data-suburb="noosa"
+               data-date="2026-02-05"
+               data-comfort="9.0" data-soul="10.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div>
+                <div class="row-title">Ra Restaurant And Bar</div>
+                <div class="row-sub">5 February 2026</div>
+              </div>
+              <div class="row-cuisine">Sri Lankan</div>
+              <div class="row-suburb">Noosa</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.0</strong></span>
+                <span class="rs">Soul <strong>10.0</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20260202-SupernormalBrisbane.html"
+               data-cuisine="modern-asian" data-suburb="brisbane-cbd"
+               data-date="2026-02-02"
+               data-comfort="6.5" data-soul="7.0" data-mastery="7.0" data-taste="8.0" data-die="7.0">
+              <div>
+                <div class="row-title">Supernormal Brisbane</div>
+                <div class="row-sub">2 February 2026</div>
+              </div>
+              <div class="row-cuisine">Modern Asian</div>
+              <div class="row-suburb">Brisbane CBD</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>6.5</strong></span>
+                <span class="rs">Soul <strong>7.0</strong></span>
+                <span class="rs">Mastery <strong>7.0</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>7.0</strong></span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- January 2026 -->
+        <section class="month-group" data-month="2026-01">
+          <h2 class="month-head">January 2026</h2>
+
+          <!-- Grid view -->
+          <div class="review-grid">
+            <a class="review-card archive-card" href="reviews/20260129-HontoRestaurant.html"
+               data-cuisine="japanese" data-suburb="fortitude-valley"
+               data-date="2026-01-29"
+               data-comfort="8.0" data-soul="7.5" data-mastery="8.5" data-taste="9.0" data-die="8.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2026-01-29_honto-restaurant/01_18086440697517704.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Fortitude Valley &middot; Japanese</span><span class="dot">&bull;</span><span>29 Jan 2026</span></div>
+                <h3>Honto Restaurant</h3>
+                <p class="blurb">I’ve been a frequent visitor to @honto.restaurant and I genuinely never leave disappointed.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>7.5</strong></span>
+                  <span class="score-pill">Mastery <strong>8.5</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20260122-NugGeneralstore.html"
+               data-cuisine="italian" data-suburb="fortitude-valley"
+               data-date="2026-01-22"
+               data-comfort="8.5" data-soul="9.5" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2026-01-22_nug-generalstore/01_18556833091005901.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Fortitude Valley &middot; Italian</span><span class="dot">&bull;</span><span>22 Jan 2026</span></div>
+                <h3>Nug Generalstore</h3>
+                <p class="blurb">This was my third visit to @nug.generalstore, and it keeps reinforcing why I like places like this so much.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.5</strong></span>
+                  <span class="score-pill">Soul <strong>9.5</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20260120-FatcowOnjamesst.html"
+               data-cuisine="steakhouse" data-suburb="fortitude-valley"
+               data-date="2026-01-20"
+               data-comfort="9.0" data-soul="8.5" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2026-01-20_fatcow-onjamesst/01_18096929386917816.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Fortitude Valley &middot; Steakhouse</span><span class="dot">&bull;</span><span>20 Jan 2026</span></div>
+                <h3>Fatcow Onjamesst</h3>
+                <p class="blurb">Been here a few times, but this was my first time since @fatcow_onjamesst introduced Kobe beef, and yes, I was quietly excited walking in.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.5</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- List view -->
+          <div class="archive-list">
+            <a class="archive-row archive-card" href="reviews/20260129-HontoRestaurant.html"
+               data-cuisine="japanese" data-suburb="fortitude-valley"
+               data-date="2026-01-29"
+               data-comfort="8.0" data-soul="7.5" data-mastery="8.5" data-taste="9.0" data-die="8.5">
+              <div>
+                <div class="row-title">Honto Restaurant</div>
+                <div class="row-sub">29 January 2026</div>
+              </div>
+              <div class="row-cuisine">Japanese</div>
+              <div class="row-suburb">Fortitude Valley</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>7.5</strong></span>
+                <span class="rs">Mastery <strong>8.5</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>8.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20260122-NugGeneralstore.html"
+               data-cuisine="italian" data-suburb="fortitude-valley"
+               data-date="2026-01-22"
+               data-comfort="8.5" data-soul="9.5" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div>
+                <div class="row-title">Nug Generalstore</div>
+                <div class="row-sub">22 January 2026</div>
+              </div>
+              <div class="row-cuisine">Italian</div>
+              <div class="row-suburb">Fortitude Valley</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.5</strong></span>
+                <span class="rs">Soul <strong>9.5</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20260120-FatcowOnjamesst.html"
+               data-cuisine="steakhouse" data-suburb="fortitude-valley"
+               data-date="2026-01-20"
+               data-comfort="9.0" data-soul="8.5" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div>
+                <div class="row-title">Fatcow Onjamesst</div>
+                <div class="row-sub">20 January 2026</div>
+              </div>
+              <div class="row-cuisine">Steakhouse</div>
+              <div class="row-suburb">Fortitude Valley</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.0</strong></span>
+                <span class="rs">Soul <strong>8.5</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- December 2025 -->
+        <section class="month-group" data-month="2025-12">
+          <h2 class="month-head">December 2025</h2>
+
+          <!-- Grid view -->
+          <div class="review-grid">
+            <a class="review-card archive-card" href="reviews/20251222-AgnesRestaurant.html"
+               data-cuisine="wood-fired" data-suburb="fortitude-valley"
+               data-date="2025-12-22"
+               data-comfort="8.0" data-soul="8.5" data-mastery="9.0" data-taste="8.5" data-die="8.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-12-22_agnes-restaurant/01_17987825798756577.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Fortitude Valley &middot; Wood-fired</span><span class="dot">&bull;</span><span>22 Dec 2025</span></div>
+                <h3>Agnes Restaurant</h3>
+                <p class="blurb">I’ve been to @agnes.restaurant by @anyday.hospitality a few times over the last few years and it has never missed.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.5</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20251209-Capiche.html"
+               data-cuisine="italian" data-suburb="ballina"
+               data-date="2025-12-09"
+               data-comfort="8.0" data-soul="7.0" data-mastery="7.5" data-taste="8.0" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-12-09_capicherestaurant/01_18110955946552350.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Ballina &middot; Italian</span><span class="dot">&bull;</span><span>9 Dec 2025</span></div>
+                <h3>Capiche</h3>
+                <p class="blurb">@capicherestaurant is perched right on the beach, and even the short stroll from the car park gives you that instant holiday feeling.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>7.0</strong></span>
+                  <span class="score-pill">Mastery <strong>7.5</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20251204-StationByKotuwa.html"
+               data-cuisine="sri-lankan" data-suburb="singapore"
+               data-date="2025-12-04"
+               data-comfort="8.0" data-soul="9.5" data-mastery="8.5" data-taste="9.0" data-die="8.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-12-04_stationbykotuwa/01_18128279245450682.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Singapore &middot; Sri Lankan</span><span class="dot">&bull;</span><span>4 Dec 2025</span></div>
+                <h3>Station by Kotuwa</h3>
+                <p class="blurb">@stationbykotuwa in Singapore feels like stepping straight into Colombo, only with a little more polish and a lot more intention.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>9.5</strong></span>
+                  <span class="score-pill">Mastery <strong>8.5</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20251201-LemakKitchenAndBar.html"
+               data-cuisine="malaysian" data-suburb="woolloongabba"
+               data-date="2025-12-01"
+               data-comfort="7.5" data-soul="9.0" data-mastery="7.5" data-taste="8.0" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-12-01_lemakkitchenandbar/01_17971782569980594.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Woolloongabba &middot; Malaysian</span><span class="dot">&bull;</span><span>1 Dec 2025</span></div>
+                <h3>Lemak Kitchen and Bar</h3>
+                <p class="blurb">@lemakkitchenandbar on a Sunday full of running errands turned out to be the best decision I made all day.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>7.5</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>7.5</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- List view -->
+          <div class="archive-list">
+            <a class="archive-row archive-card" href="reviews/20251222-AgnesRestaurant.html"
+               data-cuisine="wood-fired" data-suburb="fortitude-valley"
+               data-date="2025-12-22"
+               data-comfort="8.0" data-soul="8.5" data-mastery="9.0" data-taste="8.5" data-die="8.5">
+              <div>
+                <div class="row-title">Agnes Restaurant</div>
+                <div class="row-sub">22 December 2025</div>
+              </div>
+              <div class="row-cuisine">Wood-fired</div>
+              <div class="row-suburb">Fortitude Valley</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>8.5</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>8.5</strong></span>
+                <span class="rs die">Die happy <strong>8.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20251209-Capiche.html"
+               data-cuisine="italian" data-suburb="ballina"
+               data-date="2025-12-09"
+               data-comfort="8.0" data-soul="7.0" data-mastery="7.5" data-taste="8.0" data-die="8.0">
+              <div>
+                <div class="row-title">Capiche</div>
+                <div class="row-sub">9 December 2025</div>
+              </div>
+              <div class="row-cuisine">Italian</div>
+              <div class="row-suburb">Ballina</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>7.0</strong></span>
+                <span class="rs">Mastery <strong>7.5</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20251204-StationByKotuwa.html"
+               data-cuisine="sri-lankan" data-suburb="singapore"
+               data-date="2025-12-04"
+               data-comfort="8.0" data-soul="9.5" data-mastery="8.5" data-taste="9.0" data-die="8.5">
+              <div>
+                <div class="row-title">Station by Kotuwa</div>
+                <div class="row-sub">4 December 2025</div>
+              </div>
+              <div class="row-cuisine">Sri Lankan</div>
+              <div class="row-suburb">Singapore</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>9.5</strong></span>
+                <span class="rs">Mastery <strong>8.5</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>8.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20251201-LemakKitchenAndBar.html"
+               data-cuisine="malaysian" data-suburb="woolloongabba"
+               data-date="2025-12-01"
+               data-comfort="7.5" data-soul="9.0" data-mastery="7.5" data-taste="8.0" data-die="8.0">
+              <div>
+                <div class="row-title">Lemak Kitchen and Bar</div>
+                <div class="row-sub">1 December 2025</div>
+              </div>
+              <div class="row-cuisine">Malaysian</div>
+              <div class="row-suburb">Woolloongabba</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>7.5</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>7.5</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- November 2025 -->
+        <section class="month-group" data-month="2025-11">
+          <h2 class="month-head">November 2025</h2>
+
+          <!-- Grid view -->
+          <div class="review-grid">
+            <a class="review-card archive-card" href="reviews/20251128-GoldenAvenueRestaurant.html"
+               data-cuisine="middle-eastern" data-suburb="brisbane-cbd"
+               data-date="2025-11-28"
+               data-comfort="8.0" data-soul="8.0" data-mastery="8.5" data-taste="8.5" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-11-28_golden-avenue-restaurant/05_18063741299437501.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Brisbane CBD &middot; Middle Eastern</span><span class="dot">&bull;</span><span>28 Nov 2025</span></div>
+                <h3>Golden Avenue Restaurant</h3>
+                <p class="blurb">@golden.avenue.restaurant feels like you are waking into a lush Middle Eastern oasis tucked right into the heart of Brisbane.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.5</strong></span>
+                  <span class="score-pill">Taste <strong>8.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20251124-LaylaBrisbane.html"
+               data-cuisine="middle-eastern" data-suburb="west-end"
+               data-date="2025-11-24"
+               data-comfort="7.0" data-soul="7.0" data-mastery="6.5" data-taste="6.5" data-die="6.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-11-24_laylabrisbane/01_18327147457240485.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>West End &middot; Middle Eastern</span><span class="dot">&bull;</span><span>24 Nov 2025</span></div>
+                <h3>Layla Brisbane</h3>
+                <p class="blurb">@laylabrisbane sits in a lovely corner of West End.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>7.0</strong></span>
+                  <span class="score-pill">Soul <strong>7.0</strong></span>
+                  <span class="score-pill">Mastery <strong>6.5</strong></span>
+                  <span class="score-pill">Taste <strong>6.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>6.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20251118-WillowRestaurant.html"
+               data-cuisine="japanese" data-suburb="singapore"
+               data-date="2025-11-18"
+               data-comfort="10.0" data-soul="10.0" data-mastery="10.0" data-taste="10.0" data-die="10.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-11-18_willow-restaurant/01_17991288656884335.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Singapore &middot; Japanese</span><span class="dot">&bull;</span><span>18 Nov 2025</span></div>
+                <h3>Willow Restaurant</h3>
+                <p class="blurb">@willow.restaurant by Chef @nictkc was my choice for my wife&#x27;s birthday this year.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>10.0</strong></span>
+                  <span class="score-pill">Soul <strong>10.0</strong></span>
+                  <span class="score-pill">Mastery <strong>10.0</strong></span>
+                  <span class="score-pill">Taste <strong>10.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>10.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20251112-MariposaRestaurant.html"
+               data-cuisine="italian" data-suburb="rhodes"
+               data-date="2025-11-12"
+               data-comfort="8.5" data-soul="10.0" data-mastery="9.5" data-taste="9.5" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-11-12_mariposa-restaurant/01_18084907339995518.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Rhodes &middot; Italian</span><span class="dot">&bull;</span><span>12 Nov 2025</span></div>
+                <h3>Mariposa Restaurant</h3>
+                <p class="blurb">Some restaurants you find, others find you.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.5</strong></span>
+                  <span class="score-pill">Soul <strong>10.0</strong></span>
+                  <span class="score-pill">Mastery <strong>9.5</strong></span>
+                  <span class="score-pill">Taste <strong>9.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- List view -->
+          <div class="archive-list">
+            <a class="archive-row archive-card" href="reviews/20251128-GoldenAvenueRestaurant.html"
+               data-cuisine="middle-eastern" data-suburb="brisbane-cbd"
+               data-date="2025-11-28"
+               data-comfort="8.0" data-soul="8.0" data-mastery="8.5" data-taste="8.5" data-die="8.0">
+              <div>
+                <div class="row-title">Golden Avenue Restaurant</div>
+                <div class="row-sub">28 November 2025</div>
+              </div>
+              <div class="row-cuisine">Middle Eastern</div>
+              <div class="row-suburb">Brisbane CBD</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>8.0</strong></span>
+                <span class="rs">Mastery <strong>8.5</strong></span>
+                <span class="rs">Taste <strong>8.5</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20251124-LaylaBrisbane.html"
+               data-cuisine="middle-eastern" data-suburb="west-end"
+               data-date="2025-11-24"
+               data-comfort="7.0" data-soul="7.0" data-mastery="6.5" data-taste="6.5" data-die="6.0">
+              <div>
+                <div class="row-title">Layla Brisbane</div>
+                <div class="row-sub">24 November 2025</div>
+              </div>
+              <div class="row-cuisine">Middle Eastern</div>
+              <div class="row-suburb">West End</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>7.0</strong></span>
+                <span class="rs">Soul <strong>7.0</strong></span>
+                <span class="rs">Mastery <strong>6.5</strong></span>
+                <span class="rs">Taste <strong>6.5</strong></span>
+                <span class="rs die">Die happy <strong>6.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20251118-WillowRestaurant.html"
+               data-cuisine="japanese" data-suburb="singapore"
+               data-date="2025-11-18"
+               data-comfort="10.0" data-soul="10.0" data-mastery="10.0" data-taste="10.0" data-die="10.0">
+              <div>
+                <div class="row-title">Willow Restaurant</div>
+                <div class="row-sub">18 November 2025</div>
+              </div>
+              <div class="row-cuisine">Japanese</div>
+              <div class="row-suburb">Singapore</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>10.0</strong></span>
+                <span class="rs">Soul <strong>10.0</strong></span>
+                <span class="rs">Mastery <strong>10.0</strong></span>
+                <span class="rs">Taste <strong>10.0</strong></span>
+                <span class="rs die">Die happy <strong>10.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20251112-MariposaRestaurant.html"
+               data-cuisine="italian" data-suburb="rhodes"
+               data-date="2025-11-12"
+               data-comfort="8.5" data-soul="10.0" data-mastery="9.5" data-taste="9.5" data-die="9.0">
+              <div>
+                <div class="row-title">Mariposa Restaurant</div>
+                <div class="row-sub">12 November 2025</div>
+              </div>
+              <div class="row-cuisine">Italian</div>
+              <div class="row-suburb">Rhodes</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.5</strong></span>
+                <span class="rs">Soul <strong>10.0</strong></span>
+                <span class="rs">Mastery <strong>9.5</strong></span>
+                <span class="rs">Taste <strong>9.5</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- October 2025 -->
+        <section class="month-group" data-month="2025-10">
+          <h2 class="month-head">October 2025</h2>
+
+          <!-- Grid view -->
+          <div class="review-grid">
+            <a class="review-card archive-card" href="reviews/20251029-DeCentraleDelft.html"
+               data-cuisine="european-brasserie" data-suburb="delft"
+               data-date="2025-10-29"
+               data-comfort="8.5" data-soul="8.5" data-mastery="9.0" data-taste="8.5" data-die="8.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-10-29_decentraledelft/01_18302196400264876.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Delft &middot; European brasserie</span><span class="dot">&bull;</span><span>29 Oct 2025</span></div>
+                <h3>De Centrale Delft</h3>
+                <p class="blurb">Took the folks to dinner at @decentraledelft (The Netherlands) and let me tell you, this one is good.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.5</strong></span>
+                  <span class="score-pill">Soul <strong>8.5</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20251028-ClarenceRestaurant.html"
+               data-cuisine="seafood" data-suburb="singapore"
+               data-date="2025-10-28"
+               data-comfort="7.5" data-soul="7.5" data-mastery="8.0" data-taste="8.5" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-10-28_clarence-restaurant/01_18082253117053257.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Singapore &middot; Seafood</span><span class="dot">&bull;</span><span>28 Oct 2025</span></div>
+                <h3>Clarence Restaurant</h3>
+                <p class="blurb">@clarence.restaurant has settled into its new Fish Lane digs nicely.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>7.5</strong></span>
+                  <span class="score-pill">Soul <strong>7.5</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20251027-SingaporeChilliCrab.html"
+               data-cuisine="singaporean" data-suburb="singapore"
+               data-date="2025-10-27"
+               data-comfort="8.0" data-soul="9.5" data-mastery="8.0" data-taste="9.5" data-die="10.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-10-27_SingaporeChilliCrab/01_18069713729585467.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Singapore &middot; Singaporean</span><span class="dot">&bull;</span><span>27 Oct 2025</span></div>
+                <h3>Singapore Chilli Crab</h3>
+                <p class="blurb">When you’re in Asia and stumble into a little spot without an Instagram account, that’s usually your first sign you’re in for something real.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>9.5</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>10.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20251015-SushiRoom.html"
+               data-cuisine="japanese" data-suburb="fortitude-valley"
+               data-date="2025-10-15"
+               data-comfort="8.0" data-soul="8.0" data-mastery="7.5" data-taste="8.5" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-10-15_sushi-room/01_18065381774613031.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Fortitude Valley &middot; Japanese</span><span class="dot">&bull;</span><span>15 Oct 2025</span></div>
+                <h3>Sushi Room</h3>
+                <p class="blurb">I sat at the sushi counter at the @sushi___room and got the best seat in the house, right in front of the chefs at work.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.0</strong></span>
+                  <span class="score-pill">Mastery <strong>7.5</strong></span>
+                  <span class="score-pill">Taste <strong>8.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20251009-ExhibitionRestaurant.html"
+               data-cuisine="modern-australian" data-suburb="brisbane-cbd"
+               data-date="2025-10-09"
+               data-comfort="10.0" data-soul="10.0" data-mastery="10.0" data-taste="10.0" data-die="10.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-10-09_exhibitionrestaurant/09_18076466710887653.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Brisbane CBD &middot; Modern Australian</span><span class="dot">&bull;</span><span>9 Oct 2025</span></div>
+                <h3>Exhibition Restaurant</h3>
+                <p class="blurb">@exhibitionrestaurant in Brisbane feels like what happens when food nerds turn full scientist.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>10.0</strong></span>
+                  <span class="score-pill">Soul <strong>10.0</strong></span>
+                  <span class="score-pill">Mastery <strong>10.0</strong></span>
+                  <span class="score-pill">Taste <strong>10.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>10.0</strong></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- List view -->
+          <div class="archive-list">
+            <a class="archive-row archive-card" href="reviews/20251029-DeCentraleDelft.html"
+               data-cuisine="european-brasserie" data-suburb="delft"
+               data-date="2025-10-29"
+               data-comfort="8.5" data-soul="8.5" data-mastery="9.0" data-taste="8.5" data-die="8.5">
+              <div>
+                <div class="row-title">De Centrale Delft</div>
+                <div class="row-sub">29 October 2025</div>
+              </div>
+              <div class="row-cuisine">European brasserie</div>
+              <div class="row-suburb">Delft</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.5</strong></span>
+                <span class="rs">Soul <strong>8.5</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>8.5</strong></span>
+                <span class="rs die">Die happy <strong>8.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20251028-ClarenceRestaurant.html"
+               data-cuisine="seafood" data-suburb="singapore"
+               data-date="2025-10-28"
+               data-comfort="7.5" data-soul="7.5" data-mastery="8.0" data-taste="8.5" data-die="8.0">
+              <div>
+                <div class="row-title">Clarence Restaurant</div>
+                <div class="row-sub">28 October 2025</div>
+              </div>
+              <div class="row-cuisine">Seafood</div>
+              <div class="row-suburb">Singapore</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>7.5</strong></span>
+                <span class="rs">Soul <strong>7.5</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>8.5</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20251027-SingaporeChilliCrab.html"
+               data-cuisine="singaporean" data-suburb="singapore"
+               data-date="2025-10-27"
+               data-comfort="8.0" data-soul="9.5" data-mastery="8.0" data-taste="9.5" data-die="10.0">
+              <div>
+                <div class="row-title">Singapore Chilli Crab</div>
+                <div class="row-sub">27 October 2025</div>
+              </div>
+              <div class="row-cuisine">Singaporean</div>
+              <div class="row-suburb">Singapore</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>9.5</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>9.5</strong></span>
+                <span class="rs die">Die happy <strong>10.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20251015-SushiRoom.html"
+               data-cuisine="japanese" data-suburb="fortitude-valley"
+               data-date="2025-10-15"
+               data-comfort="8.0" data-soul="8.0" data-mastery="7.5" data-taste="8.5" data-die="8.0">
+              <div>
+                <div class="row-title">Sushi Room</div>
+                <div class="row-sub">15 October 2025</div>
+              </div>
+              <div class="row-cuisine">Japanese</div>
+              <div class="row-suburb">Fortitude Valley</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>8.0</strong></span>
+                <span class="rs">Mastery <strong>7.5</strong></span>
+                <span class="rs">Taste <strong>8.5</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20251009-ExhibitionRestaurant.html"
+               data-cuisine="modern-australian" data-suburb="brisbane-cbd"
+               data-date="2025-10-09"
+               data-comfort="10.0" data-soul="10.0" data-mastery="10.0" data-taste="10.0" data-die="10.0">
+              <div>
+                <div class="row-title">Exhibition Restaurant</div>
+                <div class="row-sub">9 October 2025</div>
+              </div>
+              <div class="row-cuisine">Modern Australian</div>
+              <div class="row-suburb">Brisbane CBD</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>10.0</strong></span>
+                <span class="rs">Soul <strong>10.0</strong></span>
+                <span class="rs">Mastery <strong>10.0</strong></span>
+                <span class="rs">Taste <strong>10.0</strong></span>
+                <span class="rs die">Die happy <strong>10.0</strong></span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- September 2025 -->
+        <section class="month-group" data-month="2025-09">
+          <h2 class="month-head">September 2025</h2>
+
+          <!-- Grid view -->
+          <div class="review-grid">
+            <a class="review-card archive-card" href="reviews/20250918-ScopriCarlton.html"
+               data-cuisine="italian" data-suburb="carlton"
+               data-date="2025-09-18"
+               data-comfort="10.0" data-soul="10.0" data-mastery="10.0" data-taste="10.0" data-die="10.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-09-18_scopri-carlton/01_18070164304939524.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Carlton &middot; Italian</span><span class="dot">&bull;</span><span>18 Sep 2025</span></div>
+                <h3>Scopri Carlton</h3>
+                <p class="blurb">My first 10/10 on all elements. Scopri, Melbourne.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>10.0</strong></span>
+                  <span class="score-pill">Soul <strong>10.0</strong></span>
+                  <span class="score-pill">Mastery <strong>10.0</strong></span>
+                  <span class="score-pill">Taste <strong>10.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>10.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250902-MilquetoastWineBar.html"
+               data-cuisine="modern-australian" data-suburb="brisbane-cbd"
+               data-date="2025-09-02"
+               data-comfort="9.0" data-soul="8.0" data-mastery="8.5" data-taste="9.0" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-09-02_milquetoastwinebar/01_18090898018684200.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Brisbane CBD &middot; Modern Australian</span><span class="dot">&bull;</span><span>2 Sep 2025</span></div>
+                <h3>Milquetoast Wine Bar</h3>
+                <p class="blurb">Red lights at the end of a dark laneway.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.5</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- List view -->
+          <div class="archive-list">
+            <a class="archive-row archive-card" href="reviews/20250918-ScopriCarlton.html"
+               data-cuisine="italian" data-suburb="carlton"
+               data-date="2025-09-18"
+               data-comfort="10.0" data-soul="10.0" data-mastery="10.0" data-taste="10.0" data-die="10.0">
+              <div>
+                <div class="row-title">Scopri Carlton</div>
+                <div class="row-sub">18 September 2025</div>
+              </div>
+              <div class="row-cuisine">Italian</div>
+              <div class="row-suburb">Carlton</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>10.0</strong></span>
+                <span class="rs">Soul <strong>10.0</strong></span>
+                <span class="rs">Mastery <strong>10.0</strong></span>
+                <span class="rs">Taste <strong>10.0</strong></span>
+                <span class="rs die">Die happy <strong>10.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250902-MilquetoastWineBar.html"
+               data-cuisine="modern-australian" data-suburb="brisbane-cbd"
+               data-date="2025-09-02"
+               data-comfort="9.0" data-soul="8.0" data-mastery="8.5" data-taste="9.0" data-die="9.0">
+              <div>
+                <div class="row-title">Milquetoast Wine Bar</div>
+                <div class="row-sub">2 September 2025</div>
+              </div>
+              <div class="row-cuisine">Modern Australian</div>
+              <div class="row-suburb">Brisbane CBD</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.0</strong></span>
+                <span class="rs">Soul <strong>8.0</strong></span>
+                <span class="rs">Mastery <strong>8.5</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- August 2025 -->
+        <section class="month-group" data-month="2025-08">
+          <h2 class="month-head">August 2025</h2>
+
+          <!-- Grid view -->
+          <div class="review-grid">
+            <a class="review-card archive-card" href="reviews/20250831-LongwangBrisbane.html"
+               data-cuisine="modern-asian" data-suburb="brisbane-cbd"
+               data-date="2025-08-31"
+               data-comfort="7.5" data-soul="7.0" data-mastery="7.0" data-taste="8.0" data-die="7.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-08-31_longwang-brisbane/01_18284279770272832.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Brisbane CBD &middot; Modern Asian</span><span class="dot">&bull;</span><span>31 Aug 2025</span></div>
+                <h3>Longwang Brisbane</h3>
+                <p class="blurb">@longwang.brisbane is another project of @michael_tassis in Brisbane and one of those spots that hits the mark when you’re peckish and just want a line-up of bite-sized snacks to graze through.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>7.5</strong></span>
+                  <span class="score-pill">Soul <strong>7.0</strong></span>
+                  <span class="score-pill">Mastery <strong>7.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>7.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250826-SNUG.html"
+               data-cuisine="korean" data-suburb="coorparoo"
+               data-date="2025-08-26"
+               data-comfort="9.0" data-soul="8.5" data-mastery="8.5" data-taste="9.0" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-08-26_snug-bne/01_18040059128671502.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Coorparoo &middot; Korean</span><span class="dot">&bull;</span><span>26 Aug 2025</span></div>
+                <h3>SNUG</h3>
+                <p class="blurb">Got recommended a neighbourhood café and wine bar called @snug.bne by @aneeshasaty.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.5</strong></span>
+                  <span class="score-pill">Mastery <strong>8.5</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250821-MinistryOfCrab.html"
+               data-cuisine="chinese" data-suburb="melbourne"
+               data-date="2025-08-21"
+               data-comfort="9.0" data-soul="10.0" data-mastery="10.0" data-taste="9.0" data-die="10.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-08-21_ministryofcrab/01_18073116233473897.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Melbourne &middot; Chinese</span><span class="dot">&bull;</span><span>21 Aug 2025</span></div>
+                <h3>Ministry of Crab</h3>
+                <p class="blurb">For the unlucky few that are yet to experience, @ministryofcrab is a world-renowned seafood institution that originated in Sri Lanka and since expanded to Singapore, Hong Kong, Bangkok, Kuala Lumpur, Shanghai and many more.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.0</strong></span>
+                  <span class="score-pill">Soul <strong>10.0</strong></span>
+                  <span class="score-pill">Mastery <strong>10.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>10.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250814-RosmarinoBrisbane.html"
+               data-cuisine="italian" data-suburb="fortitude-valley"
+               data-date="2025-08-14"
+               data-comfort="9.5" data-soul="9.0" data-mastery="8.5" data-taste="9.0" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-08-14_rosmarino-brisbane/01_18108235411478009.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Fortitude Valley &middot; Italian</span><span class="dot">&bull;</span><span>14 Aug 2025</span></div>
+                <h3>Rosmarino Brisbane</h3>
+                <p class="blurb">@rosmarino.brisbane sits in a beautiful brick-exposed building with large street facing windows.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.5</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.5</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250812-TheTamarind.html"
+               data-cuisine="thai" data-suburb="maleny"
+               data-date="2025-08-12"
+               data-comfort="8.0" data-soul="8.5" data-mastery="8.5" data-taste="9.0" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-08-12_the-tamarind/01_18087515872796650.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Maleny &middot; Thai</span><span class="dot">&bull;</span><span>12 Aug 2025</span></div>
+                <h3>The Tamarind</h3>
+                <p class="blurb">We chose the banquet at @the_tamarind and turned up hungry.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.5</strong></span>
+                  <span class="score-pill">Mastery <strong>8.5</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250807-BarRosaSouthbrisbane.html"
+               data-cuisine="italian" data-suburb="southbank"
+               data-date="2025-08-07"
+               data-comfort="9.0" data-soul="9.5" data-mastery="9.0" data-taste="9.5" data-die="9.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-08-07_bar-rosa-southbrisbane/01_18121560784477926.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>South Bank &middot; Italian</span><span class="dot">&bull;</span><span>7 Aug 2025</span></div>
+                <h3>Bar Rosa Southbrisbane</h3>
+                <p class="blurb">@bar_rosa_southbrisbane.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.0</strong></span>
+                  <span class="score-pill">Soul <strong>9.5</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250805-TheLongApron.html"
+               data-cuisine="french-bistro" data-suburb="montville"
+               data-date="2025-08-05"
+               data-comfort="6.5" data-soul="7.0" data-mastery="8.5" data-taste="8.0" data-die="7.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-08-05_thelongapron/02_18362723563148140.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Montville &middot; French bistro</span><span class="dot">&bull;</span><span>5 Aug 2025</span></div>
+                <h3>The Long Apron</h3>
+                <p class="blurb">@thelongapron is a Chef-Hatted (the Australian twist on a Michelin star) restaurant, part of @spicersclovellyestate.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>6.5</strong></span>
+                  <span class="score-pill">Soul <strong>7.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.5</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>7.0</strong></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- List view -->
+          <div class="archive-list">
+            <a class="archive-row archive-card" href="reviews/20250831-LongwangBrisbane.html"
+               data-cuisine="modern-asian" data-suburb="brisbane-cbd"
+               data-date="2025-08-31"
+               data-comfort="7.5" data-soul="7.0" data-mastery="7.0" data-taste="8.0" data-die="7.5">
+              <div>
+                <div class="row-title">Longwang Brisbane</div>
+                <div class="row-sub">31 August 2025</div>
+              </div>
+              <div class="row-cuisine">Modern Asian</div>
+              <div class="row-suburb">Brisbane CBD</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>7.5</strong></span>
+                <span class="rs">Soul <strong>7.0</strong></span>
+                <span class="rs">Mastery <strong>7.0</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>7.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250826-SNUG.html"
+               data-cuisine="korean" data-suburb="coorparoo"
+               data-date="2025-08-26"
+               data-comfort="9.0" data-soul="8.5" data-mastery="8.5" data-taste="9.0" data-die="9.0">
+              <div>
+                <div class="row-title">SNUG</div>
+                <div class="row-sub">26 August 2025</div>
+              </div>
+              <div class="row-cuisine">Korean</div>
+              <div class="row-suburb">Coorparoo</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.0</strong></span>
+                <span class="rs">Soul <strong>8.5</strong></span>
+                <span class="rs">Mastery <strong>8.5</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250821-MinistryOfCrab.html"
+               data-cuisine="chinese" data-suburb="melbourne"
+               data-date="2025-08-21"
+               data-comfort="9.0" data-soul="10.0" data-mastery="10.0" data-taste="9.0" data-die="10.0">
+              <div>
+                <div class="row-title">Ministry of Crab</div>
+                <div class="row-sub">21 August 2025</div>
+              </div>
+              <div class="row-cuisine">Chinese</div>
+              <div class="row-suburb">Melbourne</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.0</strong></span>
+                <span class="rs">Soul <strong>10.0</strong></span>
+                <span class="rs">Mastery <strong>10.0</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>10.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250814-RosmarinoBrisbane.html"
+               data-cuisine="italian" data-suburb="fortitude-valley"
+               data-date="2025-08-14"
+               data-comfort="9.5" data-soul="9.0" data-mastery="8.5" data-taste="9.0" data-die="9.0">
+              <div>
+                <div class="row-title">Rosmarino Brisbane</div>
+                <div class="row-sub">14 August 2025</div>
+              </div>
+              <div class="row-cuisine">Italian</div>
+              <div class="row-suburb">Fortitude Valley</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.5</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>8.5</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250812-TheTamarind.html"
+               data-cuisine="thai" data-suburb="maleny"
+               data-date="2025-08-12"
+               data-comfort="8.0" data-soul="8.5" data-mastery="8.5" data-taste="9.0" data-die="9.0">
+              <div>
+                <div class="row-title">The Tamarind</div>
+                <div class="row-sub">12 August 2025</div>
+              </div>
+              <div class="row-cuisine">Thai</div>
+              <div class="row-suburb">Maleny</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>8.5</strong></span>
+                <span class="rs">Mastery <strong>8.5</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250807-BarRosaSouthbrisbane.html"
+               data-cuisine="italian" data-suburb="southbank"
+               data-date="2025-08-07"
+               data-comfort="9.0" data-soul="9.5" data-mastery="9.0" data-taste="9.5" data-die="9.5">
+              <div>
+                <div class="row-title">Bar Rosa Southbrisbane</div>
+                <div class="row-sub">7 August 2025</div>
+              </div>
+              <div class="row-cuisine">Italian</div>
+              <div class="row-suburb">South Bank</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.0</strong></span>
+                <span class="rs">Soul <strong>9.5</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>9.5</strong></span>
+                <span class="rs die">Die happy <strong>9.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250805-TheLongApron.html"
+               data-cuisine="french-bistro" data-suburb="montville"
+               data-date="2025-08-05"
+               data-comfort="6.5" data-soul="7.0" data-mastery="8.5" data-taste="8.0" data-die="7.0">
+              <div>
+                <div class="row-title">The Long Apron</div>
+                <div class="row-sub">5 August 2025</div>
+              </div>
+              <div class="row-cuisine">French bistro</div>
+              <div class="row-suburb">Montville</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>6.5</strong></span>
+                <span class="rs">Soul <strong>7.0</strong></span>
+                <span class="rs">Mastery <strong>8.5</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>7.0</strong></span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- July 2025 -->
+        <section class="month-group" data-month="2025-07">
+          <h2 class="month-head">July 2025</h2>
+
+          <!-- Grid view -->
+          <div class="review-grid">
+            <a class="review-card archive-card" href="reviews/20250731-Snackman.html"
+               data-cuisine="chinese" data-suburb="fortitude-valley"
+               data-date="2025-07-31"
+               data-comfort="7.5" data-soul="7.5" data-mastery="7.5" data-taste="8.0" data-die="7.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-07-31_snackmanbris/02_18319702060235170.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Fortitude Valley &middot; Chinese</span><span class="dot">&bull;</span><span>31 Jul 2025</span></div>
+                <h3>Snackman</h3>
+                <p class="blurb">Place is a vibe</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>7.5</strong></span>
+                  <span class="score-pill">Soul <strong>7.5</strong></span>
+                  <span class="score-pill">Mastery <strong>7.5</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>7.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250729-BillysPineAndBambooRestaurant.html"
+               data-cuisine="chinese" data-suburb="morningside"
+               data-date="2025-07-29"
+               data-comfort="8.0" data-soul="9.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-07-29_brisbanerestaurants/01_18096932806721226.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Morningside &middot; Chinese</span><span class="dot">&bull;</span><span>29 Jul 2025</span></div>
+                <h3>Billy&#x27;s Pine and Bamboo Restaurant</h3>
+                <p class="blurb">Billy’s Pine &amp; Bamboo has been feeding Brisbane for years, yet somehow it stayed off my radar until recently.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250726-Komeyui.html"
+               data-cuisine="japanese" data-suburb="spring-hill"
+               data-date="2025-07-26"
+               data-comfort="8.5" data-soul="9.0" data-mastery="9.5" data-taste="9.0" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-07-26_komeyui-bris/01_18198873082312325.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Spring Hill &middot; Japanese</span><span class="dot">&bull;</span><span>26 Jul 2025</span></div>
+                <h3>Komeyui</h3>
+                <p class="blurb">There are sushi joints, and then there’s Komeyui</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.5</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>9.5</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250725-SpillwineMaleny.html"
+               data-cuisine="modern-australian" data-suburb="maleny"
+               data-date="2025-07-25"
+               data-comfort="8.0" data-soul="8.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-07-25_spillwine-maleny/01_18081424936857835.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Maleny &middot; Modern Australian</span><span class="dot">&bull;</span><span>25 Jul 2025</span></div>
+                <h3>Spillwine Maleny</h3>
+                <p class="blurb">@spillwine.maleny stocks bottles from small-batch producers and household estates alike, while a pocket-sized kitchen turns out plates that impress.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250715-CreoleSoulKitchen.html"
+               data-cuisine="creole" data-suburb="spring-hill"
+               data-date="2025-07-15"
+               data-comfort="9.0" data-soul="9.0" data-mastery="8.0" data-taste="8.5" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-07-15_creolesoulkitchen/01_17946249179882153.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Spring Hill &middot; Creole</span><span class="dot">&bull;</span><span>15 Jul 2025</span></div>
+                <h3>Creole Soul Kitchen</h3>
+                <p class="blurb">Walked into @creolesoulkitchen and immediately wished Instagram came with a smell feature.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.0</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250711-Petite.html"
+               data-cuisine="french" data-suburb="fortitude-valley"
+               data-date="2025-07-11"
+               data-comfort="7.5" data-soul="7.5" data-mastery="8.0" data-taste="8.0" data-die="7.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-07-11_petitebris/01_18166727416353370.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Fortitude Valley &middot; French</span><span class="dot">&bull;</span><span>11 Jul 2025</span></div>
+                <h3>Petite</h3>
+                <p class="blurb">@petitebris is a French-inspired wine bar that does amazing petite dishes.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>7.5</strong></span>
+                  <span class="score-pill">Soul <strong>7.5</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>7.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250708-Walters.html"
+               data-cuisine="steakhouse" data-suburb="brisbane-cbd"
+               data-date="2025-07-08"
+               data-comfort="9.0" data-soul="8.5" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-07-08_waltersbrisbane/01_18072289630807415.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Brisbane CBD &middot; Steakhouse</span><span class="dot">&bull;</span><span>8 Jul 2025</span></div>
+                <h3>Walters</h3>
+                <p class="blurb">For those who’ve followed me for a while, you’ve probably seen this place pop up more than a few times.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.5</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250703-Yamas.html"
+               data-cuisine="greek" data-suburb="west-end"
+               data-date="2025-07-03"
+               data-comfort="8.0" data-soul="7.5" data-mastery="8.5" data-taste="8.0" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-07-03_yamas-greek/01_17972764139902033.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>West End &middot; Greek</span><span class="dot">&bull;</span><span>3 Jul 2025</span></div>
+                <h3>Yamas</h3>
+                <p class="blurb">@yamas.greek has quietly become my default setting.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>7.5</strong></span>
+                  <span class="score-pill">Mastery <strong>8.5</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250701-Kafenio.html"
+               data-cuisine="greek" data-suburb="west-end"
+               data-date="2025-07-01"
+               data-comfort="8.5" data-soul="9.0" data-mastery="8.0" data-taste="8.5" data-die="8.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-07-01_kafeniobrisbane/01_18048939032414435.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>West End &middot; Greek</span><span class="dot">&bull;</span><span>1 Jul 2025</span></div>
+                <h3>Kafenio</h3>
+                <p class="blurb">It’s not fancy, but that’s the whole charm.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.5</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.5</strong></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- List view -->
+          <div class="archive-list">
+            <a class="archive-row archive-card" href="reviews/20250731-Snackman.html"
+               data-cuisine="chinese" data-suburb="fortitude-valley"
+               data-date="2025-07-31"
+               data-comfort="7.5" data-soul="7.5" data-mastery="7.5" data-taste="8.0" data-die="7.5">
+              <div>
+                <div class="row-title">Snackman</div>
+                <div class="row-sub">31 July 2025</div>
+              </div>
+              <div class="row-cuisine">Chinese</div>
+              <div class="row-suburb">Fortitude Valley</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>7.5</strong></span>
+                <span class="rs">Soul <strong>7.5</strong></span>
+                <span class="rs">Mastery <strong>7.5</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>7.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250729-BillysPineAndBambooRestaurant.html"
+               data-cuisine="chinese" data-suburb="morningside"
+               data-date="2025-07-29"
+               data-comfort="8.0" data-soul="9.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div>
+                <div class="row-title">Billy&#x27;s Pine and Bamboo Restaurant</div>
+                <div class="row-sub">29 July 2025</div>
+              </div>
+              <div class="row-cuisine">Chinese</div>
+              <div class="row-suburb">Morningside</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250726-Komeyui.html"
+               data-cuisine="japanese" data-suburb="spring-hill"
+               data-date="2025-07-26"
+               data-comfort="8.5" data-soul="9.0" data-mastery="9.5" data-taste="9.0" data-die="9.0">
+              <div>
+                <div class="row-title">Komeyui</div>
+                <div class="row-sub">26 July 2025</div>
+              </div>
+              <div class="row-cuisine">Japanese</div>
+              <div class="row-suburb">Spring Hill</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.5</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>9.5</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250725-SpillwineMaleny.html"
+               data-cuisine="modern-australian" data-suburb="maleny"
+               data-date="2025-07-25"
+               data-comfort="8.0" data-soul="8.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div>
+                <div class="row-title">Spillwine Maleny</div>
+                <div class="row-sub">25 July 2025</div>
+              </div>
+              <div class="row-cuisine">Modern Australian</div>
+              <div class="row-suburb">Maleny</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>8.0</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250715-CreoleSoulKitchen.html"
+               data-cuisine="creole" data-suburb="spring-hill"
+               data-date="2025-07-15"
+               data-comfort="9.0" data-soul="9.0" data-mastery="8.0" data-taste="8.5" data-die="8.0">
+              <div>
+                <div class="row-title">Creole Soul Kitchen</div>
+                <div class="row-sub">15 July 2025</div>
+              </div>
+              <div class="row-cuisine">Creole</div>
+              <div class="row-suburb">Spring Hill</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.0</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>8.5</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250711-Petite.html"
+               data-cuisine="french" data-suburb="fortitude-valley"
+               data-date="2025-07-11"
+               data-comfort="7.5" data-soul="7.5" data-mastery="8.0" data-taste="8.0" data-die="7.5">
+              <div>
+                <div class="row-title">Petite</div>
+                <div class="row-sub">11 July 2025</div>
+              </div>
+              <div class="row-cuisine">French</div>
+              <div class="row-suburb">Fortitude Valley</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>7.5</strong></span>
+                <span class="rs">Soul <strong>7.5</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>7.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250708-Walters.html"
+               data-cuisine="steakhouse" data-suburb="brisbane-cbd"
+               data-date="2025-07-08"
+               data-comfort="9.0" data-soul="8.5" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div>
+                <div class="row-title">Walters</div>
+                <div class="row-sub">8 July 2025</div>
+              </div>
+              <div class="row-cuisine">Steakhouse</div>
+              <div class="row-suburb">Brisbane CBD</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.0</strong></span>
+                <span class="rs">Soul <strong>8.5</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250703-Yamas.html"
+               data-cuisine="greek" data-suburb="west-end"
+               data-date="2025-07-03"
+               data-comfort="8.0" data-soul="7.5" data-mastery="8.5" data-taste="8.0" data-die="8.0">
+              <div>
+                <div class="row-title">Yamas</div>
+                <div class="row-sub">3 July 2025</div>
+              </div>
+              <div class="row-cuisine">Greek</div>
+              <div class="row-suburb">West End</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>7.5</strong></span>
+                <span class="rs">Mastery <strong>8.5</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250701-Kafenio.html"
+               data-cuisine="greek" data-suburb="west-end"
+               data-date="2025-07-01"
+               data-comfort="8.5" data-soul="9.0" data-mastery="8.0" data-taste="8.5" data-die="8.5">
+              <div>
+                <div class="row-title">Kafenio</div>
+                <div class="row-sub">1 July 2025</div>
+              </div>
+              <div class="row-cuisine">Greek</div>
+              <div class="row-suburb">West End</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.5</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>8.5</strong></span>
+                <span class="rs die">Die happy <strong>8.5</strong></span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- June 2025 -->
+        <section class="month-group" data-month="2025-06">
+          <h2 class="month-head">June 2025</h2>
+
+          <!-- Grid view -->
+          <div class="review-grid">
+            <a class="review-card archive-card" href="reviews/20250626-RaRestaurantAndBar.html"
+               data-cuisine="sri-lankan" data-suburb="noosa"
+               data-date="2025-06-26"
+               data-comfort="9.0" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-06-26_ra-restaurant-and-bar/01_18032666618680695.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Noosa &middot; Sri Lankan</span><span class="dot">&bull;</span><span>26 Jun 2025</span></div>
+                <h3>Ra Restaurant And Bar</h3>
+                <p class="blurb">@ra_restaurant_and_bar is a stunning new arrival at the Sunshine Coast that doesn’t just nod to Sri Lanka—it sings.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.0</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250620-LePetitChef.html"
+               data-cuisine="modern-australian" data-suburb="brisbane-cbd"
+               data-date="2025-06-20"
+               data-comfort="7.0" data-soul="6.5" data-mastery="6.0" data-taste="6.0" data-die="6.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-06-20_FoodieExperience/01_18510493918017987.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Brisbane CBD &middot; Modern Australian</span><span class="dot">&bull;</span><span>20 Jun 2025</span></div>
+                <h3>Le Petit Chef</h3>
+                <p class="blurb">A fun one, but not one for the foodies.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>7.0</strong></span>
+                  <span class="score-pill">Soul <strong>6.5</strong></span>
+                  <span class="score-pill">Mastery <strong>6.0</strong></span>
+                  <span class="score-pill">Taste <strong>6.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>6.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250617-CutByWolfgangPuck.html"
+               data-cuisine="steakhouse" data-suburb="singapore"
+               data-date="2025-06-17"
+               data-comfort="8.5" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-06-17_cutbywolfgangpucksg/01_18085699168657186.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Singapore &middot; Steakhouse</span><span class="dot">&bull;</span><span>17 Jun 2025</span></div>
+                <h3>Cut by Wolfgang Puck</h3>
+                <p class="blurb">Throwback to when I finally ticked off @cutbywolfgangpucksg at @marinabaysands in @visit_singapore.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.5</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250612-Takashiya.html"
+               data-cuisine="japanese" data-suburb="southbank"
+               data-date="2025-06-12"
+               data-comfort="9.0" data-soul="9.0" data-mastery="9.5" data-taste="9.0" data-die="9.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-06-12_takashiya-au/01_18064588595120019.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>South Bank &middot; Japanese</span><span class="dot">&bull;</span><span>12 Jun 2025</span></div>
+                <h3>Takashiya</h3>
+                <p class="blurb">Couldn’t even post all the photos.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.0</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>9.5</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250610-Locale.html"
+               data-cuisine="italian" data-suburb="noosa"
+               data-date="2025-06-10"
+               data-comfort="8.0" data-soul="7.0" data-mastery="7.5" data-taste="7.0" data-die="7.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-06-10_localenoosa/01_18364796962183531.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Noosa &middot; Italian</span><span class="dot">&bull;</span><span>10 Jun 2025</span></div>
+                <h3>Locale</h3>
+                <p class="blurb">@localenoosa is the kind of place that delivers exactly what it promises.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>7.0</strong></span>
+                  <span class="score-pill">Mastery <strong>7.5</strong></span>
+                  <span class="score-pill">Taste <strong>7.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>7.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250605-JoyRestaurant.html"
+               data-cuisine="modern-australian" data-suburb="fortitude-valley"
+               data-date="2025-06-05"
+               data-comfort="9.5" data-soul="8.5" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-06-05_joyrestaurant/01_18077859961803672.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Fortitude Valley &middot; Modern Australian</span><span class="dot">&bull;</span><span>5 Jun 2025</span></div>
+                <h3>Joy restaurant</h3>
+                <p class="blurb">Tucked away in a corner of Fortitude Valley, @joyrestaurant  doesn’t rely on spectacle.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.5</strong></span>
+                  <span class="score-pill">Soul <strong>8.5</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250603-Central.html"
+               data-cuisine="chinese" data-suburb="brisbane-cbd"
+               data-date="2025-06-03"
+               data-comfort="8.0" data-soul="8.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-06-03_centralbne/01_18049584659387463.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Brisbane CBD &middot; Chinese</span><span class="dot">&bull;</span><span>3 Jun 2025</span></div>
+                <h3>Central</h3>
+                <p class="blurb">There’s something about @centralbne that keeps pulling me back.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- List view -->
+          <div class="archive-list">
+            <a class="archive-row archive-card" href="reviews/20250626-RaRestaurantAndBar.html"
+               data-cuisine="sri-lankan" data-suburb="noosa"
+               data-date="2025-06-26"
+               data-comfort="9.0" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div>
+                <div class="row-title">Ra Restaurant And Bar</div>
+                <div class="row-sub">26 June 2025</div>
+              </div>
+              <div class="row-cuisine">Sri Lankan</div>
+              <div class="row-suburb">Noosa</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.0</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250620-LePetitChef.html"
+               data-cuisine="modern-australian" data-suburb="brisbane-cbd"
+               data-date="2025-06-20"
+               data-comfort="7.0" data-soul="6.5" data-mastery="6.0" data-taste="6.0" data-die="6.0">
+              <div>
+                <div class="row-title">Le Petit Chef</div>
+                <div class="row-sub">20 June 2025</div>
+              </div>
+              <div class="row-cuisine">Modern Australian</div>
+              <div class="row-suburb">Brisbane CBD</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>7.0</strong></span>
+                <span class="rs">Soul <strong>6.5</strong></span>
+                <span class="rs">Mastery <strong>6.0</strong></span>
+                <span class="rs">Taste <strong>6.0</strong></span>
+                <span class="rs die">Die happy <strong>6.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250617-CutByWolfgangPuck.html"
+               data-cuisine="steakhouse" data-suburb="singapore"
+               data-date="2025-06-17"
+               data-comfort="8.5" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div>
+                <div class="row-title">Cut by Wolfgang Puck</div>
+                <div class="row-sub">17 June 2025</div>
+              </div>
+              <div class="row-cuisine">Steakhouse</div>
+              <div class="row-suburb">Singapore</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.5</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250612-Takashiya.html"
+               data-cuisine="japanese" data-suburb="southbank"
+               data-date="2025-06-12"
+               data-comfort="9.0" data-soul="9.0" data-mastery="9.5" data-taste="9.0" data-die="9.5">
+              <div>
+                <div class="row-title">Takashiya</div>
+                <div class="row-sub">12 June 2025</div>
+              </div>
+              <div class="row-cuisine">Japanese</div>
+              <div class="row-suburb">South Bank</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.0</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>9.5</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250610-Locale.html"
+               data-cuisine="italian" data-suburb="noosa"
+               data-date="2025-06-10"
+               data-comfort="8.0" data-soul="7.0" data-mastery="7.5" data-taste="7.0" data-die="7.0">
+              <div>
+                <div class="row-title">Locale</div>
+                <div class="row-sub">10 June 2025</div>
+              </div>
+              <div class="row-cuisine">Italian</div>
+              <div class="row-suburb">Noosa</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>7.0</strong></span>
+                <span class="rs">Mastery <strong>7.5</strong></span>
+                <span class="rs">Taste <strong>7.0</strong></span>
+                <span class="rs die">Die happy <strong>7.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250605-JoyRestaurant.html"
+               data-cuisine="modern-australian" data-suburb="fortitude-valley"
+               data-date="2025-06-05"
+               data-comfort="9.5" data-soul="8.5" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div>
+                <div class="row-title">Joy restaurant</div>
+                <div class="row-sub">5 June 2025</div>
+              </div>
+              <div class="row-cuisine">Modern Australian</div>
+              <div class="row-suburb">Fortitude Valley</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.5</strong></span>
+                <span class="rs">Soul <strong>8.5</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250603-Central.html"
+               data-cuisine="chinese" data-suburb="brisbane-cbd"
+               data-date="2025-06-03"
+               data-comfort="8.0" data-soul="8.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div>
+                <div class="row-title">Central</div>
+                <div class="row-sub">3 June 2025</div>
+              </div>
+              <div class="row-cuisine">Chinese</div>
+              <div class="row-suburb">Brisbane CBD</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>8.0</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- June 2025 -->
+        <!-- May 2025 -->
+        <section class="month-group" data-month="2025-05">
+          <h2 class="month-head">May 2025</h2>
+
+          <!-- Grid view -->
+          <div class="review-grid">
+            <a class="review-card archive-card" href="reviews/20250530-JuliusPizzeria.html"
+               data-cuisine="italian" data-suburb="south-brisbane"
+               data-date="2025-05-30"
+               data-comfort="7.0" data-soul="7.5" data-mastery="7.0" data-taste="7.0" data-die="7.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-05-30_juliuspizzeria/01_18068438729312447.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>South Brisbane &middot; Italian</span><span class="dot">&bull;</span><span>30 May 2025</span></div>
+                <h3>Julius Pizzeria</h3>
+                <p class="blurb">Lunch at @juliuspizzeria on a grey, rainy Brisbane day.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>7.0</strong></span>
+                  <span class="score-pill">Soul <strong>7.5</strong></span>
+                  <span class="score-pill">Mastery <strong>7.0</strong></span>
+                  <span class="score-pill">Taste <strong>7.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>7.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250522-OgeeHobart.html"
+               data-cuisine="modern-australian" data-suburb="hobart"
+               data-date="2025-05-22"
+               data-comfort="9.0" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-05-22_ogee-hobart/01_18393620056114270.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Hobart &middot; Modern Australian</span><span class="dot">&bull;</span><span>22 May 2025</span></div>
+                <h3>Ogee Hobart</h3>
+                <p class="blurb">Dinner at @ogee.hobart in Hobart.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.0</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250519-Tillerman.html"
+               data-cuisine="seafood" data-suburb="brisbane-cbd"
+               data-date="2025-05-19"
+               data-comfort="8.0" data-soul="7.5" data-mastery="7.5" data-taste="7.5" data-die="7.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-05-19_tillermanrestaurant/01_17919903440981281.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Brisbane CBD &middot; Seafood</span><span class="dot">&bull;</span><span>19 May 2025</span></div>
+                <h3>Tillerman</h3>
+                <p class="blurb">An awesome night at @tillermanrestaurant, a great spot to share good food with even better friends.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>7.5</strong></span>
+                  <span class="score-pill">Mastery <strong>7.5</strong></span>
+                  <span class="score-pill">Taste <strong>7.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>7.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250515-Diermakr.html"
+               data-cuisine="modern-australian" data-suburb="hobart"
+               data-date="2025-05-15"
+               data-comfort="9.5" data-soul="9.0" data-mastery="9.5" data-taste="9.5" data-die="9.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-05-15_diermakr/02_18144592756382693.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Hobart &middot; Modern Australian</span><span class="dot">&bull;</span><span>15 May 2025</span></div>
+                <h3>Diermakr</h3>
+                <p class="blurb">@diermakr in Hobart is one of those places that feels like a secret.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.5</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>9.5</strong></span>
+                  <span class="score-pill">Taste <strong>9.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.5</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250513-WalkwayToCeylon.html"
+               data-cuisine="sri-lankan" data-suburb="greenslopes"
+               data-date="2025-05-13"
+               data-comfort="7.5" data-soul="8.5" data-mastery="7.0" data-taste="7.5" data-die="7.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-05-13_walkwaytoceylon/01_18066889094288242.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Greenslopes &middot; Sri Lankan</span><span class="dot">&bull;</span><span>13 May 2025</span></div>
+                <h3>Walkway to Ceylon</h3>
+                <p class="blurb">@walkwaytoceylon is a cosy new Sri Lankan spot in Greenslopes, serving up homestyle comfort food in a laid-back setting.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>7.5</strong></span>
+                  <span class="score-pill">Soul <strong>8.5</strong></span>
+                  <span class="score-pill">Mastery <strong>7.0</strong></span>
+                  <span class="score-pill">Taste <strong>7.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>7.0</strong></span>
+                </div>
+              </div>
+            </a>
+            <a class="review-card archive-card" href="reviews/20250507-Attimi.html"
+               data-cuisine="italian-degustation" data-suburb="paddington"
+               data-date="2025-05-07"
+               data-comfort="8.5" data-soul="8.5" data-mastery="9.0" data-taste="8.5" data-die="9.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-05-07_attimi-brisbane/01_17937298737001533.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Paddington &middot; Italian degustation</span><span class="dot">&bull;</span><span>7 May 2025</span></div>
+                <h3>Attimi</h3>
+                <p class="blurb">Italian degustation in a Paddington jewel box, and a butter infused with mussel I would, no questions asked, take home in a jar.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.5</strong></span>
+                  <span class="score-pill">Soul <strong>8.5</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>9.5</strong></span>
+                </div>
+              </div>
+            </a>
+
+            <a class="review-card archive-card" href="reviews/20250505-HimalayanCafe.html"
+               data-cuisine="nepali" data-suburb="new-farm"
+               data-date="2025-05-05"
+               data-comfort="8.0" data-soul="9.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-05-05_HimalayanCafe/01_17965897199912121.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>New Farm &middot; Nepali / Himalayan</span><span class="dot">&bull;</span><span>5 May 2025</span></div>
+                <h3>The Himalayan Cafe</h3>
+                <p class="blurb">Momos worth the climb, in a New Farm shopfront that wasn't built for performance.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>9.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+
+            <a class="review-card archive-card" href="reviews/20250502-NaldhamHouse.html"
+               data-cuisine="european-brasserie" data-suburb="brisbane-cbd"
+               data-date="2025-05-02"
+               data-comfort="8.0" data-soul="7.0" data-mastery="8.0" data-taste="8.0" data-die="7.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-05-02_naldhamhouse/01_18078515503696292.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Brisbane CBD &middot; European brasserie</span><span class="dot">&bull;</span><span>2 May 2025</span></div>
+                <h3>The Brasserie at Naldham House</h3>
+                <p class="blurb">Croquettes, caviar, a wagyu cheeseburger and a steak frites that means business.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>7.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>7.5</strong></span>
+                </div>
+              </div>
+            </a>
+
+            <a class="review-card archive-card" href="reviews/20250502-PenelopeBistro.html"
+               data-cuisine="french-bistro" data-suburb="james-street"
+               data-date="2025-05-02"
+               data-comfort="7.5" data-soul="7.0" data-mastery="7.0" data-taste="7.5" data-die="6.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-05-02_penelope-bistro/01_18025790750669942.png');"></div>
+              <div class="body">
+                <div class="meta"><span>James Street &middot; French bistro</span><span class="dot">&bull;</span><span>2 May 2025</span></div>
+                <h3>Penelope Bistro</h3>
+                <p class="blurb">A James Street bistro that knows its hours, even if the cooking doesn't quite knock you over.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>7.5</strong></span>
+                  <span class="score-pill">Soul <strong>7.0</strong></span>
+                  <span class="score-pill">Mastery <strong>7.0</strong></span>
+                  <span class="score-pill">Taste <strong>7.5</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>6.5</strong></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- List view -->
+          <div class="archive-list">
+            <a class="archive-row archive-card" href="reviews/20250530-JuliusPizzeria.html"
+               data-cuisine="italian" data-suburb="south-brisbane"
+               data-date="2025-05-30"
+               data-comfort="7.0" data-soul="7.5" data-mastery="7.0" data-taste="7.0" data-die="7.0">
+              <div>
+                <div class="row-title">Julius Pizzeria</div>
+                <div class="row-sub">30 May 2025</div>
+              </div>
+              <div class="row-cuisine">Italian</div>
+              <div class="row-suburb">South Brisbane</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>7.0</strong></span>
+                <span class="rs">Soul <strong>7.5</strong></span>
+                <span class="rs">Mastery <strong>7.0</strong></span>
+                <span class="rs">Taste <strong>7.0</strong></span>
+                <span class="rs die">Die happy <strong>7.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250522-OgeeHobart.html"
+               data-cuisine="modern-australian" data-suburb="hobart"
+               data-date="2025-05-22"
+               data-comfort="9.0" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
+              <div>
+                <div class="row-title">Ogee Hobart</div>
+                <div class="row-sub">22 May 2025</div>
+              </div>
+              <div class="row-cuisine">Modern Australian</div>
+              <div class="row-suburb">Hobart</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.0</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>9.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250519-Tillerman.html"
+               data-cuisine="seafood" data-suburb="brisbane-cbd"
+               data-date="2025-05-19"
+               data-comfort="8.0" data-soul="7.5" data-mastery="7.5" data-taste="7.5" data-die="7.5">
+              <div>
+                <div class="row-title">Tillerman</div>
+                <div class="row-sub">19 May 2025</div>
+              </div>
+              <div class="row-cuisine">Seafood</div>
+              <div class="row-suburb">Brisbane CBD</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>7.5</strong></span>
+                <span class="rs">Mastery <strong>7.5</strong></span>
+                <span class="rs">Taste <strong>7.5</strong></span>
+                <span class="rs die">Die happy <strong>7.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250515-Diermakr.html"
+               data-cuisine="modern-australian" data-suburb="hobart"
+               data-date="2025-05-15"
+               data-comfort="9.5" data-soul="9.0" data-mastery="9.5" data-taste="9.5" data-die="9.5">
+              <div>
+                <div class="row-title">Diermakr</div>
+                <div class="row-sub">15 May 2025</div>
+              </div>
+              <div class="row-cuisine">Modern Australian</div>
+              <div class="row-suburb">Hobart</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.5</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>9.5</strong></span>
+                <span class="rs">Taste <strong>9.5</strong></span>
+                <span class="rs die">Die happy <strong>9.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250513-WalkwayToCeylon.html"
+               data-cuisine="sri-lankan" data-suburb="greenslopes"
+               data-date="2025-05-13"
+               data-comfort="7.5" data-soul="8.5" data-mastery="7.0" data-taste="7.5" data-die="7.0">
+              <div>
+                <div class="row-title">Walkway to Ceylon</div>
+                <div class="row-sub">13 May 2025</div>
+              </div>
+              <div class="row-cuisine">Sri Lankan</div>
+              <div class="row-suburb">Greenslopes</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>7.5</strong></span>
+                <span class="rs">Soul <strong>8.5</strong></span>
+                <span class="rs">Mastery <strong>7.0</strong></span>
+                <span class="rs">Taste <strong>7.5</strong></span>
+                <span class="rs die">Die happy <strong>7.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250507-Attimi.html"
+               data-cuisine="italian-degustation" data-suburb="paddington"
+               data-date="2025-05-07"
+               data-comfort="8.5" data-soul="8.5" data-mastery="9.0" data-taste="8.5" data-die="9.5">
+              <div>
+                <div class="row-title">Attimi</div>
+                <div class="row-sub">7 May 2025</div>
+              </div>
+              <div class="row-cuisine">Italian degustation</div>
+              <div class="row-suburb">Paddington</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.5</strong></span>
+                <span class="rs">Soul <strong>8.5</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>8.5</strong></span>
+                <span class="rs die">Die happy <strong>9.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250505-HimalayanCafe.html"
+               data-cuisine="nepali" data-suburb="new-farm"
+               data-date="2025-05-05"
+               data-comfort="8.0" data-soul="9.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div>
+                <div class="row-title">The Himalayan Cafe</div>
+                <div class="row-sub">5 May 2025</div>
+              </div>
+              <div class="row-cuisine">Nepali / Himalayan</div>
+              <div class="row-suburb">New Farm</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>9.0</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250502-NaldhamHouse.html"
+               data-cuisine="european-brasserie" data-suburb="brisbane-cbd"
+               data-date="2025-05-02"
+               data-comfort="8.0" data-soul="7.0" data-mastery="8.0" data-taste="8.0" data-die="7.5">
+              <div>
+                <div class="row-title">The Brasserie at Naldham House</div>
+                <div class="row-sub">2 May 2025</div>
+              </div>
+              <div class="row-cuisine">European brasserie</div>
+              <div class="row-suburb">Brisbane CBD</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>7.0</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>7.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250502-PenelopeBistro.html"
+               data-cuisine="french-bistro" data-suburb="james-street"
+               data-date="2025-05-02"
+               data-comfort="7.5" data-soul="7.0" data-mastery="7.0" data-taste="7.5" data-die="6.5">
+              <div>
+                <div class="row-title">Penelope Bistro</div>
+                <div class="row-sub">2 May 2025</div>
+              </div>
+              <div class="row-cuisine">French bistro</div>
+              <div class="row-suburb">James Street, Fortitude Valley</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>7.5</strong></span>
+                <span class="rs">Soul <strong>7.0</strong></span>
+                <span class="rs">Mastery <strong>7.0</strong></span>
+                <span class="rs">Taste <strong>7.5</strong></span>
+                <span class="rs die">Die happy <strong>6.5</strong></span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- April 2025 -->
+        <section class="month-group" data-month="2025-04">
+          <h2 class="month-head">April 2025</h2>
+
+          <div class="review-grid">
+            <a class="review-card archive-card" href="reviews/20250430-TheFiftySix.html"
+               data-cuisine="cantonese" data-suburb="brisbane-cbd"
+               data-date="2025-04-30"
+               data-comfort="9.0" data-soul="8.5" data-mastery="9.0" data-taste="9.0" data-die="8.5">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-04-30_thefiftysixrestaurant/01_18061216847511494.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Brisbane CBD &middot; Cantonese</span><span class="dot">&bull;</span><span>30 Apr 2025</span></div>
+                <h3>The Fifty Six</h3>
+                <p class="blurb">Cantonese, riverside, with caviar in the right places. The Murray cod made the table go quiet.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>9.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.5</strong></span>
+                  <span class="score-pill">Mastery <strong>9.0</strong></span>
+                  <span class="score-pill">Taste <strong>9.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.5</strong></span>
+                </div>
+              </div>
+            </a>
+
+            <a class="review-card archive-card" href="reviews/20250426-TheGreen.html"
+               data-cuisine="modern-middle-eastern" data-suburb="james-street"
+               data-date="2025-04-26"
+               data-comfort="8.0" data-soul="8.5" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-04-26_thegreen-au/01_18145417141347019.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>James Street &middot; Modern Middle Eastern</span><span class="dot">&bull;</span><span>26 Apr 2025</span></div>
+                <h3>The Green</h3>
+                <p class="blurb">A long Sunday lunch, in a Lebanese key. A lamb shoulder that asks for company and gets it.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.5</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+
+            <a class="review-card archive-card" href="reviews/20250424-BarryParadePublicHouse.html"
+               data-cuisine="creole" data-suburb="fortitude-valley"
+               data-date="2025-04-24"
+               data-comfort="8.0" data-soul="8.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-04-24_barryparadeph/01_18500350270014573.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Fortitude Valley &middot; Creole</span><span class="dot">&bull;</span><span>24 Apr 2025</span></div>
+                <h3>Barry Parade Public House</h3>
+                <p class="blurb">Creole snacks that argue with the cocktails, in the best possible way.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>8.0</strong></span>
+                  <span class="score-pill">Mastery <strong>8.0</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>8.0</strong></span>
+                </div>
+              </div>
+            </a>
+
+            <a class="review-card archive-card" href="reviews/20250420-StiltsDining.html"
+               data-cuisine="modern-australian" data-suburb="brisbane-cbd"
+               data-date="2025-04-20"
+               data-comfort="8.0" data-soul="7.0" data-mastery="7.5" data-taste="8.0" data-die="7.0">
+              <div class="thumb" style="background-image: url('assets/reviews/2025-04-20_stilts-dining/01_18105965602499766.jpg');"></div>
+              <div class="body">
+                <div class="meta"><span>Brisbane CBD &middot; Modern Australian</span><span class="dot">&bull;</span><span>20 Apr 2025</span></div>
+                <h3>Stilts Dining</h3>
+                <p class="blurb">Up in the air, Michael Tassis's kitchen takes its time, and asks you to take yours.</p>
+                <div class="scores-mini">
+                  <span class="score-pill">Comfort <strong>8.0</strong></span>
+                  <span class="score-pill">Soul <strong>7.0</strong></span>
+                  <span class="score-pill">Mastery <strong>7.5</strong></span>
+                  <span class="score-pill">Taste <strong>8.0</strong></span>
+                  <span class="score-pill die-happy">Die happy <strong>7.0</strong></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="archive-list">            <a class="archive-row archive-card" href="reviews/20250430-TheFiftySix.html"
+               data-cuisine="cantonese" data-suburb="brisbane-cbd"
+               data-date="2025-04-30"
+               data-comfort="9.0" data-soul="8.5" data-mastery="9.0" data-taste="9.0" data-die="8.5">
+              <div>
+                <div class="row-title">The Fifty Six</div>
+                <div class="row-sub">30 April 2025</div>
+              </div>
+              <div class="row-cuisine">Cantonese</div>
+              <div class="row-suburb">Naldham House, Brisbane CBD</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>9.0</strong></span>
+                <span class="rs">Soul <strong>8.5</strong></span>
+                <span class="rs">Mastery <strong>9.0</strong></span>
+                <span class="rs">Taste <strong>9.0</strong></span>
+                <span class="rs die">Die happy <strong>8.5</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250426-TheGreen.html"
+               data-cuisine="modern-middle-eastern" data-suburb="james-street"
+               data-date="2025-04-26"
+               data-comfort="8.0" data-soul="8.5" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div>
+                <div class="row-title">The Green</div>
+                <div class="row-sub">26 April 2025</div>
+              </div>
+              <div class="row-cuisine">Modern Middle Eastern</div>
+              <div class="row-suburb">James Street, Fortitude Valley</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>8.5</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250424-BarryParadePublicHouse.html"
+               data-cuisine="creole" data-suburb="fortitude-valley"
+               data-date="2025-04-24"
+               data-comfort="8.0" data-soul="8.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
+              <div>
+                <div class="row-title">Barry Parade Public House</div>
+                <div class="row-sub">24 April 2025</div>
+              </div>
+              <div class="row-cuisine">Creole</div>
+              <div class="row-suburb">Fortitude Valley</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>8.0</strong></span>
+                <span class="rs">Mastery <strong>8.0</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>8.0</strong></span>
+              </div>
+            </a>
+            <a class="archive-row archive-card" href="reviews/20250420-StiltsDining.html"
+               data-cuisine="modern-australian" data-suburb="brisbane-cbd"
+               data-date="2025-04-20"
+               data-comfort="8.0" data-soul="7.0" data-mastery="7.5" data-taste="8.0" data-die="7.0">
+              <div>
+                <div class="row-title">Stilts Dining</div>
+                <div class="row-sub">20 April 2025</div>
+              </div>
+              <div class="row-cuisine">Modern Australian</div>
+              <div class="row-suburb">Brisbane CBD</div>
+              <div class="row-scores">
+                <span class="rs">Comfort <strong>8.0</strong></span>
+                <span class="rs">Soul <strong>7.0</strong></span>
+                <span class="rs">Mastery <strong>7.5</strong></span>
+                <span class="rs">Taste <strong>8.0</strong></span>
+                <span class="rs die">Die happy <strong>7.0</strong></span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <a class="brand-mark" href="index.html" aria-label="Sasenka Loves Food, home">
+        <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <text x="0" y="78" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">SASENKA</text>
+          <text x="0" y="160" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">L</text>
+          <g transform="translate(44 105) scale(0.47)">
+            <path d="M134.756 39.507C134.756 90.727 67.378 117.057 67.378 117.057C67.378 117.057 0 90.727 0 39.507C0 17.681 16.28 0 36.376 0C49.472 0 60.965 7.523 67.378 18.785C73.791 7.523 85.284 0 98.38 0C118.499 0 134.756 17.681 134.756 39.507Z" fill="#BD112E"/>
+          </g>
+          <text x="108" y="160" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">VES</text>
+          <text x="0" y="218" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">FOOD.</text>
+        </svg>
+      </a>
+      <a class="footer-ig" href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener">
+        <svg class="ig-glyph" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/>
+        </svg>
+        <span>Find me on Instagram, @sasenkalovesfood</span>
+      </a>
+      <span class="site-footer__copy">&copy; 2026 Sasenka Loves Food</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var root = document.querySelector('.archive-reviews');
+      var state = { view: 'grid', sort: 'date', cuisine: 'all', suburb: 'all' };
+
+      // Snapshot original home (month group) for each card, so we can restore
+      // date-grouped order after sorting by any score element.
+      var sortLabels = {
+        date: 'Most recent',
+        comfort: 'Comfort',
+        soul: 'Soul',
+        mastery: 'Mastery',
+        taste: 'Taste',
+        die: 'Die happy'
+      };
+      var originalHeadings = {};
+      document.querySelectorAll('.month-group').forEach(function (mg) {
+        originalHeadings[mg.dataset.month] = mg.querySelector('.month-head').textContent;
+        var grid = mg.querySelector('.review-grid');
+        var list = mg.querySelector('.archive-list');
+        Array.prototype.forEach.call(grid.children, function (c, i) {
+          c.dataset.homeMonth = mg.dataset.month;
+          c.dataset.homeContainer = 'grid';
+          c.dataset.homeIndex = i;
+        });
+        Array.prototype.forEach.call(list.children, function (c, i) {
+          c.dataset.homeMonth = mg.dataset.month;
+          c.dataset.homeContainer = 'list';
+          c.dataset.homeIndex = i;
+        });
+      });
+
+      // View toggle
+      document.querySelectorAll('.toolbar-btn[data-view]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.toolbar-btn[data-view]').forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          state.view = btn.dataset.view;
+          root.dataset.view = state.view;
+        });
+      });
+
+      // Sort toggle
+      document.querySelectorAll('.toolbar-btn[data-sort]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.toolbar-btn[data-sort]').forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          state.sort = btn.dataset.sort;
+          applySort();
+          applyFilters();
+        });
+      });
+
+      // Filter chips
+      document.querySelectorAll('.chip').forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          var cat = chip.dataset.category;
+          document.querySelectorAll('.chip[data-category="' + cat + '"]').forEach(function (b) { b.classList.remove('is-active'); });
+          chip.classList.add('is-active');
+          state[cat] = chip.dataset.filter;
+          applyFilters();
+        });
+      });
+
+      function applyFilters() {
+        document.querySelectorAll('.archive-card').forEach(function (card) {
+          var cuisineMatch = state.cuisine === 'all' || card.dataset.cuisine === state.cuisine;
+          var suburbMatch = state.suburb === 'all' || card.dataset.suburb === state.suburb;
+          card.hidden = !(cuisineMatch && suburbMatch);
+        });
+        // Hide empty month groups
+        document.querySelectorAll('.month-group').forEach(function (mg) {
+          if (mg.dataset.collapsed === 'true') return; // collapsed groups stay hidden during score sorts
+          var visible = mg.querySelectorAll('.archive-card:not([hidden])');
+          mg.hidden = visible.length === 0;
+        });
+      }
+
+      function restoreMonthGrouping() {
+        document.querySelectorAll('.month-group').forEach(function (mg) {
+          mg.querySelector('.month-head').textContent = originalHeadings[mg.dataset.month];
+          mg.dataset.collapsed = 'false';
+          mg.hidden = false;
+        });
+        // Move every card back to its home month + container, then re-sort within each container by its original index.
+        var groupsByMonth = {};
+        document.querySelectorAll('.month-group').forEach(function (mg) { groupsByMonth[mg.dataset.month] = mg; });
+
+        document.querySelectorAll('.archive-card').forEach(function (card) {
+          var home = groupsByMonth[card.dataset.homeMonth];
+          if (!home) return;
+          var container = home.querySelector(card.dataset.homeContainer === 'grid' ? '.review-grid' : '.archive-list');
+          container.appendChild(card);
+        });
+        document.querySelectorAll('.review-grid, .archive-list').forEach(function (container) {
+          var cards = Array.prototype.slice.call(container.children);
+          cards.sort(function (a, b) {
+            return parseInt(a.dataset.homeIndex, 10) - parseInt(b.dataset.homeIndex, 10);
+          });
+          cards.forEach(function (c) { container.appendChild(c); });
+        });
+      }
+
+      function collapseAndSortByScore(key) {
+        var groups = document.querySelectorAll('.month-group');
+        if (!groups.length) return;
+        var firstGroup = groups[0];
+        firstGroup.querySelector('.month-head').textContent = 'Sorted by ' + sortLabels[key].toLowerCase();
+        firstGroup.dataset.collapsed = 'false';
+        firstGroup.hidden = false;
+
+        var firstGrid = firstGroup.querySelector('.review-grid');
+        var firstList = firstGroup.querySelector('.archive-list');
+
+        // Move every card into the first group's matching container.
+        document.querySelectorAll('.archive-card').forEach(function (card) {
+          if (card.classList.contains('review-card')) firstGrid.appendChild(card);
+          else firstList.appendChild(card);
+        });
+
+        // Sort descending by the chosen score. Tie-break by most recent date so ordering is stable and meaningful.
+        [firstGrid, firstList].forEach(function (container) {
+          var cards = Array.prototype.slice.call(container.children);
+          cards.sort(function (a, b) {
+            var diff = parseFloat(b.dataset[key]) - parseFloat(a.dataset[key]);
+            if (diff !== 0) return diff;
+            return (b.dataset.date || '').localeCompare(a.dataset.date || '');
+          });
+          cards.forEach(function (c) { container.appendChild(c); });
+        });
+
+        // Hide all other month groups.
+        Array.prototype.slice.call(groups, 1).forEach(function (g) {
+          g.dataset.collapsed = 'true';
+          g.hidden = true;
+        });
+      }
+
+      function applySort() {
+        if (state.sort === 'date') {
+          restoreMonthGrouping();
+        } else {
+          collapseAndSortByScore(state.sort);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

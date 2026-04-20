@@ -1,0 +1,71 @@
+{
+  "review_number": 67,
+  "date": "May 02, 2025 1:30 am",
+  "date_iso": "2025-05-02T01:30:00",
+  "restaurant": "Penelope Bistro",
+  "handle": "penelope.bistro",
+  "all_mentions": [
+    "penelope.bistro"
+  ],
+  "hashtags": [
+    "SasenkaLovesFood",
+    "BrisbaneEats",
+    "JamesStreetBrisbane",
+    "FortitudeValley",
+    "PenelopeBrisbane",
+    "BistroBrisbane",
+    "BrisbaneFoodie",
+    "LateNightEats",
+    "CocktailCulture",
+    "DinnerPlans"
+  ],
+  "ratings": {},
+  "caption": "@penelope.bistro is a chic addition to Brisbane's James Street, where classic bistro comfort meets late-night charm, right in the heart of James Street. Stylish without trying too hard, it’s the kind of spot that works for a long lunch, a moody dinner, or cocktails that turn into midnight snacks.\n\nPictured 📸:\n1. Pastry, with goat cheese and chili\n2. Scallop, Potato Scallop, Oscietra Caviar, Chives\n3. Duck Paté, Pickled Sour Cherry, Toast\n4. Chicken Tenders, Buttermilk Ranch, Hot Honey with Caviar\n5. Steak Frites, Au Poivre, Cognac & Green Peppercorn Sauce\n6. Pasta Alla Vodka, Smoked Mozzarella, ‘Nduja, Stracciatella\n7. Sazerac with Rye and Tequila \n\n#SasenkaLovesFood #BrisbaneEats #JamesStreetBrisbane #FortitudeValley #PenelopeBrisbane #BistroBrisbane #BrisbaneFoodie #LateNightEats #CocktailCulture #DinnerPlans",
+  "media_files": [
+    {
+      "order": 1,
+      "filename": "01_18025790750669942.png",
+      "is_video": false,
+      "original_path": "media/posts/202505/18025790750669942.png"
+    },
+    {
+      "order": 2,
+      "filename": "02_18046776419135389.png",
+      "is_video": false,
+      "original_path": "media/posts/202505/18046776419135389.png"
+    },
+    {
+      "order": 3,
+      "filename": "03_18116941300461188.png",
+      "is_video": false,
+      "original_path": "media/posts/202505/18116941300461188.png"
+    },
+    {
+      "order": 4,
+      "filename": "04_17963754557874244.png",
+      "is_video": false,
+      "original_path": "media/posts/202505/17963754557874244.png"
+    },
+    {
+      "order": 5,
+      "filename": "05_18043446773425880.png",
+      "is_video": false,
+      "original_path": "media/posts/202505/18043446773425880.png"
+    },
+    {
+      "order": 6,
+      "filename": "06_18061876307089747.png",
+      "is_video": false,
+      "original_path": "media/posts/202505/18061876307089747.png"
+    },
+    {
+      "order": 7,
+      "filename": "07_18167053840338571.png",
+      "is_video": false,
+      "original_path": "media/posts/202505/18167053840338571.png"
+    }
+  ],
+  "photo_count": 7,
+  "video_count": 0,
+  "folder": "2025-05-02_penelope-bistro"
+}

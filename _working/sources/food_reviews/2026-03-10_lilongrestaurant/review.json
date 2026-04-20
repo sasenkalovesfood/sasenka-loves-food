@@ -1,0 +1,60 @@
+{
+  "review_number": 3,
+  "date": "Mar 10, 2026 1:40 am",
+  "date_iso": "2026-03-10T01:40:00",
+  "restaurant": "Lilongrestaurant",
+  "handle": "lilongrestaurant",
+  "all_mentions": [
+    "lilongrestaurant"
+  ],
+  "hashtags": [
+    "SasenkaLovesFood",
+    "WestEndBrisbane",
+    "BrisbaneEats",
+    "BrisbaneFood",
+    "ChineseFood"
+  ],
+  "ratings": {
+    "comfort": 7.5,
+    "soul": 8.0,
+    "mastery": 7.0,
+    "taste": 8.0,
+    "would_i_die_happy": 7.5
+  },
+  "caption": "West End has no shortage of good food, but sometimes you just want something simple, comforting, and full of flavour. That is exactly where @lilongrestaurant fits in.\n\nThis is authentic Chinese street food done properly. Nothing fancy. Just honest dishes built on traditional techniques and epic flavours. Dumplings, noodles, snacks to share, and plates that belong around a busy table.\n\nIt is the kind of place that works for a lazy weekend bite or a quick weeknight feed when cooking feels like too much effort. And the takeaway game is strong too.\n\nWe started with the pan fried pork dumplings. Solid. Crisp on the bottom, juicy inside, exactly what you hope for.\n\nThen came the wok fried water spinach. Light, garlicky, and the one dish that briefly convinced me I was making healthy life choices. The prawns and chives spring rolls quickly balanced that illusion. Golden, crunchy, and very happy to undo the health narrative.\n\nFried rice followed. Pure comfort. The kind of bowl that quietly does its job and disappears before you realise.\nThe standout of the night was the barramundi in soy and chilli sauce. Fantastic. Silky fish and a punchy sauce.\n\nLi Long is not trying to impress with theatrics. It simply delivers the kind of food that satisfies. Sometimes that is exactly what you want.\n\nPictured 📸\n\t1. Pan fried pork dumplings\n\t2. Wok fried water spinach\n\t3. Prawns and chives spring rolls\n\t4. Fried rice\n\t5. Barramundi in soy and chilli sauce\n\nRatings out of 10:\nComfort: 7.5\nSoul: 8\nMastery: 7\nTaste: 8\nWould I die happy: 7.5\n\n#SasenkaLovesFood #WestEndBrisbane #BrisbaneEats #BrisbaneFood #ChineseFood BrisbaneFoodies ComfortFoodBrisbane",
+  "media_files": [
+    {
+      "order": 1,
+      "filename": "01_17868807885579339.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202603/17868807885579339.jpg"
+    },
+    {
+      "order": 2,
+      "filename": "02_18096161776982208.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202603/18096161776982208.jpg"
+    },
+    {
+      "order": 3,
+      "filename": "03_18000454325731182.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202603/18000454325731182.jpg"
+    },
+    {
+      "order": 4,
+      "filename": "04_18066491714289234.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202603/18066491714289234.jpg"
+    },
+    {
+      "order": 5,
+      "filename": "05_18082404458365324.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202603/18082404458365324.jpg"
+    }
+  ],
+  "photo_count": 5,
+  "video_count": 0,
+  "folder": "2026-03-10_lilongrestaurant"
+}

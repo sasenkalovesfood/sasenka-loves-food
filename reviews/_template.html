@@ -1,0 +1,148 @@
+<!doctype html>
+<!--
+  ============================================================
+  REVIEW TEMPLATE. To add a new review:
+    1. Make a copy of this file in the /reviews folder.
+    2. Rename it using the pattern YYYYMMDD-RestaurantName.html,
+       where the date is the visit date. Examples:
+         20260412-Walters.html
+         20260531-DishoomKingsCross.html
+    3. Search for "REPLACE:" comments below and fill them in.
+    4. Add a matching card to the grid in /index.html.
+  ============================================================
+-->
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- REPLACE: page title and description below -->
+  <title>Restaurant name, City &mdash; Sasenka Loves Food</title>
+  <meta name="description" content="One-sentence summary of the review.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand-mark" href="../index.html" aria-label="Sasenka Loves Food, home">
+        <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <text x="0" y="78" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">SASENKA</text>
+          <text x="0" y="160" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">L</text>
+          <g transform="translate(44 105) scale(0.47)">
+            <path d="M134.756 39.507C134.756 90.727 67.378 117.057 67.378 117.057C67.378 117.057 0 90.727 0 39.507C0 17.681 16.28 0 36.376 0C49.472 0 60.965 7.523 67.378 18.785C73.791 7.523 85.284 0 98.38 0C118.499 0 134.756 17.681 134.756 39.507Z" fill="#BD112E"/>
+          </g>
+          <text x="108" y="160" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">VES</text>
+          <text x="0" y="218" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">FOOD.</text>
+        </svg>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../reviews-archive.html">Reviews</a>
+        <a href="../rating-system.html">Rating system</a>
+        <a href="../about.html">About</a>
+        <a href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener">Instagram</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container">
+      <div class="review-hero">
+        <!-- REPLACE: hero photo path and data-caption. data-caption shows in the lightbox when the image is clicked. -->
+        <div class="photo" data-caption="Short caption for the hero, shown when enlarged." style="background-image:url('../assets/placeholder-1.svg');"></div>
+        <div>
+          <!-- REPLACE: eyebrow (month year) and restaurant name -->
+          <span class="eyebrow">Review &middot; Month Year</span>
+          <h1>Restaurant name</h1>
+          <!-- REPLACE: short tagline -->
+          <p class="italic">A one-sentence summary that sets the scene.</p>
+        </div>
+      </div>
+
+      <!-- REPLACE: the facts below -->
+      <div class="fact-bar">
+        <div class="fact"><span class="label">Location</span>Street, City Postcode</div>
+        <div class="fact"><span class="label">Cuisine</span>Type of cooking</div>
+        <div class="fact"><span class="label">Visited</span>Date</div>
+        <div class="fact"><span class="label">Link</span><a href="#" rel="noopener">website.com</a></div>
+      </div>
+
+      <!-- REPLACE: the five scores, each 1 to 10 (use one decimal place, e.g. 8.4) -->
+      <section aria-label="Ratings">
+        <div class="scores">
+          <div class="score"><span class="label">Comfort</span><span class="value">0.0<span class="out">/10</span></span></div>
+          <div class="score"><span class="label">Soul</span><span class="value">0.0<span class="out">/10</span></span></div>
+          <div class="score"><span class="label">Mastery</span><span class="value">0.0<span class="out">/10</span></span></div>
+          <div class="score"><span class="label">Taste</span><span class="value">0.0<span class="out">/10</span></span></div>
+          <div class="score die-happy"><span class="label">Would I die happy?</span><span class="value">0.0<span class="out">/10</span></span></div>
+        </div>
+      </section>
+
+      <!-- REPLACE: the written review. Use <p>, <h2>, and <blockquote> as needed. -->
+      <article class="review-body">
+        <p>Opening paragraph, set the scene.</p>
+        <blockquote>A standout line from the meal, or a key observation, lifted for emphasis.</blockquote>
+        <p>Body of the review.</p>
+        <h2>A sub-heading</h2>
+        <p>More of the review.</p>
+        <h2>Would I go back?</h2>
+        <p>Yes / no / perhaps, and why.</p>
+      </article>
+
+      <!--
+        REPLACE: gallery images + captions. Each photo is wrapped in a <figure>
+        so it gets a caption (describing the dish) and becomes click-to-enlarge.
+        Add as many <figure> blocks as you like.
+      -->
+      <section class="gallery" aria-label="Photos">
+        <h2>From the meal</h2>
+        <div class="gallery-grid">
+          <figure>
+            <div class="photo" style="background-image:url('../assets/placeholder-1.svg');"></div>
+            <figcaption>Short description of what's in the photo.</figcaption>
+          </figure>
+          <figure>
+            <div class="photo" style="background-image:url('../assets/placeholder-2.svg');"></div>
+            <figcaption>Short description of what's in the photo.</figcaption>
+          </figure>
+          <figure>
+            <div class="photo" style="background-image:url('../assets/placeholder-3.svg');"></div>
+            <figcaption>Short description of what's in the photo.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <a href="../reviews-archive.html" class="back-link">&larr; All reviews</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <a class="brand-mark" href="../index.html" aria-label="Sasenka Loves Food, home">
+        <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <text x="0" y="78" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">SASENKA</text>
+          <text x="0" y="160" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">L</text>
+          <g transform="translate(44 105) scale(0.47)">
+            <path d="M134.756 39.507C134.756 90.727 67.378 117.057 67.378 117.057C67.378 117.057 0 90.727 0 39.507C0 17.681 16.28 0 36.376 0C49.472 0 60.965 7.523 67.378 18.785C73.791 7.523 85.284 0 98.38 0C118.499 0 134.756 17.681 134.756 39.507Z" fill="#BD112E"/>
+          </g>
+          <text x="108" y="160" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">VES</text>
+          <text x="0" y="218" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">FOOD.</text>
+        </svg>
+      </a>
+      <a class="footer-ig" href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener">
+        <svg class="ig-glyph" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/>
+        </svg>
+        <span>Find me on Instagram, @sasenkalovesfood</span>
+      </a>
+      <span class="site-footer__copy">&copy; 2026 Sasenka Loves Food</span>
+    </div>
+  </footer>
+  <!-- Click-to-enlarge for gallery and hero images. -->
+  <script src="../assets/lightbox.js" defer></script>
+</body>
+</html>

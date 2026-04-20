@@ -1,0 +1,72 @@
+{
+  "review_number": 5,
+  "date": "Feb 24, 2026 1:40 am",
+  "date_iso": "2026-02-24T01:40:00",
+  "restaurant": "Bosco Winegrill",
+  "handle": "bosco_winegrill",
+  "all_mentions": [
+    "bosco_winegrill"
+  ],
+  "hashtags": [
+    "SasenkaLovesFood",
+    "BrisbaneEats",
+    "BoscoWineAndGrill",
+    "WoodFired",
+    "BrisbaneRestaurants"
+  ],
+  "ratings": {
+    "comfort": 8.5,
+    "soul": 9.0,
+    "mastery": 8.5,
+    "taste": 9.0,
+    "would_i_die_happy": 8.0
+  },
+  "caption": "@bosco_winegrill sits in what feels like a dark industrial warehouse, almost a shed, and somehow that makes the whole experience better. Moody. Honest. Fire at the centre of it all. You can smell this place from a couple of blocks away. You walk in and immediately know this place takes its craft seriously.\n\nIt’s a wood-fired restaurant and they lean into it properly. Smoke, char, depth. Service was excellent throughout, warm but not overbearing. And the wine list deserves a nod too, pretty solid. \n\nWe started with Bosco’s croquette of suckling pig and chicken. Crisp shell, rich and savoury inside. The flatbread gilda with olive, pepper and Olasagasti anchovy was punchy and salty in the best way. Simple ingredients, big flavour. Don’t skip it.\n\nThe duck with sweet spice, bone stock rice, asparagus and rhubarb glaze was beautifully balanced. The glaze cut through the richness, the rice soaked up everything around it. Proper comfort, but refined.\n\nThen the ember-hung whole Bannockburn chicken with vadouvan jus. Smoky skin, juicy flesh, that gently spiced jus tying it all together. You could taste the fire. You could taste the care.\n\nSpring potato torta and broccolini on the side did their job well. The potatoes especially, crisp edges, soft centre, exactly what you want next to wood-fired protein.\n\nYou can tell they are proud of what they do here. \n\nPictured 📸\n\t1. Duck, sweet spice, bone stock rice, asparagus, rhubarb glaze\n\t2. Bosco’s croquette of suckling pig and chicken\n\t3. Flatbread gilda with olive, pepper and Olasagasti anchovy\n\t4. Ember-hung whole Bannockburn chicken, vadouvan jus\n\t5. Spring potato torta\n\t6. Broccolini\n\t7. Vibe\n\nRatings out of 10:\nComfort: 8.5\nSoul: 9\nMastery: 8.5\nTaste: 9\nWould I die happy: 8\n\n#SasenkaLovesFood #BrisbaneEats #BoscoWineAndGrill #WoodFired #BrisbaneRestaurants FoodieAU",
+  "media_files": [
+    {
+      "order": 1,
+      "filename": "01_18120847072606652.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202602/18120847072606652.jpg"
+    },
+    {
+      "order": 2,
+      "filename": "02_17856648717617512.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202602/17856648717617512.jpg"
+    },
+    {
+      "order": 3,
+      "filename": "03_18072017669170091.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202602/18072017669170091.jpg"
+    },
+    {
+      "order": 4,
+      "filename": "04_17899859934390347.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202602/17899859934390347.jpg"
+    },
+    {
+      "order": 5,
+      "filename": "05_17974649639993611.mp4",
+      "is_video": true,
+      "original_path": "media/posts/202602/17974649639993611.mp4"
+    },
+    {
+      "order": 6,
+      "filename": "06_18074265251454816.mp4",
+      "is_video": true,
+      "original_path": "media/posts/202602/18074265251454816.mp4"
+    },
+    {
+      "order": 7,
+      "filename": "07_17957384345917881.jpg",
+      "is_video": false,
+      "original_path": "media/posts/202602/17957384345917881.jpg"
+    }
+  ],
+  "photo_count": 5,
+  "video_count": 2,
+  "folder": "2026-02-24_bosco-winegrill"
+}
