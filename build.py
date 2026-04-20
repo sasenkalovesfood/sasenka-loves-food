@@ -55,6 +55,84 @@ MONTH_LABELS = [
 MONTH_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
               "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
+# Filter bucket mapping. The CMS lets Sasenka write cuisine/suburb as free
+# text so the granular label on each review page stays hers. For the archive
+# filter chips we fold each entry into one of the rationalised buckets below.
+# An unmapped value falls through as-is (render_filters then appends a new
+# chip, which is our signal to extend this map).
+CUISINE_BUCKETS = {
+    "modern-australian":     "modern-australian",
+    "italian":               "italian",
+    "italian-degustation":   "italian",
+    "chinese":               "chinese",
+    "cantonese":             "chinese",
+    "japanese":              "japanese",
+    "nepali":                "pan-asian",
+    "modern-asian":          "pan-asian",
+    "korean":                "pan-asian",
+    "malaysian":             "pan-asian",
+    "singaporean":           "pan-asian",
+    "thai":                  "pan-asian",
+    "vietnamese":            "pan-asian",
+    "sri-lankan":            "sri-lankan",
+    "greek":                 "mediterranean",
+    "middle-eastern":        "mediterranean",
+    "modern-middle-eastern": "mediterranean",
+    "mediterranean":         "mediterranean",
+    "spanish":               "mediterranean",
+    "french":                "french-european",
+    "french-bistro":         "french-european",
+    "european-brasserie":    "french-european",
+    "nordic":                "french-european",
+    "european":              "french-european",
+    "seafood":               "fire-and-ocean",
+    "wood-fired":            "fire-and-ocean",
+    "steakhouse":            "steakhouse",
+    "creole":                "creole",
+}
+
+SUBURB_BUCKETS = {
+    "brisbane-cbd":     "brisbane-cbd",
+    "fortitude-valley": "fortitude-valley",
+    "west-end":         "west-end",
+    "james-street":     "james-street-newstead",
+    "newstead":         "james-street-newstead",
+    "south-brisbane":   "south-brisbane-south-bank",
+    "southbank":        "south-brisbane-south-bank",
+    "south-bank":       "south-brisbane-south-bank",
+    "woolloongabba":    "south-brisbane-south-bank",
+    "paddington":       "inner-suburbs",
+    "new-farm":         "inner-suburbs",
+    "spring-hill":      "inner-suburbs",
+    "morningside":      "inner-suburbs",
+    "coorparoo":        "inner-suburbs",
+    "greenslopes":      "inner-suburbs",
+    "red-hill":         "inner-suburbs",
+    "bulimba":          "inner-suburbs",
+    "teneriffe":        "inner-suburbs",
+    "noosa":            "sunshine-coast",
+    "maleny":           "sunshine-coast",
+    "montville":        "sunshine-coast",
+    "hobart":           "australia-elsewhere",
+    "melbourne":        "australia-elsewhere",
+    "carlton":          "australia-elsewhere",
+    "ballina":          "australia-elsewhere",
+    "sydney":           "australia-elsewhere",
+    "singapore":        "overseas",
+    "delft":            "overseas",
+    "rhodes":           "overseas",
+}
+
+
+def bucket_cuisine(raw: str) -> str:
+    k = kebab(raw)
+    return CUISINE_BUCKETS.get(k, k)
+
+
+def bucket_suburb(raw: str) -> str:
+    k = kebab(raw)
+    return SUBURB_BUCKETS.get(k, k)
+
 
 # ----------------------------------------------------------------------------
 # Helpers
@@ -215,9 +293,9 @@ def normalise_cms(entry: dict, slug: str) -> dict:
         "homepage_blurb": tagline,
         "homepage_thumb": hero_photo,
         "meta_description": meta_desc,
-        "suburb_slug": kebab(suburb_display),
+        "suburb_slug": bucket_suburb(suburb_display),
         "suburb_display": suburb_display,
-        "cuisine_slug": kebab(cuisine_display),
+        "cuisine_slug": bucket_cuisine(cuisine_display),
         "cuisine_display": cuisine_display,
         "instagram_handle": (entry.get("instagram_handle") or "").lstrip("@").strip(),
         "hero_photo": hero_photo,

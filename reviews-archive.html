@@ -266,66 +266,42 @@
           <button type="button" class="toolbar-btn" data-sort="taste">Taste</button>
           <button type="button" class="toolbar-btn" data-sort="die">Die happy</button>
         </div>
+        <div class="toolbar-group">
+          <span class="toolbar-label">Highlights</span>
+          <button type="button" class="toolbar-btn is-active" data-highlights="all">All reviews</button>
+          <button type="button" class="toolbar-btn" data-highlights="perfect">Perfect score</button>
+        </div>
       </div>
 
       <!-- BUILD:FILTERS -->
       <div class="filter-chips" aria-label="Filters">
         <div class="chip-row" role="group" aria-label="Cuisine">
-          <span class="chip-label">Cuisine</span>
+          <span class="toolbar-label">Cuisine</span>
           <button type="button" class="chip is-active" data-category="cuisine" data-filter="all">All</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="italian-degustation">Italian degustation</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="nepali">Nepali / Himalayan</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="european-brasserie">European brasserie</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="french-bistro">French bistro</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="cantonese">Cantonese</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="modern-middle-eastern">Modern Middle Eastern</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="creole">Creole</button>
           <button type="button" class="chip" data-category="cuisine" data-filter="modern-australian">Modern Australian</button>
-                  <button type="button" class="chip" data-category="cuisine" data-filter="chinese">Chinese</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="french">French</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="greek">Greek</button>
           <button type="button" class="chip" data-category="cuisine" data-filter="italian">Italian</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="chinese">Chinese</button>
           <button type="button" class="chip" data-category="cuisine" data-filter="japanese">Japanese</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="korean">Korean</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="malaysian">Malaysian</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="mediterranean">Mediterranean</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="middle-eastern">Middle Eastern</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="modern-asian">Modern Asian</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="nordic">Nordic</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="seafood">Seafood</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="singaporean">Singaporean</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="pan-asian">Pan-Asian</button>
           <button type="button" class="chip" data-category="cuisine" data-filter="sri-lankan">Sri Lankan</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="mediterranean">Mediterranean</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="french-european">French &amp; European</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="fire-and-ocean">Fire &amp; ocean</button>
           <button type="button" class="chip" data-category="cuisine" data-filter="steakhouse">Steakhouse</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="thai">Thai</button>
-          <button type="button" class="chip" data-category="cuisine" data-filter="wood-fired">Wood-fired</button>
+          <button type="button" class="chip" data-category="cuisine" data-filter="creole">Creole</button>
         </div>
         <div class="chip-row" role="group" aria-label="Suburb">
-          <span class="chip-label">Suburb</span>
+          <span class="toolbar-label">Suburb</span>
           <button type="button" class="chip is-active" data-category="suburb" data-filter="all">All</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="paddington">Paddington</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="new-farm">New Farm</button>
           <button type="button" class="chip" data-category="suburb" data-filter="brisbane-cbd">Brisbane CBD</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="james-street">James Street</button>
           <button type="button" class="chip" data-category="suburb" data-filter="fortitude-valley">Fortitude Valley</button>
-                  <button type="button" class="chip" data-category="suburb" data-filter="ballina">Ballina</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="carlton">Carlton</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="coorparoo">Coorparoo</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="delft">Delft</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="greenslopes">Greenslopes</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="hobart">Hobart</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="maleny">Maleny</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="melbourne">Melbourne</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="montville">Montville</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="morningside">Morningside</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="newstead">Newstead</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="noosa">Noosa</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="rhodes">Rhodes</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="singapore">Singapore</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="southbank">South Bank</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="south-brisbane">South Brisbane</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="spring-hill">Spring Hill</button>
           <button type="button" class="chip" data-category="suburb" data-filter="west-end">West End</button>
-          <button type="button" class="chip" data-category="suburb" data-filter="woolloongabba">Woolloongabba</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="james-street-newstead">James Street &amp; Newstead</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="south-brisbane-south-bank">South Brisbane &amp; South Bank</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="inner-suburbs">Inner suburbs</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="sunshine-coast">Sunshine Coast &amp; hinterland</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="australia-elsewhere">Australia (elsewhere)</button>
+          <button type="button" class="chip" data-category="suburb" data-filter="overseas">Overseas</button>
         </div>
       </div>
       <!-- /BUILD:FILTERS -->
@@ -340,7 +316,7 @@
           <!-- Grid view -->
           <div class="review-grid">
             <a class="review-card archive-card" href="reviews/20260409-Aunty.html"
-               data-cuisine="cantonese" data-suburb="fortitude-valley"
+               data-cuisine="chinese" data-suburb="fortitude-valley"
                data-date="2026-04-09"
                data-comfort="8.0" data-soul="8.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
               <div class="thumb" style="background-image: url('assets/reviews/2026-04-09_auntyonwandoo/01_18087311645194797.jpg');"></div>
@@ -362,7 +338,7 @@
           <!-- List view -->
           <div class="archive-list">
             <a class="archive-row archive-card" href="reviews/20260409-Aunty.html"
-               data-cuisine="cantonese" data-suburb="fortitude-valley"
+               data-cuisine="chinese" data-suburb="fortitude-valley"
                data-date="2026-04-09"
                data-comfort="8.0" data-soul="8.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
               <div>
@@ -389,7 +365,7 @@
           <!-- Grid view -->
           <div class="review-grid">
             <a class="review-card archive-card" href="reviews/20260331-MonalDining.html"
-               data-cuisine="nepali" data-suburb="newstead"
+               data-cuisine="pan-asian" data-suburb="james-street-newstead"
                data-date="2026-03-31"
                data-comfort="8.0" data-soul="9.0" data-mastery="8.0" data-taste="8.5" data-die="8.5">
               <div class="thumb" style="background-image: url('assets/reviews/2026-03-31_monaldining/01_18432584782141051.jpg');"></div>
@@ -425,7 +401,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20260304-Venner.html"
-               data-cuisine="nordic" data-suburb="west-end"
+               data-cuisine="french-european" data-suburb="west-end"
                data-date="2026-03-04"
                data-comfort="8.5" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="8.5">
               <div class="thumb" style="background-image: url('assets/reviews/2026-03-04_WestEndBrisbane/01_18017961773650161.jpg');"></div>
@@ -447,7 +423,7 @@
           <!-- List view -->
           <div class="archive-list">
             <a class="archive-row archive-card" href="reviews/20260331-MonalDining.html"
-               data-cuisine="nepali" data-suburb="newstead"
+               data-cuisine="pan-asian" data-suburb="james-street-newstead"
                data-date="2026-03-31"
                data-comfort="8.0" data-soul="9.0" data-mastery="8.0" data-taste="8.5" data-die="8.5">
               <div>
@@ -483,7 +459,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20260304-Venner.html"
-               data-cuisine="nordic" data-suburb="west-end"
+               data-cuisine="french-european" data-suburb="west-end"
                data-date="2026-03-04"
                data-comfort="8.5" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="8.5">
               <div>
@@ -510,7 +486,7 @@
           <!-- Grid view -->
           <div class="review-grid">
             <a class="review-card archive-card" href="reviews/20260224-BoscoWineGrill.html"
-               data-cuisine="mediterranean" data-suburb="newstead"
+               data-cuisine="mediterranean" data-suburb="james-street-newstead"
                data-date="2026-02-24"
                data-comfort="8.5" data-soul="9.0" data-mastery="8.5" data-taste="9.0" data-die="8.0">
               <div class="thumb" style="background-image: url('assets/reviews/2026-02-24_bosco-winegrill/01_18120847072606652.jpg');"></div>
@@ -528,7 +504,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20260219-Marlowe.html"
-               data-cuisine="modern-australian" data-suburb="south-brisbane"
+               data-cuisine="modern-australian" data-suburb="south-brisbane-south-bank"
                data-date="2026-02-19"
                data-comfort="9.0" data-soul="8.5" data-mastery="9.0" data-taste="9.5" data-die="9.0">
               <div class="thumb" style="background-image: url('assets/reviews/2026-02-19_davidsflynn/01_17883731508354569.jpg');"></div>
@@ -546,7 +522,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20260210-Darkshepherd.html"
-               data-cuisine="greek" data-suburb="brisbane-cbd"
+               data-cuisine="mediterranean" data-suburb="brisbane-cbd"
                data-date="2026-02-10"
                data-comfort="8.5" data-soul="8.0" data-mastery="8.5" data-taste="9.0" data-die="8.5">
               <div class="thumb" style="background-image: url('assets/reviews/2026-02-10_darkshepherd-bne/01_18111596410725670.jpg');"></div>
@@ -564,7 +540,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20260205-RaRestaurantAndBar.html"
-               data-cuisine="sri-lankan" data-suburb="noosa"
+               data-cuisine="sri-lankan" data-suburb="sunshine-coast"
                data-date="2026-02-05"
                data-comfort="9.0" data-soul="10.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
               <div class="thumb" style="background-image: url('assets/reviews/2026-02-05_ra-restaurant-and-bar/01_17848571763638378.jpg');"></div>
@@ -582,7 +558,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20260202-SupernormalBrisbane.html"
-               data-cuisine="modern-asian" data-suburb="brisbane-cbd"
+               data-cuisine="pan-asian" data-suburb="brisbane-cbd"
                data-date="2026-02-02"
                data-comfort="6.5" data-soul="7.0" data-mastery="7.0" data-taste="8.0" data-die="7.0">
               <div class="thumb" style="background-image: url('assets/reviews/2026-02-02_supernormal-brisbane/01_17914463352125975.jpg');"></div>
@@ -604,7 +580,7 @@
           <!-- List view -->
           <div class="archive-list">
             <a class="archive-row archive-card" href="reviews/20260224-BoscoWineGrill.html"
-               data-cuisine="mediterranean" data-suburb="newstead"
+               data-cuisine="mediterranean" data-suburb="james-street-newstead"
                data-date="2026-02-24"
                data-comfort="8.5" data-soul="9.0" data-mastery="8.5" data-taste="9.0" data-die="8.0">
               <div>
@@ -622,7 +598,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20260219-Marlowe.html"
-               data-cuisine="modern-australian" data-suburb="south-brisbane"
+               data-cuisine="modern-australian" data-suburb="south-brisbane-south-bank"
                data-date="2026-02-19"
                data-comfort="9.0" data-soul="8.5" data-mastery="9.0" data-taste="9.5" data-die="9.0">
               <div>
@@ -640,7 +616,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20260210-Darkshepherd.html"
-               data-cuisine="greek" data-suburb="brisbane-cbd"
+               data-cuisine="mediterranean" data-suburb="brisbane-cbd"
                data-date="2026-02-10"
                data-comfort="8.5" data-soul="8.0" data-mastery="8.5" data-taste="9.0" data-die="8.5">
               <div>
@@ -658,7 +634,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20260205-RaRestaurantAndBar.html"
-               data-cuisine="sri-lankan" data-suburb="noosa"
+               data-cuisine="sri-lankan" data-suburb="sunshine-coast"
                data-date="2026-02-05"
                data-comfort="9.0" data-soul="10.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
               <div>
@@ -676,7 +652,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20260202-SupernormalBrisbane.html"
-               data-cuisine="modern-asian" data-suburb="brisbane-cbd"
+               data-cuisine="pan-asian" data-suburb="brisbane-cbd"
                data-date="2026-02-02"
                data-comfort="6.5" data-soul="7.0" data-mastery="7.0" data-taste="8.0" data-die="7.0">
               <div>
@@ -824,7 +800,7 @@
           <!-- Grid view -->
           <div class="review-grid">
             <a class="review-card archive-card" href="reviews/20251222-AgnesRestaurant.html"
-               data-cuisine="wood-fired" data-suburb="fortitude-valley"
+               data-cuisine="fire-and-ocean" data-suburb="fortitude-valley"
                data-date="2025-12-22"
                data-comfort="8.0" data-soul="8.5" data-mastery="9.0" data-taste="8.5" data-die="8.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-12-22_agnes-restaurant/01_17987825798756577.jpg');"></div>
@@ -842,7 +818,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20251209-Capiche.html"
-               data-cuisine="italian" data-suburb="ballina"
+               data-cuisine="italian" data-suburb="australia-elsewhere"
                data-date="2025-12-09"
                data-comfort="8.0" data-soul="7.0" data-mastery="7.5" data-taste="8.0" data-die="8.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-12-09_capicherestaurant/01_18110955946552350.jpg');"></div>
@@ -860,7 +836,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20251204-StationByKotuwa.html"
-               data-cuisine="sri-lankan" data-suburb="singapore"
+               data-cuisine="sri-lankan" data-suburb="overseas"
                data-date="2025-12-04"
                data-comfort="8.0" data-soul="9.5" data-mastery="8.5" data-taste="9.0" data-die="8.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-12-04_stationbykotuwa/01_18128279245450682.jpg');"></div>
@@ -878,7 +854,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20251201-LemakKitchenAndBar.html"
-               data-cuisine="malaysian" data-suburb="woolloongabba"
+               data-cuisine="pan-asian" data-suburb="south-brisbane-south-bank"
                data-date="2025-12-01"
                data-comfort="7.5" data-soul="9.0" data-mastery="7.5" data-taste="8.0" data-die="8.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-12-01_lemakkitchenandbar/01_17971782569980594.jpg');"></div>
@@ -900,7 +876,7 @@
           <!-- List view -->
           <div class="archive-list">
             <a class="archive-row archive-card" href="reviews/20251222-AgnesRestaurant.html"
-               data-cuisine="wood-fired" data-suburb="fortitude-valley"
+               data-cuisine="fire-and-ocean" data-suburb="fortitude-valley"
                data-date="2025-12-22"
                data-comfort="8.0" data-soul="8.5" data-mastery="9.0" data-taste="8.5" data-die="8.5">
               <div>
@@ -918,7 +894,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20251209-Capiche.html"
-               data-cuisine="italian" data-suburb="ballina"
+               data-cuisine="italian" data-suburb="australia-elsewhere"
                data-date="2025-12-09"
                data-comfort="8.0" data-soul="7.0" data-mastery="7.5" data-taste="8.0" data-die="8.0">
               <div>
@@ -936,7 +912,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20251204-StationByKotuwa.html"
-               data-cuisine="sri-lankan" data-suburb="singapore"
+               data-cuisine="sri-lankan" data-suburb="overseas"
                data-date="2025-12-04"
                data-comfort="8.0" data-soul="9.5" data-mastery="8.5" data-taste="9.0" data-die="8.5">
               <div>
@@ -954,7 +930,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20251201-LemakKitchenAndBar.html"
-               data-cuisine="malaysian" data-suburb="woolloongabba"
+               data-cuisine="pan-asian" data-suburb="south-brisbane-south-bank"
                data-date="2025-12-01"
                data-comfort="7.5" data-soul="9.0" data-mastery="7.5" data-taste="8.0" data-die="8.0">
               <div>
@@ -981,7 +957,7 @@
           <!-- Grid view -->
           <div class="review-grid">
             <a class="review-card archive-card" href="reviews/20251128-GoldenAvenueRestaurant.html"
-               data-cuisine="middle-eastern" data-suburb="brisbane-cbd"
+               data-cuisine="mediterranean" data-suburb="brisbane-cbd"
                data-date="2025-11-28"
                data-comfort="8.0" data-soul="8.0" data-mastery="8.5" data-taste="8.5" data-die="8.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-11-28_golden-avenue-restaurant/05_18063741299437501.jpg');"></div>
@@ -999,7 +975,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20251124-LaylaBrisbane.html"
-               data-cuisine="middle-eastern" data-suburb="west-end"
+               data-cuisine="mediterranean" data-suburb="west-end"
                data-date="2025-11-24"
                data-comfort="7.0" data-soul="7.0" data-mastery="6.5" data-taste="6.5" data-die="6.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-11-24_laylabrisbane/01_18327147457240485.jpg');"></div>
@@ -1017,7 +993,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20251118-WillowRestaurant.html"
-               data-cuisine="japanese" data-suburb="singapore"
+               data-cuisine="japanese" data-suburb="overseas"
                data-date="2025-11-18"
                data-comfort="10.0" data-soul="10.0" data-mastery="10.0" data-taste="10.0" data-die="10.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-11-18_willow-restaurant/01_17991288656884335.jpg');"></div>
@@ -1035,7 +1011,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20251112-MariposaRestaurant.html"
-               data-cuisine="italian" data-suburb="rhodes"
+               data-cuisine="italian" data-suburb="overseas"
                data-date="2025-11-12"
                data-comfort="8.5" data-soul="10.0" data-mastery="9.5" data-taste="9.5" data-die="9.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-11-12_mariposa-restaurant/01_18084907339995518.jpg');"></div>
@@ -1057,7 +1033,7 @@
           <!-- List view -->
           <div class="archive-list">
             <a class="archive-row archive-card" href="reviews/20251128-GoldenAvenueRestaurant.html"
-               data-cuisine="middle-eastern" data-suburb="brisbane-cbd"
+               data-cuisine="mediterranean" data-suburb="brisbane-cbd"
                data-date="2025-11-28"
                data-comfort="8.0" data-soul="8.0" data-mastery="8.5" data-taste="8.5" data-die="8.0">
               <div>
@@ -1075,7 +1051,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20251124-LaylaBrisbane.html"
-               data-cuisine="middle-eastern" data-suburb="west-end"
+               data-cuisine="mediterranean" data-suburb="west-end"
                data-date="2025-11-24"
                data-comfort="7.0" data-soul="7.0" data-mastery="6.5" data-taste="6.5" data-die="6.0">
               <div>
@@ -1093,7 +1069,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20251118-WillowRestaurant.html"
-               data-cuisine="japanese" data-suburb="singapore"
+               data-cuisine="japanese" data-suburb="overseas"
                data-date="2025-11-18"
                data-comfort="10.0" data-soul="10.0" data-mastery="10.0" data-taste="10.0" data-die="10.0">
               <div>
@@ -1111,7 +1087,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20251112-MariposaRestaurant.html"
-               data-cuisine="italian" data-suburb="rhodes"
+               data-cuisine="italian" data-suburb="overseas"
                data-date="2025-11-12"
                data-comfort="8.5" data-soul="10.0" data-mastery="9.5" data-taste="9.5" data-die="9.0">
               <div>
@@ -1138,7 +1114,7 @@
           <!-- Grid view -->
           <div class="review-grid">
             <a class="review-card archive-card" href="reviews/20251029-DeCentraleDelft.html"
-               data-cuisine="european-brasserie" data-suburb="delft"
+               data-cuisine="french-european" data-suburb="overseas"
                data-date="2025-10-29"
                data-comfort="8.5" data-soul="8.5" data-mastery="9.0" data-taste="8.5" data-die="8.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-10-29_decentraledelft/01_18302196400264876.jpg');"></div>
@@ -1156,7 +1132,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20251028-ClarenceRestaurant.html"
-               data-cuisine="seafood" data-suburb="singapore"
+               data-cuisine="fire-and-ocean" data-suburb="overseas"
                data-date="2025-10-28"
                data-comfort="7.5" data-soul="7.5" data-mastery="8.0" data-taste="8.5" data-die="8.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-10-28_clarence-restaurant/01_18082253117053257.jpg');"></div>
@@ -1174,7 +1150,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20251027-SingaporeChilliCrab.html"
-               data-cuisine="singaporean" data-suburb="singapore"
+               data-cuisine="pan-asian" data-suburb="overseas"
                data-date="2025-10-27"
                data-comfort="8.0" data-soul="9.5" data-mastery="8.0" data-taste="9.5" data-die="10.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-10-27_SingaporeChilliCrab/01_18069713729585467.jpg');"></div>
@@ -1232,7 +1208,7 @@
           <!-- List view -->
           <div class="archive-list">
             <a class="archive-row archive-card" href="reviews/20251029-DeCentraleDelft.html"
-               data-cuisine="european-brasserie" data-suburb="delft"
+               data-cuisine="french-european" data-suburb="overseas"
                data-date="2025-10-29"
                data-comfort="8.5" data-soul="8.5" data-mastery="9.0" data-taste="8.5" data-die="8.5">
               <div>
@@ -1250,7 +1226,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20251028-ClarenceRestaurant.html"
-               data-cuisine="seafood" data-suburb="singapore"
+               data-cuisine="fire-and-ocean" data-suburb="overseas"
                data-date="2025-10-28"
                data-comfort="7.5" data-soul="7.5" data-mastery="8.0" data-taste="8.5" data-die="8.0">
               <div>
@@ -1268,7 +1244,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20251027-SingaporeChilliCrab.html"
-               data-cuisine="singaporean" data-suburb="singapore"
+               data-cuisine="pan-asian" data-suburb="overseas"
                data-date="2025-10-27"
                data-comfort="8.0" data-soul="9.5" data-mastery="8.0" data-taste="9.5" data-die="10.0">
               <div>
@@ -1331,7 +1307,7 @@
           <!-- Grid view -->
           <div class="review-grid">
             <a class="review-card archive-card" href="reviews/20250918-ScopriCarlton.html"
-               data-cuisine="italian" data-suburb="carlton"
+               data-cuisine="italian" data-suburb="australia-elsewhere"
                data-date="2025-09-18"
                data-comfort="10.0" data-soul="10.0" data-mastery="10.0" data-taste="10.0" data-die="10.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-09-18_scopri-carlton/01_18070164304939524.jpg');"></div>
@@ -1371,7 +1347,7 @@
           <!-- List view -->
           <div class="archive-list">
             <a class="archive-row archive-card" href="reviews/20250918-ScopriCarlton.html"
-               data-cuisine="italian" data-suburb="carlton"
+               data-cuisine="italian" data-suburb="australia-elsewhere"
                data-date="2025-09-18"
                data-comfort="10.0" data-soul="10.0" data-mastery="10.0" data-taste="10.0" data-die="10.0">
               <div>
@@ -1416,7 +1392,7 @@
           <!-- Grid view -->
           <div class="review-grid">
             <a class="review-card archive-card" href="reviews/20250831-LongwangBrisbane.html"
-               data-cuisine="modern-asian" data-suburb="brisbane-cbd"
+               data-cuisine="pan-asian" data-suburb="brisbane-cbd"
                data-date="2025-08-31"
                data-comfort="7.5" data-soul="7.0" data-mastery="7.0" data-taste="8.0" data-die="7.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-08-31_longwang-brisbane/01_18284279770272832.jpg');"></div>
@@ -1434,7 +1410,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250826-SNUG.html"
-               data-cuisine="korean" data-suburb="coorparoo"
+               data-cuisine="pan-asian" data-suburb="inner-suburbs"
                data-date="2025-08-26"
                data-comfort="9.0" data-soul="8.5" data-mastery="8.5" data-taste="9.0" data-die="9.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-08-26_snug-bne/01_18040059128671502.jpg');"></div>
@@ -1452,7 +1428,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250821-MinistryOfCrab.html"
-               data-cuisine="chinese" data-suburb="melbourne"
+               data-cuisine="chinese" data-suburb="australia-elsewhere"
                data-date="2025-08-21"
                data-comfort="9.0" data-soul="10.0" data-mastery="10.0" data-taste="9.0" data-die="10.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-08-21_ministryofcrab/01_18073116233473897.jpg');"></div>
@@ -1488,7 +1464,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250812-TheTamarind.html"
-               data-cuisine="thai" data-suburb="maleny"
+               data-cuisine="pan-asian" data-suburb="sunshine-coast"
                data-date="2025-08-12"
                data-comfort="8.0" data-soul="8.5" data-mastery="8.5" data-taste="9.0" data-die="9.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-08-12_the-tamarind/01_18087515872796650.jpg');"></div>
@@ -1506,7 +1482,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250807-BarRosaSouthbrisbane.html"
-               data-cuisine="italian" data-suburb="southbank"
+               data-cuisine="italian" data-suburb="south-brisbane-south-bank"
                data-date="2025-08-07"
                data-comfort="9.0" data-soul="9.5" data-mastery="9.0" data-taste="9.5" data-die="9.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-08-07_bar-rosa-southbrisbane/01_18121560784477926.jpg');"></div>
@@ -1524,7 +1500,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250805-TheLongApron.html"
-               data-cuisine="french-bistro" data-suburb="montville"
+               data-cuisine="french-european" data-suburb="sunshine-coast"
                data-date="2025-08-05"
                data-comfort="6.5" data-soul="7.0" data-mastery="8.5" data-taste="8.0" data-die="7.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-08-05_thelongapron/02_18362723563148140.jpg');"></div>
@@ -1546,7 +1522,7 @@
           <!-- List view -->
           <div class="archive-list">
             <a class="archive-row archive-card" href="reviews/20250831-LongwangBrisbane.html"
-               data-cuisine="modern-asian" data-suburb="brisbane-cbd"
+               data-cuisine="pan-asian" data-suburb="brisbane-cbd"
                data-date="2025-08-31"
                data-comfort="7.5" data-soul="7.0" data-mastery="7.0" data-taste="8.0" data-die="7.5">
               <div>
@@ -1564,7 +1540,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250826-SNUG.html"
-               data-cuisine="korean" data-suburb="coorparoo"
+               data-cuisine="pan-asian" data-suburb="inner-suburbs"
                data-date="2025-08-26"
                data-comfort="9.0" data-soul="8.5" data-mastery="8.5" data-taste="9.0" data-die="9.0">
               <div>
@@ -1582,7 +1558,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250821-MinistryOfCrab.html"
-               data-cuisine="chinese" data-suburb="melbourne"
+               data-cuisine="chinese" data-suburb="australia-elsewhere"
                data-date="2025-08-21"
                data-comfort="9.0" data-soul="10.0" data-mastery="10.0" data-taste="9.0" data-die="10.0">
               <div>
@@ -1618,7 +1594,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250812-TheTamarind.html"
-               data-cuisine="thai" data-suburb="maleny"
+               data-cuisine="pan-asian" data-suburb="sunshine-coast"
                data-date="2025-08-12"
                data-comfort="8.0" data-soul="8.5" data-mastery="8.5" data-taste="9.0" data-die="9.0">
               <div>
@@ -1636,7 +1612,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250807-BarRosaSouthbrisbane.html"
-               data-cuisine="italian" data-suburb="southbank"
+               data-cuisine="italian" data-suburb="south-brisbane-south-bank"
                data-date="2025-08-07"
                data-comfort="9.0" data-soul="9.5" data-mastery="9.0" data-taste="9.5" data-die="9.5">
               <div>
@@ -1654,7 +1630,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250805-TheLongApron.html"
-               data-cuisine="french-bistro" data-suburb="montville"
+               data-cuisine="french-european" data-suburb="sunshine-coast"
                data-date="2025-08-05"
                data-comfort="6.5" data-soul="7.0" data-mastery="8.5" data-taste="8.0" data-die="7.0">
               <div>
@@ -1699,7 +1675,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250729-BillysPineAndBambooRestaurant.html"
-               data-cuisine="chinese" data-suburb="morningside"
+               data-cuisine="chinese" data-suburb="inner-suburbs"
                data-date="2025-07-29"
                data-comfort="8.0" data-soul="9.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-07-29_brisbanerestaurants/01_18096932806721226.jpg');"></div>
@@ -1717,7 +1693,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250726-Komeyui.html"
-               data-cuisine="japanese" data-suburb="spring-hill"
+               data-cuisine="japanese" data-suburb="inner-suburbs"
                data-date="2025-07-26"
                data-comfort="8.5" data-soul="9.0" data-mastery="9.5" data-taste="9.0" data-die="9.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-07-26_komeyui-bris/01_18198873082312325.jpg');"></div>
@@ -1735,7 +1711,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250725-SpillwineMaleny.html"
-               data-cuisine="modern-australian" data-suburb="maleny"
+               data-cuisine="modern-australian" data-suburb="sunshine-coast"
                data-date="2025-07-25"
                data-comfort="8.0" data-soul="8.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-07-25_spillwine-maleny/01_18081424936857835.jpg');"></div>
@@ -1753,7 +1729,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250715-CreoleSoulKitchen.html"
-               data-cuisine="creole" data-suburb="spring-hill"
+               data-cuisine="creole" data-suburb="inner-suburbs"
                data-date="2025-07-15"
                data-comfort="9.0" data-soul="9.0" data-mastery="8.0" data-taste="8.5" data-die="8.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-07-15_creolesoulkitchen/01_17946249179882153.jpg');"></div>
@@ -1771,7 +1747,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250711-Petite.html"
-               data-cuisine="french" data-suburb="fortitude-valley"
+               data-cuisine="french-european" data-suburb="fortitude-valley"
                data-date="2025-07-11"
                data-comfort="7.5" data-soul="7.5" data-mastery="8.0" data-taste="8.0" data-die="7.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-07-11_petitebris/01_18166727416353370.jpg');"></div>
@@ -1807,7 +1783,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250703-Yamas.html"
-               data-cuisine="greek" data-suburb="west-end"
+               data-cuisine="mediterranean" data-suburb="west-end"
                data-date="2025-07-03"
                data-comfort="8.0" data-soul="7.5" data-mastery="8.5" data-taste="8.0" data-die="8.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-07-03_yamas-greek/01_17972764139902033.jpg');"></div>
@@ -1825,7 +1801,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250701-Kafenio.html"
-               data-cuisine="greek" data-suburb="west-end"
+               data-cuisine="mediterranean" data-suburb="west-end"
                data-date="2025-07-01"
                data-comfort="8.5" data-soul="9.0" data-mastery="8.0" data-taste="8.5" data-die="8.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-07-01_kafeniobrisbane/01_18048939032414435.jpg');"></div>
@@ -1865,7 +1841,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250729-BillysPineAndBambooRestaurant.html"
-               data-cuisine="chinese" data-suburb="morningside"
+               data-cuisine="chinese" data-suburb="inner-suburbs"
                data-date="2025-07-29"
                data-comfort="8.0" data-soul="9.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
               <div>
@@ -1883,7 +1859,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250726-Komeyui.html"
-               data-cuisine="japanese" data-suburb="spring-hill"
+               data-cuisine="japanese" data-suburb="inner-suburbs"
                data-date="2025-07-26"
                data-comfort="8.5" data-soul="9.0" data-mastery="9.5" data-taste="9.0" data-die="9.0">
               <div>
@@ -1901,7 +1877,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250725-SpillwineMaleny.html"
-               data-cuisine="modern-australian" data-suburb="maleny"
+               data-cuisine="modern-australian" data-suburb="sunshine-coast"
                data-date="2025-07-25"
                data-comfort="8.0" data-soul="8.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
               <div>
@@ -1919,7 +1895,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250715-CreoleSoulKitchen.html"
-               data-cuisine="creole" data-suburb="spring-hill"
+               data-cuisine="creole" data-suburb="inner-suburbs"
                data-date="2025-07-15"
                data-comfort="9.0" data-soul="9.0" data-mastery="8.0" data-taste="8.5" data-die="8.0">
               <div>
@@ -1937,7 +1913,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250711-Petite.html"
-               data-cuisine="french" data-suburb="fortitude-valley"
+               data-cuisine="french-european" data-suburb="fortitude-valley"
                data-date="2025-07-11"
                data-comfort="7.5" data-soul="7.5" data-mastery="8.0" data-taste="8.0" data-die="7.5">
               <div>
@@ -1973,7 +1949,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250703-Yamas.html"
-               data-cuisine="greek" data-suburb="west-end"
+               data-cuisine="mediterranean" data-suburb="west-end"
                data-date="2025-07-03"
                data-comfort="8.0" data-soul="7.5" data-mastery="8.5" data-taste="8.0" data-die="8.0">
               <div>
@@ -1991,7 +1967,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250701-Kafenio.html"
-               data-cuisine="greek" data-suburb="west-end"
+               data-cuisine="mediterranean" data-suburb="west-end"
                data-date="2025-07-01"
                data-comfort="8.5" data-soul="9.0" data-mastery="8.0" data-taste="8.5" data-die="8.5">
               <div>
@@ -2018,7 +1994,7 @@
           <!-- Grid view -->
           <div class="review-grid">
             <a class="review-card archive-card" href="reviews/20250626-RaRestaurantAndBar.html"
-               data-cuisine="sri-lankan" data-suburb="noosa"
+               data-cuisine="sri-lankan" data-suburb="sunshine-coast"
                data-date="2025-06-26"
                data-comfort="9.0" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-06-26_ra-restaurant-and-bar/01_18032666618680695.jpg');"></div>
@@ -2054,7 +2030,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250617-CutByWolfgangPuck.html"
-               data-cuisine="steakhouse" data-suburb="singapore"
+               data-cuisine="steakhouse" data-suburb="overseas"
                data-date="2025-06-17"
                data-comfort="8.5" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-06-17_cutbywolfgangpucksg/01_18085699168657186.jpg');"></div>
@@ -2072,7 +2048,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250612-Takashiya.html"
-               data-cuisine="japanese" data-suburb="southbank"
+               data-cuisine="japanese" data-suburb="south-brisbane-south-bank"
                data-date="2025-06-12"
                data-comfort="9.0" data-soul="9.0" data-mastery="9.5" data-taste="9.0" data-die="9.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-06-12_takashiya-au/01_18064588595120019.jpg');"></div>
@@ -2090,7 +2066,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250610-Locale.html"
-               data-cuisine="italian" data-suburb="noosa"
+               data-cuisine="italian" data-suburb="sunshine-coast"
                data-date="2025-06-10"
                data-comfort="8.0" data-soul="7.0" data-mastery="7.5" data-taste="7.0" data-die="7.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-06-10_localenoosa/01_18364796962183531.jpg');"></div>
@@ -2148,7 +2124,7 @@
           <!-- List view -->
           <div class="archive-list">
             <a class="archive-row archive-card" href="reviews/20250626-RaRestaurantAndBar.html"
-               data-cuisine="sri-lankan" data-suburb="noosa"
+               data-cuisine="sri-lankan" data-suburb="sunshine-coast"
                data-date="2025-06-26"
                data-comfort="9.0" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
               <div>
@@ -2184,7 +2160,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250617-CutByWolfgangPuck.html"
-               data-cuisine="steakhouse" data-suburb="singapore"
+               data-cuisine="steakhouse" data-suburb="overseas"
                data-date="2025-06-17"
                data-comfort="8.5" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
               <div>
@@ -2202,7 +2178,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250612-Takashiya.html"
-               data-cuisine="japanese" data-suburb="southbank"
+               data-cuisine="japanese" data-suburb="south-brisbane-south-bank"
                data-date="2025-06-12"
                data-comfort="9.0" data-soul="9.0" data-mastery="9.5" data-taste="9.0" data-die="9.5">
               <div>
@@ -2220,7 +2196,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250610-Locale.html"
-               data-cuisine="italian" data-suburb="noosa"
+               data-cuisine="italian" data-suburb="sunshine-coast"
                data-date="2025-06-10"
                data-comfort="8.0" data-soul="7.0" data-mastery="7.5" data-taste="7.0" data-die="7.0">
               <div>
@@ -2283,7 +2259,7 @@
           <!-- Grid view -->
           <div class="review-grid">
             <a class="review-card archive-card" href="reviews/20250530-JuliusPizzeria.html"
-               data-cuisine="italian" data-suburb="south-brisbane"
+               data-cuisine="italian" data-suburb="south-brisbane-south-bank"
                data-date="2025-05-30"
                data-comfort="7.0" data-soul="7.5" data-mastery="7.0" data-taste="7.0" data-die="7.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-05-30_juliuspizzeria/01_18068438729312447.jpg');"></div>
@@ -2301,7 +2277,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250522-OgeeHobart.html"
-               data-cuisine="modern-australian" data-suburb="hobart"
+               data-cuisine="modern-australian" data-suburb="australia-elsewhere"
                data-date="2025-05-22"
                data-comfort="9.0" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-05-22_ogee-hobart/01_18393620056114270.jpg');"></div>
@@ -2319,7 +2295,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250519-Tillerman.html"
-               data-cuisine="seafood" data-suburb="brisbane-cbd"
+               data-cuisine="fire-and-ocean" data-suburb="brisbane-cbd"
                data-date="2025-05-19"
                data-comfort="8.0" data-soul="7.5" data-mastery="7.5" data-taste="7.5" data-die="7.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-05-19_tillermanrestaurant/01_17919903440981281.jpg');"></div>
@@ -2337,7 +2313,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250515-Diermakr.html"
-               data-cuisine="modern-australian" data-suburb="hobart"
+               data-cuisine="modern-australian" data-suburb="australia-elsewhere"
                data-date="2025-05-15"
                data-comfort="9.5" data-soul="9.0" data-mastery="9.5" data-taste="9.5" data-die="9.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-05-15_diermakr/02_18144592756382693.jpg');"></div>
@@ -2355,7 +2331,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250513-WalkwayToCeylon.html"
-               data-cuisine="sri-lankan" data-suburb="greenslopes"
+               data-cuisine="sri-lankan" data-suburb="inner-suburbs"
                data-date="2025-05-13"
                data-comfort="7.5" data-soul="8.5" data-mastery="7.0" data-taste="7.5" data-die="7.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-05-13_walkwaytoceylon/01_18066889094288242.jpg');"></div>
@@ -2373,7 +2349,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250507-Attimi.html"
-               data-cuisine="italian-degustation" data-suburb="paddington"
+               data-cuisine="italian" data-suburb="inner-suburbs"
                data-date="2025-05-07"
                data-comfort="8.5" data-soul="8.5" data-mastery="9.0" data-taste="8.5" data-die="9.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-05-07_attimi-brisbane/01_17937298737001533.jpg');"></div>
@@ -2391,7 +2367,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250505-HimalayanCafe.html"
-               data-cuisine="nepali" data-suburb="new-farm"
+               data-cuisine="pan-asian" data-suburb="inner-suburbs"
                data-date="2025-05-05"
                data-comfort="8.0" data-soul="9.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-05-05_HimalayanCafe/01_17965897199912121.jpg');"></div>
@@ -2409,7 +2385,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250502-NaldhamHouse.html"
-               data-cuisine="european-brasserie" data-suburb="brisbane-cbd"
+               data-cuisine="french-european" data-suburb="brisbane-cbd"
                data-date="2025-05-02"
                data-comfort="8.0" data-soul="7.0" data-mastery="8.0" data-taste="8.0" data-die="7.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-05-02_naldhamhouse/01_18078515503696292.jpg');"></div>
@@ -2427,7 +2403,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250502-PenelopeBistro.html"
-               data-cuisine="french-bistro" data-suburb="james-street"
+               data-cuisine="french-european" data-suburb="james-street-newstead"
                data-date="2025-05-02"
                data-comfort="7.5" data-soul="7.0" data-mastery="7.0" data-taste="7.5" data-die="6.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-05-02_penelope-bistro/01_18025790750669942.png');"></div>
@@ -2449,7 +2425,7 @@
           <!-- List view -->
           <div class="archive-list">
             <a class="archive-row archive-card" href="reviews/20250530-JuliusPizzeria.html"
-               data-cuisine="italian" data-suburb="south-brisbane"
+               data-cuisine="italian" data-suburb="south-brisbane-south-bank"
                data-date="2025-05-30"
                data-comfort="7.0" data-soul="7.5" data-mastery="7.0" data-taste="7.0" data-die="7.0">
               <div>
@@ -2467,7 +2443,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250522-OgeeHobart.html"
-               data-cuisine="modern-australian" data-suburb="hobart"
+               data-cuisine="modern-australian" data-suburb="australia-elsewhere"
                data-date="2025-05-22"
                data-comfort="9.0" data-soul="9.0" data-mastery="9.0" data-taste="9.0" data-die="9.0">
               <div>
@@ -2485,7 +2461,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250519-Tillerman.html"
-               data-cuisine="seafood" data-suburb="brisbane-cbd"
+               data-cuisine="fire-and-ocean" data-suburb="brisbane-cbd"
                data-date="2025-05-19"
                data-comfort="8.0" data-soul="7.5" data-mastery="7.5" data-taste="7.5" data-die="7.5">
               <div>
@@ -2503,7 +2479,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250515-Diermakr.html"
-               data-cuisine="modern-australian" data-suburb="hobart"
+               data-cuisine="modern-australian" data-suburb="australia-elsewhere"
                data-date="2025-05-15"
                data-comfort="9.5" data-soul="9.0" data-mastery="9.5" data-taste="9.5" data-die="9.5">
               <div>
@@ -2521,7 +2497,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250513-WalkwayToCeylon.html"
-               data-cuisine="sri-lankan" data-suburb="greenslopes"
+               data-cuisine="sri-lankan" data-suburb="inner-suburbs"
                data-date="2025-05-13"
                data-comfort="7.5" data-soul="8.5" data-mastery="7.0" data-taste="7.5" data-die="7.0">
               <div>
@@ -2539,7 +2515,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250507-Attimi.html"
-               data-cuisine="italian-degustation" data-suburb="paddington"
+               data-cuisine="italian" data-suburb="inner-suburbs"
                data-date="2025-05-07"
                data-comfort="8.5" data-soul="8.5" data-mastery="9.0" data-taste="8.5" data-die="9.5">
               <div>
@@ -2557,7 +2533,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250505-HimalayanCafe.html"
-               data-cuisine="nepali" data-suburb="new-farm"
+               data-cuisine="pan-asian" data-suburb="inner-suburbs"
                data-date="2025-05-05"
                data-comfort="8.0" data-soul="9.0" data-mastery="8.0" data-taste="8.0" data-die="8.0">
               <div>
@@ -2575,7 +2551,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250502-NaldhamHouse.html"
-               data-cuisine="european-brasserie" data-suburb="brisbane-cbd"
+               data-cuisine="french-european" data-suburb="brisbane-cbd"
                data-date="2025-05-02"
                data-comfort="8.0" data-soul="7.0" data-mastery="8.0" data-taste="8.0" data-die="7.5">
               <div>
@@ -2593,7 +2569,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250502-PenelopeBistro.html"
-               data-cuisine="french-bistro" data-suburb="james-street"
+               data-cuisine="french-european" data-suburb="james-street-newstead"
                data-date="2025-05-02"
                data-comfort="7.5" data-soul="7.0" data-mastery="7.0" data-taste="7.5" data-die="6.5">
               <div>
@@ -2620,7 +2596,7 @@
           <!-- Grid view -->
           <div class="review-grid">
             <a class="review-card archive-card" href="reviews/20250430-TheFiftySix.html"
-               data-cuisine="cantonese" data-suburb="brisbane-cbd"
+               data-cuisine="chinese" data-suburb="brisbane-cbd"
                data-date="2025-04-30"
                data-comfort="9.0" data-soul="8.5" data-mastery="9.0" data-taste="9.0" data-die="8.5">
               <div class="thumb" style="background-image: url('assets/reviews/2025-04-30_thefiftysixrestaurant/01_18061216847511494.jpg');"></div>
@@ -2638,7 +2614,7 @@
               </div>
             </a>
             <a class="review-card archive-card" href="reviews/20250426-TheGreen.html"
-               data-cuisine="modern-middle-eastern" data-suburb="james-street"
+               data-cuisine="mediterranean" data-suburb="james-street-newstead"
                data-date="2025-04-26"
                data-comfort="8.0" data-soul="8.5" data-mastery="8.0" data-taste="8.0" data-die="8.0">
               <div class="thumb" style="background-image: url('assets/reviews/2025-04-26_thegreen-au/01_18145417141347019.jpg');"></div>
@@ -2696,7 +2672,7 @@
           <!-- List view -->
           <div class="archive-list">
             <a class="archive-row archive-card" href="reviews/20250430-TheFiftySix.html"
-               data-cuisine="cantonese" data-suburb="brisbane-cbd"
+               data-cuisine="chinese" data-suburb="brisbane-cbd"
                data-date="2025-04-30"
                data-comfort="9.0" data-soul="8.5" data-mastery="9.0" data-taste="9.0" data-die="8.5">
               <div>
@@ -2714,7 +2690,7 @@
               </div>
             </a>
             <a class="archive-row archive-card" href="reviews/20250426-TheGreen.html"
-               data-cuisine="modern-middle-eastern" data-suburb="james-street"
+               data-cuisine="mediterranean" data-suburb="james-street-newstead"
                data-date="2025-04-26"
                data-comfort="8.0" data-soul="8.5" data-mastery="8.0" data-taste="8.0" data-die="8.0">
               <div>
@@ -2804,7 +2780,7 @@
   <script>
     (function () {
       var root = document.querySelector('.archive-reviews');
-      var state = { view: 'grid', sort: 'date', cuisine: 'all', suburb: 'all' };
+      var state = { view: 'grid', sort: 'date', cuisine: 'all', suburb: 'all', highlights: 'all' };
 
       // Snapshot original home (month group) for each card, so we can restore
       // date-grouped order after sorting by any score element.
@@ -2854,6 +2830,16 @@
         });
       });
 
+      // Highlights toggle (10/10 scores)
+      document.querySelectorAll('.toolbar-btn[data-highlights]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.toolbar-btn[data-highlights]').forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          state.highlights = btn.dataset.highlights;
+          applyFilters();
+        });
+      });
+
       // Filter chips
       document.querySelectorAll('.chip').forEach(function (chip) {
         chip.addEventListener('click', function () {
@@ -2869,7 +2855,14 @@
         document.querySelectorAll('.archive-card').forEach(function (card) {
           var cuisineMatch = state.cuisine === 'all' || card.dataset.cuisine === state.cuisine;
           var suburbMatch = state.suburb === 'all' || card.dataset.suburb === state.suburb;
-          card.hidden = !(cuisineMatch && suburbMatch);
+          var perfectMatch = true;
+          if (state.highlights === 'perfect') {
+            var keys = ['comfort', 'soul', 'mastery', 'taste', 'die'];
+            perfectMatch = keys.every(function (k) {
+              return parseFloat(card.dataset[k] || '0') >= 10;
+            });
+          }
+          card.hidden = !(cuisineMatch && suburbMatch && perfectMatch);
         });
         // Hide empty month groups
         document.querySelectorAll('.month-group').forEach(function (mg) {
