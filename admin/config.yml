@@ -1,0 +1,140 @@
+# Decap CMS configuration for Sasenka Loves Food.
+#
+# What this does, in plain English:
+#   - It tells the CMS where to save each new review (a JSON file in /data/reviews/).
+#   - It defines the form fields you see when you write a review.
+#   - It tells the CMS where to upload photos (a per-review folder under /assets/reviews/).
+#
+# Any time you change this file, push to GitHub and Netlify will redeploy.
+
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    create: 'New review: {{collection}} "{{slug}}"'
+    update: 'Update review: {{collection}} "{{slug}}"'
+    delete: 'Delete review: {{collection}} "{{slug}}"'
+    uploadMedia: 'Upload photo "{{path}}"'
+    deleteMedia: 'Delete photo "{{path}}"'
+
+# Fallback upload location if no collection-specific folder is given.
+media_folder: 'assets/uploads'
+public_folder: '/assets/uploads'
+
+# Optional local preview support. Leave site_url as-is until the domain is live;
+# Netlify will ignore it in production.
+site_url: https://sasenkalovesfood.com
+display_url: https://sasenkalovesfood.com
+logo_url: https://sasenkalovesfood.com/assets/sasenka.jpg
+
+collections:
+  - name: reviews
+    label: Reviews
+    label_singular: Review
+    folder: data/reviews
+    create: true
+    delete: true
+    extension: json
+    format: json
+    # Slug pattern: visit date + kebab-case restaurant name. So a visit to
+    # Venner on 4 March 2026 becomes 20260304-venner.json, matching the
+    # existing review filename convention in /reviews/.
+    slug: '{{year}}{{month}}{{day}}-{{fields.restaurant_name}}'
+    # Uploads for this collection land in a per-review subfolder, which
+    # keeps the assets folder tidy and matches the existing structure.
+    media_folder: '/assets/reviews/{{slug}}'
+    public_folder: '/assets/reviews/{{slug}}'
+    summary: '{{restaurant_name}} ({{suburb}}), visited {{date_visited | date("D MMM YYYY")}}'
+    sortable_fields: ['date_visited', 'restaurant_name']
+    view_filters:
+      - label: Published
+        field: status
+        pattern: published
+      - label: Drafts
+        field: status
+        pattern: draft
+    fields:
+      - label: 'Status'
+        name: status
+        widget: select
+        options: ['draft', 'published']
+        default: 'published'
+        hint: 'Drafts do not appear on the site. Set to published when you are ready.'
+
+      - label: 'Restaurant name'
+        name: restaurant_name
+        widget: string
+        hint: 'As it should appear as a heading. Example: Venner.'
+
+      - label: 'Date visited'
+        name: date_visited
+        widget: datetime
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        format: 'YYYY-MM-DD'
+        picker_utc: false
+
+      - label: 'Suburb or area'
+        name: suburb
+        widget: string
+        hint: 'Example: West End, Fortitude Valley, Noosa.'
+
+      - label: 'Cuisine'
+        name: cuisine
+        widget: string
+        hint: 'Example: Italian, Modern Australian, Sri Lankan. Title case is fine.'
+
+      - label: 'Instagram handle'
+        name: instagram_handle
+        widget: string
+        required: false
+        hint: 'Without the @. Example: restaurantvenner. Leave blank if none.'
+
+      - label: 'Tagline'
+        name: tagline
+        widget: string
+        hint: 'One-line summary shown in italic under the restaurant name.'
+
+      - label: 'Meta description'
+        name: meta_description
+        widget: string
+        required: false
+        hint: 'Optional. Short search-engine description. If left blank, the tagline is used.'
+
+      - label: 'Hero photo'
+        name: hero_photo
+        widget: image
+        hint: 'The large photo at the top of the review.'
+
+      - label: 'Hero photo caption'
+        name: hero_caption
+        widget: string
+        required: false
+        hint: 'Shown when the hero photo is clicked to enlarge.'
+
+      - label: 'Scores'
+        name: scores
+        widget: object
+        fields:
+          - { label: 'Comfort', name: comfort, widget: number, value_type: float, min: 0, max: 10, step: 0.5 }
+          - { label: 'Soul', name: soul, widget: number, value_type: float, min: 0, max: 10, step: 0.5 }
+          - { label: 'Mastery', name: mastery, widget: number, value_type: float, min: 0, max: 10, step: 0.5 }
+          - { label: 'Taste', name: taste, widget: number, value_type: float, min: 0, max: 10, step: 0.5 }
+          - { label: 'Would I die happy?', name: die_happy, widget: number, value_type: float, min: 0, max: 10, step: 0.5 }
+
+      - label: 'Review body'
+        name: body
+        widget: markdown
+        hint: 'The main text. Use blank lines between paragraphs. You can add headings and bold/italic.'
+        minimal: true
+        buttons: ['bold', 'italic', 'link', 'heading-two', 'quote', 'bulleted-list', 'numbered-list']
+        editor_components: []
+
+      - label: 'Gallery'
+        name: gallery
+        widget: list
+        required: false
+        summary: '{{fields.caption}}'
+        fields:
+          - { label: 'Photo', name: photo, widget: image }
+          - { label: 'Caption', name: caption, widget: string, required: false, hint: 'Short description of the dish.' }

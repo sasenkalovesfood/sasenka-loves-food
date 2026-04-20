@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
+  <!-- Netlify Identity widget. Needed so invite-acceptance links land
+       users back on /admin after they set a password. Tiny script. -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -69,6 +72,7 @@
       </header>
 
       <!-- Latest review, featured -->
+      <!-- BUILD:FEATURED -->
       <a class="feature-review" href="reviews/20260409-Aunty.html">
         <div class="photo" style="background-image: url('assets/reviews/2026-04-09_auntyonwandoo/01_18087311645194797.jpg');"></div>
         <div class="body">
@@ -84,8 +88,10 @@
           </div>
         </div>
       </a>
+      <!-- /BUILD:FEATURED -->
 
       <!-- Remaining reviews -->
+      <!-- BUILD:GRID -->
       <div class="review-grid">
 
         <a class="review-card" href="reviews/20260331-MonalDining.html">
@@ -229,6 +235,7 @@
         </a>
 
       </div>
+      <!-- /BUILD:GRID -->
 
       <div class="view-all-reviews">
         <a href="reviews-archive.html">
@@ -256,6 +263,7 @@
         <h3>Lately, in pictures</h3>
         <a href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener">Follow on Instagram &rarr;</a>
       </div>
+      <!-- BUILD:IG_STRIP -->
       <div class="ig-strip" aria-label="Recent Instagram posts">
         <a class="tile" href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener" style="background-image:url('assets/reviews/2026-04-09_auntyonwandoo/02_17889052965462062.jpg');" aria-label="Aunty, pressed wagyu skewer"></a>
         <a class="tile" href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener" style="background-image:url('assets/reviews/2026-03-31_monaldining/02_18060836234396713.jpg');" aria-label="Monal Dining"></a>
@@ -264,6 +272,7 @@
         <a class="tile" href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener" style="background-image:url('assets/reviews/2026-02-24_bosco-winegrill/02_17856648717617512.jpg');" aria-label="Bosco Wine Grill"></a>
         <a class="tile" href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener" style="background-image:url('assets/reviews/2026-02-19_davidsflynn/03_17980061975809027.jpg');" aria-label="Marlowe"></a>
       </div>
+      <!-- /BUILD:IG_STRIP -->
     </section>
   </main>
 
@@ -291,5 +300,18 @@
       <span class="site-footer__copy">&copy; 2026 Sasenka Loves Food</span>
     </div>
   </footer>
+  <script>
+    // If someone lands on the homepage with a Netlify Identity invite token
+    // in the URL hash, bounce them to /admin so they can set a password there.
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', function (user) {
+        if (!user) {
+          window.netlifyIdentity.on('login', function () {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
+  </script>
 </body>
 </html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Content manager &middot; Sasenka Loves Food</title>
+  <!-- Netlify Identity widget: handles login and invite links. -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+  <!-- Decap CMS (formerly Netlify CMS): loaded from their CDN. -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // After an invite acceptance or password recovery, Identity sends the user
+    // back to the site with a token in the URL hash. If they land on /admin,
+    // we bounce them to the homepage so the widget can finish the handshake,
+    // then bounce them back. This is the standard Decap + Identity pattern.
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', function (user) {
+        if (!user) {
+          window.netlifyIdentity.on('login', function () {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
