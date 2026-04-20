@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sasenka Loves Food">
+  <rect width="64" height="64" rx="12" fill="#48453B"/>
+  <g transform="translate(5 9) scale(0.4)">
+    <path d="M134.756 39.507C134.756 90.727 67.378 117.057 67.378 117.057C67.378 117.057 0 90.727 0 39.507C0 17.681 16.28 0 36.376 0C49.472 0 60.965 7.523 67.378 18.785C73.791 7.523 85.284 0 98.38 0C118.499 0 134.756 17.681 134.756 39.507Z" fill="#BD112E"/>
+  </g>
+</svg>
