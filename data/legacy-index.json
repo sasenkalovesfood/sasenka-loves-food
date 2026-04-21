@@ -1,6 +1,6 @@
 {
   "generated_notes": "Snapshot of the 63 hand-edited review pages, verbatim archive cards and the current homepage blurb/thumb tuning. The build script treats these as read-only and composes them with any new CMS reviews. Regenerate with python3 _working/migrate_legacy.py if hand-edits change.",
-  "count": 63,
+  "count": 64,
   "filter_chips": {
     "cuisine_html": "<div class=\"chip-row\" role=\"group\" aria-label=\"Cuisine\">\n          <span class=\"toolbar-label\">Cuisine</span>\n          <button type=\"button\" class=\"chip is-active\" data-category=\"cuisine\" data-filter=\"all\">All</button>\n          <button type=\"button\" class=\"chip\" data-category=\"cuisine\" data-filter=\"modern-australian\">Modern Australian</button>\n          <button type=\"button\" class=\"chip\" data-category=\"cuisine\" data-filter=\"italian\">Italian</button>\n          <button type=\"button\" class=\"chip\" data-category=\"cuisine\" data-filter=\"chinese\">Chinese</button>\n          <button type=\"button\" class=\"chip\" data-category=\"cuisine\" data-filter=\"japanese\">Japanese</button>\n          <button type=\"button\" class=\"chip\" data-category=\"cuisine\" data-filter=\"pan-asian\">Pan-Asian</button>\n          <button type=\"button\" class=\"chip\" data-category=\"cuisine\" data-filter=\"sri-lankan\">Sri Lankan</button>\n          <button type=\"button\" class=\"chip\" data-category=\"cuisine\" data-filter=\"mediterranean\">Mediterranean</button>\n          <button type=\"button\" class=\"chip\" data-category=\"cuisine\" data-filter=\"french-european\">French &amp; European</button>\n          <button type=\"button\" class=\"chip\" data-category=\"cuisine\" data-filter=\"fire-and-ocean\">Fire &amp; ocean</button>\n          <button type=\"button\" class=\"chip\" data-category=\"cuisine\" data-filter=\"steakhouse\">Steakhouse</button>\n          <button type=\"button\" class=\"chip\" data-category=\"cuisine\" data-filter=\"creole\">Creole</button>\n        </div>",
     "cuisine_filters": [
@@ -89,7 +89,7 @@
     {
       "slug": "20260310-LilongRestaurant",
       "href": "reviews/20260310-LilongRestaurant.html",
-      "date": "2026-10-22",
+      "date": "2025-10-22",
       "cuisine_slug": "chinese",
       "suburb_slug": "west-end",
       "scores": {
@@ -99,13 +99,13 @@
         "taste": 8.0,
         "die_happy": 7.5
       },
-      "archive_grid_html": "<a class=\"review-card archive-card\" href=\"reviews/20260310-LilongRestaurant.html\"\n               data-cuisine=\"chinese\" data-suburb=\"west-end\"\n               data-date=\"2026-10-22\"\n               data-comfort=\"7.5\" data-soul=\"8.0\" data-mastery=\"7.0\" data-taste=\"8.0\" data-die=\"7.5\">\n              <div class=\"thumb\" style=\"background-image: url('assets/reviews/2026-03-10_lilongrestaurant/01_17868807885579339.jpg');\"></div>\n              <div class=\"body\">\n                <div class=\"meta\"><span>West End &middot; Chinese</span><span class=\"dot\">&bull;</span><span>22 Oct 2026</span></div>\n                <h3>Lilong Restaurant</h3>\n                <p class=\"blurb\">West End has no shortage of good food, but sometimes you just want something simple, comforting, and full of flavour.</p>\n                <div class=\"scores-mini\">\n                  <span class=\"score-pill\">Comfort <strong>7.5</strong></span>\n                  <span class=\"score-pill\">Soul <strong>8.0</strong></span>\n                  <span class=\"score-pill\">Mastery <strong>7.0</strong></span>\n                  <span class=\"score-pill\">Taste <strong>8.0</strong></span>\n                  <span class=\"score-pill die-happy\">Die happy <strong>7.5</strong></span>\n                </div>\n              </div>\n            </a>",
+      "archive_grid_html": "<a class=\"review-card archive-card\" href=\"reviews/20260310-LilongRestaurant.html\"\n               data-cuisine=\"chinese\" data-suburb=\"west-end\"\n               data-date=\"2025-10-22\"\n               data-comfort=\"7.5\" data-soul=\"8.0\" data-mastery=\"7.0\" data-taste=\"8.0\" data-die=\"7.5\">\n              <div class=\"thumb\" style=\"background-image: url('assets/reviews/2026-03-10_lilongrestaurant/01_17868807885579339.jpg');\"></div>\n              <div class=\"body\">\n                <div class=\"meta\"><span>West End &middot; Chinese</span><span class=\"dot\">&bull;</span><span>22 Oct 2025</span></div>\n                <h3>Lilong Restaurant</h3>\n                <p class=\"blurb\">West End has no shortage of good food, but sometimes you just want something simple, comforting, and full of flavour.</p>\n                <div class=\"scores-mini\">\n                  <span class=\"score-pill\">Comfort <strong>7.5</strong></span>\n                  <span class=\"score-pill\">Soul <strong>8.0</strong></span>\n                  <span class=\"score-pill\">Mastery <strong>7.0</strong></span>\n                  <span class=\"score-pill\">Taste <strong>8.0</strong></span>\n                  <span class=\"score-pill die-happy\">Die happy <strong>7.5</strong></span>\n                </div>\n              </div>\n            </a>",
       "restaurant_name": "Lilong Restaurant",
       "blurb": "West End has no shortage of good food, but sometimes you just want something simple, comforting, and full of flavour.",
       "suburb_display": "West End",
       "cuisine_display": "Chinese",
       "thumb": "assets/reviews/2026-03-10_lilongrestaurant/01_17868807885579339.jpg",
-      "archive_list_html": "<a class=\"archive-row archive-card\" href=\"reviews/20260310-LilongRestaurant.html\"\n               data-cuisine=\"chinese\" data-suburb=\"west-end\"\n               data-date=\"2026-10-22\"\n               data-comfort=\"7.5\" data-soul=\"8.0\" data-mastery=\"7.0\" data-taste=\"8.0\" data-die=\"7.5\">\n              <div>\n                <div class=\"row-title\">Lilong Restaurant</div>\n                <div class=\"row-sub\">22 October 2026</div>\n              </div>\n              <div class=\"row-cuisine\">Chinese</div>\n              <div class=\"row-suburb\">West End</div>\n              <div class=\"row-scores\">\n                <span class=\"rs\">Comfort <strong>7.5</strong></span>\n                <span class=\"rs\">Soul <strong>8.0</strong></span>\n                <span class=\"rs\">Mastery <strong>7.0</strong></span>\n                <span class=\"rs\">Taste <strong>8.0</strong></span>\n                <span class=\"rs die\">Die happy <strong>7.5</strong></span>\n              </div>\n            </a>",
+      "archive_list_html": "<a class=\"archive-row archive-card\" href=\"reviews/20260310-LilongRestaurant.html\"\n               data-cuisine=\"chinese\" data-suburb=\"west-end\"\n               data-date=\"2025-10-22\"\n               data-comfort=\"7.5\" data-soul=\"8.0\" data-mastery=\"7.0\" data-taste=\"8.0\" data-die=\"7.5\">\n              <div>\n                <div class=\"row-title\">Lilong Restaurant</div>\n                <div class=\"row-sub\">22 October 2025</div>\n              </div>\n              <div class=\"row-cuisine\">Chinese</div>\n              <div class=\"row-suburb\">West End</div>\n              <div class=\"row-scores\">\n                <span class=\"rs\">Comfort <strong>7.5</strong></span>\n                <span class=\"rs\">Soul <strong>8.0</strong></span>\n                <span class=\"rs\">Mastery <strong>7.0</strong></span>\n                <span class=\"rs\">Taste <strong>8.0</strong></span>\n                <span class=\"rs die\">Die happy <strong>7.5</strong></span>\n              </div>\n            </a>",
       "homepage_thumb": "assets/reviews/2026-03-10_lilongrestaurant/01_17868807885579339.jpg",
       "homepage_blurb": "West End has no shortage of good food, but sometimes you just want something simple, comforting, and full of flavour.",
       "homepage_position": "grid",
@@ -1564,6 +1564,33 @@
       "instagram_handle": "stilts.dining",
       "meta_description": "A review of Stilts Dining, Michael Tassis's elevated room above the Brisbane CBD, where the city slows down and the kitchen takes its time.",
       "hero_photo": "assets/reviews/2025-04-20_stilts-dining/01_18105965602499766.jpg"
+    },
+    {
+      "slug": "20260312-TheFrenchExit",
+      "href": "reviews/20260312-TheFrenchExit.html",
+      "date": "2026-03-12",
+      "cuisine_slug": "french-european",
+      "suburb_slug": "brisbane-cbd",
+      "scores": {
+        "comfort": 8.5,
+        "soul": 8.0,
+        "mastery": 7.5,
+        "taste": 8.0,
+        "die_happy": 8.0
+      },
+      "restaurant_name": "The French Exit",
+      "blurb": "Small room, big energy. A Parisian bistro masquerading as a neighbourhood pub, and getting away with it.",
+      "suburb_display": "Brisbane CBD",
+      "cuisine_display": "French bistro",
+      "thumb": "assets/reviews/2026-03-12_thefrenchexit/01_frenchexit_pate.jpg",
+      "homepage_thumb": "assets/reviews/2026-03-12_thefrenchexit/01_frenchexit_pate.jpg",
+      "homepage_blurb": "Small room, big energy. A Parisian bistro masquerading as a neighbourhood pub, and getting away with it.",
+      "homepage_position": "grid",
+      "instagram_handle": "thefrenchexit.restaurant",
+      "meta_description": "Small, warm, a bit rowdy. My first instinct was to call The French Exit a pub. It isn't — it's a proper Parisian bistro in a heritage warehouse on the corner of Mary and Edward.",
+      "hero_photo": "assets/reviews/2026-03-12_thefrenchexit/01_frenchexit_pate.jpg",
+      "archive_grid_html": "<a class=\"review-card archive-card\" href=\"reviews/20260312-TheFrenchExit.html\"\n               data-cuisine=\"french-european\" data-suburb=\"brisbane-cbd\"\n               data-date=\"2026-03-12\"\n               data-comfort=\"8.5\" data-soul=\"8.0\" data-mastery=\"7.5\" data-taste=\"8.0\" data-die=\"8.0\">\n              <div class=\"thumb\" style=\"background-image: url('assets/reviews/2026-03-12_thefrenchexit/01_frenchexit_pate.jpg');\"></div>\n              <div class=\"body\">\n                <div class=\"meta\"><span>Brisbane CBD &middot; French bistro</span><span class=\"dot\">&bull;</span><span>12 Mar 2026</span></div>\n                <h3>The French Exit</h3>\n                <p class=\"blurb\">Small room, big energy. A Parisian bistro masquerading as a neighbourhood pub, and getting away with it.</p>\n                <div class=\"scores-mini\">\n                  <span class=\"score-pill\">Comfort <strong>8.5</strong></span>\n                  <span class=\"score-pill\">Soul <strong>8.0</strong></span>\n                  <span class=\"score-pill\">Mastery <strong>7.5</strong></span>\n                  <span class=\"score-pill\">Taste <strong>8.0</strong></span>\n                  <span class=\"score-pill die-happy\">Die happy <strong>8.0</strong></span>\n                </div>\n              </div>\n            </a>",
+      "archive_list_html": "<a class=\"archive-row archive-card\" href=\"reviews/20260312-TheFrenchExit.html\"\n               data-cuisine=\"french-european\" data-suburb=\"brisbane-cbd\"\n               data-date=\"2026-03-12\"\n               data-comfort=\"8.5\" data-soul=\"8.0\" data-mastery=\"7.5\" data-taste=\"8.0\" data-die=\"8.0\">\n              <div>\n                <div class=\"row-title\">The French Exit</div>\n                <div class=\"row-sub\">12 March 2026</div>\n              </div>\n              <div class=\"row-cuisine\">French bistro</div>\n              <div class=\"row-suburb\">Brisbane CBD</div>\n              <div class=\"row-scores\">\n                <span class=\"rs\">Comfort <strong>8.5</strong></span>\n                <span class=\"rs\">Soul <strong>8.0</strong></span>\n                <span class=\"rs\">Mastery <strong>7.5</strong></span>\n                <span class=\"rs\">Taste <strong>8.0</strong></span>\n                <span class=\"rs die\">Die happy <strong>8.0</strong></span>\n              </div>\n            </a>"
     }
   ]
 }
