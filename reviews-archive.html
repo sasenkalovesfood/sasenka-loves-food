@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <link rel="shortcut icon" href="favicon.ico">
   <title>All reviews &mdash; Sasenka Loves Food</title>
-  <meta name="description" content="Every review on Sasenka Loves Food, grouped by month. Filter by cuisine or suburb, or flip to list view to scan fast.">
+  <meta name="description" content="Every review on Sasenka Loves Food, grouped by month. Filter by cuisine or place, or flip to list view to scan fast.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -85,6 +85,29 @@
       background: var(--ink);
       color: var(--paper);
       border-color: var(--ink);
+    }
+
+    /* Perfect-score filter: anchors to the right edge of the toolbar and
+       turns tomato-red when active, so it reads as a special filter, not
+       another radio-select sort option. */
+    .toolbar-btn--perfect {
+      margin-left: auto;
+      color: var(--tomato);
+      border-color: var(--tomato);
+    }
+    .toolbar-btn--perfect .star {
+      margin-right: 4px;
+      font-size: 12px;
+    }
+    .toolbar-btn--perfect:hover {
+      color: var(--paper);
+      background: var(--tomato);
+      border-color: var(--tomato);
+    }
+    .toolbar-btn--perfect.is-active {
+      background: var(--tomato);
+      color: var(--paper);
+      border-color: var(--tomato);
     }
 
     .filter-chips {
@@ -248,7 +271,7 @@
       <header class="archive-head">
         <span class="eyebrow">Archive</span>
         <h1>All reviews</h1>
-        <p>Every place I've reviewed, grouped by month. Filter by cuisine or suburb, or flip to list view to scan fast.</p>
+        <p>Every place I've reviewed, grouped by month. Filter by cuisine or place, or flip to list view to scan fast.</p>
       </header>
 
       <div class="archive-toolbar" role="toolbar" aria-label="View and sort">
@@ -266,11 +289,9 @@
           <button type="button" class="toolbar-btn" data-sort="taste">Taste</button>
           <button type="button" class="toolbar-btn" data-sort="die">Die happy</button>
         </div>
-        <div class="toolbar-group">
-          <span class="toolbar-label">Highlights</span>
-          <button type="button" class="toolbar-btn is-active" data-highlights="all">All reviews</button>
-          <button type="button" class="toolbar-btn" data-highlights="perfect">Perfect score</button>
-        </div>
+        <button type="button" class="toolbar-btn toolbar-btn--perfect" data-highlights-toggle aria-pressed="false">
+          <span class="star" aria-hidden="true">&#9733;</span> Perfect score
+        </button>
       </div>
 
       <!-- BUILD:FILTERS -->
@@ -290,8 +311,8 @@
           <button type="button" class="chip" data-category="cuisine" data-filter="steakhouse">Steakhouse</button>
           <button type="button" class="chip" data-category="cuisine" data-filter="creole">Creole</button>
         </div>
-        <div class="chip-row" role="group" aria-label="Suburb">
-          <span class="toolbar-label">Suburb</span>
+        <div class="chip-row" role="group" aria-label="Place">
+          <span class="toolbar-label">Place</span>
           <button type="button" class="chip is-active" data-category="suburb" data-filter="all">All</button>
           <button type="button" class="chip" data-category="suburb" data-filter="brisbane-cbd">Brisbane CBD</button>
           <button type="button" class="chip" data-category="suburb" data-filter="fortitude-valley">Fortitude Valley</button>
@@ -2830,12 +2851,13 @@
         });
       });
 
-      // Highlights toggle (10/10 scores)
-      document.querySelectorAll('.toolbar-btn[data-highlights]').forEach(function (btn) {
+      // Highlights toggle (perfect-score single-button toggle)
+      document.querySelectorAll('.toolbar-btn[data-highlights-toggle]').forEach(function (btn) {
         btn.addEventListener('click', function () {
-          document.querySelectorAll('.toolbar-btn[data-highlights]').forEach(function (b) { b.classList.remove('is-active'); });
-          btn.classList.add('is-active');
-          state.highlights = btn.dataset.highlights;
+          var nowOn = state.highlights !== 'perfect';
+          state.highlights = nowOn ? 'perfect' : 'all';
+          btn.classList.toggle('is-active', nowOn);
+          btn.setAttribute('aria-pressed', nowOn ? 'true' : 'false');
           applyFilters();
         });
       });
