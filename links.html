@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <title>Sasenka Loves Food, start here</title>
+  <meta name="description" content="Tap any review: the full Sasenka Loves Food archive, photo-first, in one place.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    /* Tile-lobby page. A narrow one-column shell that opens into
+       a square-tile grid of every review, most recent first. Built
+       for the visitor arriving from the Instagram bio on a phone. */
+    .links-main { padding: 26px 0 56px; }
+    .links-container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+    .links-masthead { text-align: center; padding: 6px 0 20px; }
+    .links-masthead .brand-mark { display: inline-block; width: 172px; }
+    .links-masthead .brand-mark svg { width: 100%; height: auto; display: block; }
+    .links-eyebrow {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--tomato);
+      margin-top: 16px;
+    }
+    .links-sub {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ink-muted);
+      margin: 8px 0 0;
+      line-height: 1.45;
+    }
+
+    /* Quick-actions strip: the non-review lobby links sit above the
+       grid as small, understated pills. Perfect score gets the tomato
+       accent so it pops in the feed. */
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin: 22px 0 18px;
+      padding: 0;
+      list-style: none;
+    }
+    .quick-actions a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      background: var(--paper);
+      transition: all .18s ease;
+    }
+    .quick-actions a:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
+    .quick-actions a.qa-accent {
+      background: var(--tomato);
+      border-color: var(--tomato);
+      color: var(--paper);
+    }
+    .quick-actions a.qa-accent:hover {
+      background: var(--tomato-ink);
+      border-color: var(--tomato-ink);
+      color: var(--paper);
+    }
+
+    /* The grid itself: 2-col on phone, 3-col on tablet+ so it echoes
+       Instagram's own profile density on bigger screens. */
+    .tile-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+    }
+    @media (min-width: 560px) {
+      .tile-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .tile {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      border-radius: 2px;
+      background: var(--cream);
+      text-decoration: none;
+      color: var(--paper);
+      transition: transform .2s ease;
+    }
+    /* Padding-bottom trick: makes the tile a perfect square regardless
+       of viewport, and is more portable than aspect-ratio. */
+    .tile::before {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+    .tile-photo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .tile:hover .tile-photo { transform: scale(1.04); }
+    .tile-shade {
+      /* Dark gradient so the name stays legible on any photo. */
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 45%, rgba(0,0,0,0.72) 100%);
+      pointer-events: none;
+    }
+    .tile-name {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      z-index: 1;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.15;
+      letter-spacing: -0.005em;
+      color: var(--paper);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+    }
+    @media (min-width: 560px) {
+      .tile-name { font-size: 13.5px; }
+    }
+
+    /* Instagram footer row: branded, centred, sits beneath the grid. */
+    .ig-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 14px;
+      margin: 22px 0 0;
+      transition: all .18s ease;
+    }
+    .ig-row:hover {
+      border-color: var(--tomato);
+      color: var(--tomato);
+      border-bottom-color: var(--tomato);
+    }
+    .ig-row svg { width: 18px; height: 18px; }
+
+    /* Footer wordmark, tiny. */
+    .links-footer {
+      text-align: center;
+      margin-top: 34px;
+      padding-top: 22px;
+      border-top: 1px solid var(--rule);
+    }
+    .links-footer .brand-mark { display: inline-block; width: 112px; opacity: 0.65; }
+    .links-footer .brand-mark svg { width: 100%; height: auto; display: block; }
+    .links-footer .copy {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main class="links-main">
+    <div class="links-container">
+
+      <header class="links-masthead">
+        <a class="brand-mark" href="index.html" aria-label="Sasenka Loves Food, home">
+          <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <text x="0" y="78" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">SASENKA</text>
+            <text x="0" y="160" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">L</text>
+            <g transform="translate(44 105) scale(0.47)">
+              <path d="M134.756 39.507C134.756 90.727 67.378 117.057 67.378 117.057C67.378 117.057 0 90.727 0 39.507C0 17.681 16.28 0 36.376 0C49.472 0 60.965 7.523 67.378 18.785C73.791 7.523 85.284 0 98.38 0C118.499 0 134.756 17.681 134.756 39.507Z" fill="#BD112E"/>
+            </g>
+            <text x="108" y="160" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">VES</text>
+            <text x="0" y="218" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">FOOD.</text>
+          </svg>
+        </a>
+        <span class="links-eyebrow">From my Instagram</span>
+        <p class="links-sub">Tap any square to read the review.</p>
+      </header>
+
+      <ul class="quick-actions">
+        <li><a href="reviews-archive.html">Filter &amp; sort</a></li>
+        <li><a href="rating-system.html">How I rate</a></li>
+        <li><a href="about.html">About Sasenka</a></li>
+      </ul>
+
+      <!-- TILE GRID — BUILD:TILES -->
+      <div class="tile-grid">
+        <a class="tile" href="reviews/20260409-Aunty.html" aria-label="Read the review of Aunty">
+          <img class="tile-photo" src="assets/reviews/2026-04-09_auntyonwandoo/01_18087311645194797.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Aunty</span>
+        </a>
+        <a class="tile" href="reviews/20260331-MonalDining.html" aria-label="Read the review of Monal Dining">
+          <img class="tile-photo" src="assets/reviews/2026-03-31_monaldining/01_18432584782141051.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Monal Dining</span>
+        </a>
+        <a class="tile" href="reviews/20260310-LilongRestaurant.html" aria-label="Read the review of Lilong Restaurant">
+          <img class="tile-photo" src="assets/reviews/2026-03-10_lilongrestaurant/01_17868807885579339.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Lilong Restaurant</span>
+        </a>
+        <a class="tile" href="reviews/20260304-Venner.html" aria-label="Read the review of Venner">
+          <img class="tile-photo" src="assets/reviews/2026-03-04_WestEndBrisbane/01_18017961773650161.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Venner</span>
+        </a>
+        <a class="tile" href="reviews/20260224-BoscoWineGrill.html" aria-label="Read the review of Bosco Wine Grill">
+          <img class="tile-photo" src="assets/reviews/2026-02-24_bosco-winegrill/01_18120847072606652.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Bosco Wine Grill</span>
+        </a>
+        <a class="tile" href="reviews/20260219-Marlowe.html" aria-label="Read the review of Marlowe">
+          <img class="tile-photo" src="assets/reviews/2026-02-19_davidsflynn/01_17883731508354569.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Marlowe</span>
+        </a>
+        <a class="tile" href="reviews/20260210-Darkshepherd.html" aria-label="Read the review of Dark Shepherd">
+          <img class="tile-photo" src="assets/reviews/2026-02-10_darkshepherd-bne/01_18111596410725670.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Dark Shepherd</span>
+        </a>
+        <a class="tile" href="reviews/20260205-RaRestaurantAndBar.html" aria-label="Read the review of Ra Restaurant And Bar">
+          <img class="tile-photo" src="assets/reviews/2026-02-05_ra-restaurant-and-bar/01_17848571763638378.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Ra Restaurant And Bar</span>
+        </a>
+        <a class="tile" href="reviews/20260202-SupernormalBrisbane.html" aria-label="Read the review of Supernormal Brisbane">
+          <img class="tile-photo" src="assets/reviews/2026-02-02_supernormal-brisbane/01_17914463352125975.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Supernormal Brisbane</span>
+        </a>
+        <a class="tile" href="reviews/20260129-HontoRestaurant.html" aria-label="Read the review of Honto Restaurant">
+          <img class="tile-photo" src="assets/reviews/2026-01-29_honto-restaurant/01_18086440697517704.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Honto Restaurant</span>
+        </a>
+        <a class="tile" href="reviews/20260122-NugGeneralstore.html" aria-label="Read the review of Nug Generalstore">
+          <img class="tile-photo" src="assets/reviews/2026-01-22_nug-generalstore/01_18556833091005901.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Nug Generalstore</span>
+        </a>
+        <a class="tile" href="reviews/20260120-FatcowOnjamesst.html" aria-label="Read the review of Fatcow Onjamesst">
+          <img class="tile-photo" src="assets/reviews/2026-01-20_fatcow-onjamesst/01_18096929386917816.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Fatcow Onjamesst</span>
+        </a>
+        <a class="tile" href="reviews/20251222-AgnesRestaurant.html" aria-label="Read the review of Agnes Restaurant">
+          <img class="tile-photo" src="assets/reviews/2025-12-22_agnes-restaurant/01_17987825798756577.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Agnes Restaurant</span>
+        </a>
+        <a class="tile" href="reviews/20251209-Capiche.html" aria-label="Read the review of Capiche">
+          <img class="tile-photo" src="assets/reviews/2025-12-09_capicherestaurant/01_18110955946552350.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Capiche</span>
+        </a>
+        <a class="tile" href="reviews/20251204-StationByKotuwa.html" aria-label="Read the review of Station by Kotuwa">
+          <img class="tile-photo" src="assets/reviews/2025-12-04_stationbykotuwa/01_18128279245450682.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Station by Kotuwa</span>
+        </a>
+        <a class="tile" href="reviews/20251201-LemakKitchenAndBar.html" aria-label="Read the review of Lemak Kitchen and Bar">
+          <img class="tile-photo" src="assets/reviews/2025-12-01_lemakkitchenandbar/01_17971782569980594.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Lemak Kitchen and Bar</span>
+        </a>
+        <a class="tile" href="reviews/20251128-GoldenAvenueRestaurant.html" aria-label="Read the review of Golden Avenue Restaurant">
+          <img class="tile-photo" src="assets/reviews/2025-11-28_golden-avenue-restaurant/05_18063741299437501.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Golden Avenue Restaurant</span>
+        </a>
+        <a class="tile" href="reviews/20251124-LaylaBrisbane.html" aria-label="Read the review of Layla Brisbane">
+          <img class="tile-photo" src="assets/reviews/2025-11-24_laylabrisbane/01_18327147457240485.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Layla Brisbane</span>
+        </a>
+        <a class="tile" href="reviews/20251118-WillowRestaurant.html" aria-label="Read the review of Willow Restaurant">
+          <img class="tile-photo" src="assets/reviews/2025-11-18_willow-restaurant/01_17991288656884335.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Willow Restaurant</span>
+        </a>
+        <a class="tile" href="reviews/20251112-MariposaRestaurant.html" aria-label="Read the review of Mariposa Restaurant">
+          <img class="tile-photo" src="assets/reviews/2025-11-12_mariposa-restaurant/01_18084907339995518.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Mariposa Restaurant</span>
+        </a>
+        <a class="tile" href="reviews/20251029-DeCentraleDelft.html" aria-label="Read the review of De Centrale Delft">
+          <img class="tile-photo" src="assets/reviews/2025-10-29_decentraledelft/01_18302196400264876.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">De Centrale Delft</span>
+        </a>
+        <a class="tile" href="reviews/20251028-ClarenceRestaurant.html" aria-label="Read the review of Clarence Restaurant">
+          <img class="tile-photo" src="assets/reviews/2025-10-28_clarence-restaurant/01_18082253117053257.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Clarence Restaurant</span>
+        </a>
+        <a class="tile" href="reviews/20251027-SingaporeChilliCrab.html" aria-label="Read the review of Singapore Chilli Crab">
+          <img class="tile-photo" src="assets/reviews/2025-10-27_SingaporeChilliCrab/01_18069713729585467.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Singapore Chilli Crab</span>
+        </a>
+        <a class="tile" href="reviews/20251015-SushiRoom.html" aria-label="Read the review of Sushi Room">
+          <img class="tile-photo" src="assets/reviews/2025-10-15_sushi-room/01_18065381774613031.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Sushi Room</span>
+        </a>
+        <a class="tile" href="reviews/20251009-ExhibitionRestaurant.html" aria-label="Read the review of Exhibition Restaurant">
+          <img class="tile-photo" src="assets/reviews/2025-10-09_exhibitionrestaurant/09_18076466710887653.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Exhibition Restaurant</span>
+        </a>
+        <a class="tile" href="reviews/20250918-ScopriCarlton.html" aria-label="Read the review of Scopri Carlton">
+          <img class="tile-photo" src="assets/reviews/2025-09-18_scopri-carlton/01_18070164304939524.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Scopri Carlton</span>
+        </a>
+        <a class="tile" href="reviews/20250902-MilquetoastWineBar.html" aria-label="Read the review of Milquetoast Wine Bar">
+          <img class="tile-photo" src="assets/reviews/2025-09-02_milquetoastwinebar/01_18090898018684200.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Milquetoast Wine Bar</span>
+        </a>
+        <a class="tile" href="reviews/20250831-LongwangBrisbane.html" aria-label="Read the review of Longwang Brisbane">
+          <img class="tile-photo" src="assets/reviews/2025-08-31_longwang-brisbane/01_18284279770272832.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Longwang Brisbane</span>
+        </a>
+        <a class="tile" href="reviews/20250826-SNUG.html" aria-label="Read the review of SNUG">
+          <img class="tile-photo" src="assets/reviews/2025-08-26_snug-bne/01_18040059128671502.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">SNUG</span>
+        </a>
+        <a class="tile" href="reviews/20250821-MinistryOfCrab.html" aria-label="Read the review of Ministry of Crab">
+          <img class="tile-photo" src="assets/reviews/2025-08-21_ministryofcrab/01_18073116233473897.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Ministry of Crab</span>
+        </a>
+        <a class="tile" href="reviews/20250814-RosmarinoBrisbane.html" aria-label="Read the review of Rosmarino Brisbane">
+          <img class="tile-photo" src="assets/reviews/2025-08-14_rosmarino-brisbane/01_18108235411478009.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Rosmarino Brisbane</span>
+        </a>
+        <a class="tile" href="reviews/20250812-TheTamarind.html" aria-label="Read the review of The Tamarind">
+          <img class="tile-photo" src="assets/reviews/2025-08-12_the-tamarind/01_18087515872796650.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">The Tamarind</span>
+        </a>
+        <a class="tile" href="reviews/20250807-BarRosaSouthbrisbane.html" aria-label="Read the review of Bar Rosa Southbrisbane">
+          <img class="tile-photo" src="assets/reviews/2025-08-07_bar-rosa-southbrisbane/01_18121560784477926.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Bar Rosa Southbrisbane</span>
+        </a>
+        <a class="tile" href="reviews/20250805-TheLongApron.html" aria-label="Read the review of The Long Apron">
+          <img class="tile-photo" src="assets/reviews/2025-08-05_thelongapron/02_18362723563148140.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">The Long Apron</span>
+        </a>
+        <a class="tile" href="reviews/20250731-Snackman.html" aria-label="Read the review of Snackman">
+          <img class="tile-photo" src="assets/reviews/2025-07-31_snackmanbris/02_18319702060235170.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Snackman</span>
+        </a>
+        <a class="tile" href="reviews/20250729-BillysPineAndBambooRestaurant.html" aria-label="Read the review of Billy&amp;#x27;s Pine and Bamboo Restaurant">
+          <img class="tile-photo" src="assets/reviews/2025-07-29_brisbanerestaurants/01_18096932806721226.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Billy&amp;#x27;s Pine and Bamboo Restaurant</span>
+        </a>
+        <a class="tile" href="reviews/20250726-Komeyui.html" aria-label="Read the review of Komeyui">
+          <img class="tile-photo" src="assets/reviews/2025-07-26_komeyui-bris/01_18198873082312325.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Komeyui</span>
+        </a>
+        <a class="tile" href="reviews/20250725-SpillwineMaleny.html" aria-label="Read the review of Spillwine Maleny">
+          <img class="tile-photo" src="assets/reviews/2025-07-25_spillwine-maleny/01_18081424936857835.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Spillwine Maleny</span>
+        </a>
+        <a class="tile" href="reviews/20250715-CreoleSoulKitchen.html" aria-label="Read the review of Creole Soul Kitchen">
+          <img class="tile-photo" src="assets/reviews/2025-07-15_creolesoulkitchen/01_17946249179882153.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Creole Soul Kitchen</span>
+        </a>
+        <a class="tile" href="reviews/20250711-Petite.html" aria-label="Read the review of Petite">
+          <img class="tile-photo" src="assets/reviews/2025-07-11_petitebris/01_18166727416353370.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Petite</span>
+        </a>
+        <a class="tile" href="reviews/20250708-Walters.html" aria-label="Read the review of Walters">
+          <img class="tile-photo" src="assets/reviews/2025-07-08_waltersbrisbane/01_18072289630807415.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Walters</span>
+        </a>
+        <a class="tile" href="reviews/20250703-Yamas.html" aria-label="Read the review of Yamas">
+          <img class="tile-photo" src="assets/reviews/2025-07-03_yamas-greek/01_17972764139902033.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Yamas</span>
+        </a>
+        <a class="tile" href="reviews/20250701-Kafenio.html" aria-label="Read the review of Kafenio">
+          <img class="tile-photo" src="assets/reviews/2025-07-01_kafeniobrisbane/01_18048939032414435.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Kafenio</span>
+        </a>
+        <a class="tile" href="reviews/20250626-RaRestaurantAndBar.html" aria-label="Read the review of Ra Restaurant And Bar">
+          <img class="tile-photo" src="assets/reviews/2025-06-26_ra-restaurant-and-bar/01_18032666618680695.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Ra Restaurant And Bar</span>
+        </a>
+        <a class="tile" href="reviews/20250620-LePetitChef.html" aria-label="Read the review of Le Petit Chef">
+          <img class="tile-photo" src="assets/reviews/2025-06-20_FoodieExperience/01_18510493918017987.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Le Petit Chef</span>
+        </a>
+        <a class="tile" href="reviews/20250617-CutByWolfgangPuck.html" aria-label="Read the review of Cut by Wolfgang Puck">
+          <img class="tile-photo" src="assets/reviews/2025-06-17_cutbywolfgangpucksg/01_18085699168657186.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Cut by Wolfgang Puck</span>
+        </a>
+        <a class="tile" href="reviews/20250612-Takashiya.html" aria-label="Read the review of Takashiya">
+          <img class="tile-photo" src="assets/reviews/2025-06-12_takashiya-au/01_18064588595120019.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Takashiya</span>
+        </a>
+        <a class="tile" href="reviews/20250610-Locale.html" aria-label="Read the review of Locale">
+          <img class="tile-photo" src="assets/reviews/2025-06-10_localenoosa/01_18364796962183531.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Locale</span>
+        </a>
+        <a class="tile" href="reviews/20250605-JoyRestaurant.html" aria-label="Read the review of Joy restaurant">
+          <img class="tile-photo" src="assets/reviews/2025-06-05_joyrestaurant/01_18077859961803672.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Joy restaurant</span>
+        </a>
+        <a class="tile" href="reviews/20250603-Central.html" aria-label="Read the review of Central">
+          <img class="tile-photo" src="assets/reviews/2025-06-03_centralbne/01_18049584659387463.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Central</span>
+        </a>
+        <a class="tile" href="reviews/20250530-JuliusPizzeria.html" aria-label="Read the review of Julius Pizzeria">
+          <img class="tile-photo" src="assets/reviews/2025-05-30_juliuspizzeria/01_18068438729312447.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Julius Pizzeria</span>
+        </a>
+        <a class="tile" href="reviews/20250522-OgeeHobart.html" aria-label="Read the review of Ogee Hobart">
+          <img class="tile-photo" src="assets/reviews/2025-05-22_ogee-hobart/01_18393620056114270.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Ogee Hobart</span>
+        </a>
+        <a class="tile" href="reviews/20250519-Tillerman.html" aria-label="Read the review of Tillerman">
+          <img class="tile-photo" src="assets/reviews/2025-05-19_tillermanrestaurant/01_17919903440981281.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Tillerman</span>
+        </a>
+        <a class="tile" href="reviews/20250515-Diermakr.html" aria-label="Read the review of Diermakr">
+          <img class="tile-photo" src="assets/reviews/2025-05-15_diermakr/02_18144592756382693.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Diermakr</span>
+        </a>
+        <a class="tile" href="reviews/20250513-WalkwayToCeylon.html" aria-label="Read the review of Walkway to Ceylon">
+          <img class="tile-photo" src="assets/reviews/2025-05-13_walkwaytoceylon/01_18066889094288242.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Walkway to Ceylon</span>
+        </a>
+        <a class="tile" href="reviews/20250507-Attimi.html" aria-label="Read the review of Attimi">
+          <img class="tile-photo" src="assets/reviews/2025-05-07_attimi-brisbane/01_17937298737001533.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Attimi</span>
+        </a>
+        <a class="tile" href="reviews/20250505-HimalayanCafe.html" aria-label="Read the review of The Himalayan Cafe">
+          <img class="tile-photo" src="assets/reviews/2025-05-05_HimalayanCafe/01_17965897199912121.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">The Himalayan Cafe</span>
+        </a>
+        <a class="tile" href="reviews/20250502-NaldhamHouse.html" aria-label="Read the review of The Brasserie at Naldham House">
+          <img class="tile-photo" src="assets/reviews/2025-05-02_naldhamhouse/01_18078515503696292.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">The Brasserie at Naldham House</span>
+        </a>
+        <a class="tile" href="reviews/20250502-PenelopeBistro.html" aria-label="Read the review of Penelope Bistro">
+          <img class="tile-photo" src="assets/reviews/2025-05-02_penelope-bistro/01_18025790750669942.png" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Penelope Bistro</span>
+        </a>
+        <a class="tile" href="reviews/20250430-TheFiftySix.html" aria-label="Read the review of The Fifty Six">
+          <img class="tile-photo" src="assets/reviews/2025-04-30_thefiftysixrestaurant/01_18061216847511494.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">The Fifty Six</span>
+        </a>
+        <a class="tile" href="reviews/20250426-TheGreen.html" aria-label="Read the review of The Green">
+          <img class="tile-photo" src="assets/reviews/2025-04-26_thegreen-au/01_18145417141347019.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">The Green</span>
+        </a>
+        <a class="tile" href="reviews/20250424-BarryParadePublicHouse.html" aria-label="Read the review of Barry Parade Public House">
+          <img class="tile-photo" src="assets/reviews/2025-04-24_barryparadeph/01_18500350270014573.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Barry Parade Public House</span>
+        </a>
+        <a class="tile" href="reviews/20250420-StiltsDining.html" aria-label="Read the review of Stilts Dining">
+          <img class="tile-photo" src="assets/reviews/2025-04-20_stilts-dining/01_18105965602499766.jpg" alt="" loading="lazy">
+          <span class="tile-shade" aria-hidden="true"></span>
+          <span class="tile-name">Stilts Dining</span>
+        </a>
+      </div>
+      <!-- /BUILD:TILES -->
+
+      <a class="ig-row" href="https://instagram.com/sasenkalovesfood" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/>
+        </svg>
+        <span>@sasenkalovesfood on Instagram</span>
+      </a>
+
+      <footer class="links-footer">
+        <a class="brand-mark" href="index.html" aria-label="Sasenka Loves Food, home">
+          <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <text x="0" y="78" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">SASENKA</text>
+            <text x="0" y="160" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">L</text>
+            <g transform="translate(44 105) scale(0.47)">
+              <path d="M134.756 39.507C134.756 90.727 67.378 117.057 67.378 117.057C67.378 117.057 0 90.727 0 39.507C0 17.681 16.28 0 36.376 0C49.472 0 60.965 7.523 67.378 18.785C73.791 7.523 85.284 0 98.38 0C118.499 0 134.756 17.681 134.756 39.507Z" fill="#BD112E"/>
+            </g>
+            <text x="108" y="160" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">VES</text>
+            <text x="0" y="218" font-family="Archivo Black, Arial Black, Impact, sans-serif" font-size="78" font-weight="900" fill="#1D1D1D" letter-spacing="-2">FOOD.</text>
+          </svg>
+        </a>
+        <span class="copy">&copy; 2026 Sasenka Loves Food</span>
+      </footer>
+
+    </div>
+  </main>
+</body>
+</html>

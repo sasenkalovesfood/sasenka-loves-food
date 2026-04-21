@@ -46,7 +46,7 @@ ARCHIVE_HTML = ROOT / "reviews-archive.html"
 
 GENERATED_MARKER = "<!-- GENERATED FROM data/reviews/"
 
-HOMEPAGE_GRID_SIZE = 7
+HOMEPAGE_GRID_SIZE = 6
 
 MONTH_LABELS = [
     "January", "February", "March", "April", "May", "June",
