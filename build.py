@@ -43,6 +43,7 @@ DATA_REVIEWS_DIR = ROOT / "data" / "reviews"
 REVIEWS_DIR = ROOT / "reviews"
 INDEX_HTML = ROOT / "index.html"
 ARCHIVE_HTML = ROOT / "reviews-archive.html"
+LINKS_HTML = ROOT / "links.html"
 
 GENERATED_MARKER = "<!-- GENERATED FROM data/reviews/"
 
@@ -722,6 +723,38 @@ def render_filters(
 
 
 # ----------------------------------------------------------------------------
+# Links page: photo-tile lobby, every review as a square tile
+# ----------------------------------------------------------------------------
+
+def _links_thumb(r: dict) -> str:
+    # Legacy entries expose homepage_thumb; CMS entries expose thumb/hero_photo.
+    # Fall through in that order so either source renders cleanly.
+    return r.get("homepage_thumb") or r.get("thumb") or r.get("hero_photo") or ""
+
+
+def render_links_tile(r: dict) -> str:
+    name = esc(r.get("restaurant_name", ""))
+    href = esc(r.get("href", ""))
+    thumb = esc(_links_thumb(r))
+    return (
+        f'        <a class="tile" href="{href}" aria-label="Read the review of {name}">\n'
+        f'          <img class="tile-photo" src="{thumb}" alt="" loading="lazy">\n'
+        f'          <span class="tile-shade" aria-hidden="true"></span>\n'
+        f'          <span class="tile-name">{name}</span>\n'
+        f'        </a>'
+    )
+
+
+def render_links_grid(reviews: list[dict]) -> str:
+    tiles = [render_links_tile(r) for r in reviews]
+    return (
+        '      <div class="tile-grid">\n'
+        + "\n".join(tiles) + "\n"
+        '      </div>'
+    )
+
+
+# ----------------------------------------------------------------------------
 # Main
 # ----------------------------------------------------------------------------
 
@@ -784,6 +817,17 @@ def update_archive(reviews: list[dict], filter_chips: dict) -> None:
     ARCHIVE_HTML.write_text(source, encoding="utf-8")
 
 
+def update_links(reviews: list[dict]) -> None:
+    # links.html is the Instagram-bio lobby. The BUILD:TILES marker frames the
+    # photo-tile grid. Reviews are already sorted most-recent-first by
+    # load_all_reviews(), so we can drop them in as-is.
+    if not LINKS_HTML.exists():
+        return
+    source = LINKS_HTML.read_text(encoding="utf-8")
+    source = replace_marker(source, "TILES", render_links_grid(reviews))
+    LINKS_HTML.write_text(source, encoding="utf-8")
+
+
 def main() -> None:
     reviews, filter_chips = load_all_reviews()
     legacy_n = sum(1 for r in reviews if r["source"] == "legacy")
@@ -799,6 +843,9 @@ def main() -> None:
 
     update_archive(reviews, filter_chips)
     print("Updated reviews-archive.html")
+
+    update_links(reviews)
+    print("Updated links.html")
 
 
 if __name__ == "__main__":
