@@ -44,6 +44,20 @@ REVIEWS_DIR = ROOT / "reviews"
 INDEX_HTML = ROOT / "index.html"
 ARCHIVE_HTML = ROOT / "reviews-archive.html"
 LINKS_HTML = ROOT / "links.html"
+SITEMAP_XML = ROOT / "sitemap.xml"
+
+# Public domain, used to build sitemap loc URLs. Matches admin/config.yml.
+SITE_URL = "https://sasenkalovesfood.com"
+
+# Static top-level pages included in the sitemap alongside each review.
+# (path from site root, changefreq, priority)
+STATIC_SITEMAP_PAGES = [
+    ("",                     "weekly",  "1.0"),  # homepage
+    ("reviews-archive.html", "weekly",  "0.9"),
+    ("links.html",           "weekly",  "0.7"),
+    ("rating-system.html",   "monthly", "0.6"),
+    ("about.html",           "monthly", "0.5"),
+]
 
 GENERATED_MARKER = "<!-- GENERATED FROM data/reviews/"
 
@@ -812,6 +826,49 @@ def update_links(reviews: list[dict]) -> None:
     LINKS_HTML.write_text(source, encoding="utf-8")
 
 
+def _sitemap_url(loc: str, lastmod: str, changefreq: str, priority: str) -> str:
+    return (
+        "  <url>\n"
+        f"    <loc>{loc}</loc>\n"
+        f"    <lastmod>{lastmod}</lastmod>\n"
+        f"    <changefreq>{changefreq}</changefreq>\n"
+        f"    <priority>{priority}</priority>\n"
+        "  </url>"
+    )
+
+
+def update_sitemap(reviews: list[dict]) -> None:
+    """Write /sitemap.xml with every review page + the static top-level pages.
+
+    lastmod for review pages uses the visit date (r["date_iso"]).
+    lastmod for static pages uses the newest visit date on the site — that's
+    when the homepage feature, archive, and links tile grid were last touched.
+    """
+    if not reviews:
+        return
+    newest = max((r.get("date_iso") or "") for r in reviews) or reviews[0].get("date_iso", "")
+
+    parts = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+
+    # Static pages
+    for path, changefreq, priority in STATIC_SITEMAP_PAGES:
+        loc = f"{SITE_URL}/{path}" if path else f"{SITE_URL}/"
+        parts.append(_sitemap_url(loc, newest, changefreq, priority))
+
+    # Review pages, most recent first (matches the load order)
+    for r in reviews:
+        href = r.get("href")
+        lastmod = r.get("date_iso") or newest
+        if not href:
+            continue
+        loc = f"{SITE_URL}/{href}"
+        parts.append(_sitemap_url(loc, lastmod, "yearly", "0.7"))
+
+    parts.append("</urlset>\n")
+    SITEMAP_XML.write_text("\n".join(parts), encoding="utf-8")
+
+
 def main() -> None:
     reviews, filter_chips = load_all_reviews()
     legacy_n = sum(1 for r in reviews if r["source"] == "legacy")
@@ -830,6 +887,9 @@ def main() -> None:
 
     update_links(reviews)
     print("Updated links.html")
+
+    update_sitemap(reviews)
+    print("Updated sitemap.xml")
 
 
 if __name__ == "__main__":

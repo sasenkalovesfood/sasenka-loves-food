@@ -1,0 +1,9 @@
+# robots.txt for sasenkalovesfood.com
+# Open to all reputable crawlers; internal admin paths blocked.
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /_working/
+
+Sitemap: https://sasenkalovesfood.com/sitemap.xml
