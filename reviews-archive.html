@@ -3543,8 +3543,13 @@
       var searchClear = document.querySelector('.archive-search__clear');
       if (searchInput) {
         searchInput.addEventListener('input', function () {
+          var prevActive = !!state.search;
           state.search = searchInput.value.trim().toLowerCase();
+          var nowActive = !!state.search;
           if (searchClear) searchClear.hidden = state.search.length === 0;
+          // Re-layout only when transitioning in or out of search-active mode
+          // (or when combined with a score sort, which needs a heading update).
+          if (prevActive !== nowActive || state.sort !== 'date') applySort();
           applyFilters();
         });
       }
@@ -3554,6 +3559,7 @@
           state.search = '';
           searchClear.hidden = true;
           searchInput.focus();
+          applySort();
           applyFilters();
         });
       }
@@ -3618,11 +3624,58 @@
         });
       }
 
+      function collapseForSearch() {
+        // Flatten every card into the first month group's containers and
+        // relabel it "Search results". Sort by date descending so the newest
+        // matches come first. Mirrors collapseAndSortByScore but with a
+        // date-only sort.
+        var groups = document.querySelectorAll('.month-group');
+        if (!groups.length) return;
+        var firstGroup = groups[0];
+        firstGroup.querySelector('.month-head').textContent = 'Search results';
+        firstGroup.dataset.collapsed = 'false';
+        firstGroup.hidden = false;
+
+        var firstGrid = firstGroup.querySelector('.review-grid');
+        var firstList = firstGroup.querySelector('.archive-list');
+
+        document.querySelectorAll('.archive-card').forEach(function (card) {
+          if (card.classList.contains('review-card')) firstGrid.appendChild(card);
+          else firstList.appendChild(card);
+        });
+
+        [firstGrid, firstList].forEach(function (container) {
+          var cards = Array.prototype.slice.call(container.children);
+          cards.sort(function (a, b) {
+            return (b.dataset.date || '').localeCompare(a.dataset.date || '');
+          });
+          cards.forEach(function (c) { container.appendChild(c); });
+        });
+
+        Array.prototype.slice.call(groups, 1).forEach(function (g) {
+          g.dataset.collapsed = 'true';
+          g.hidden = true;
+        });
+      }
+
       function applySort() {
         if (state.sort === 'date') {
-          restoreMonthGrouping();
+          if (state.search) {
+            collapseForSearch();
+          } else {
+            restoreMonthGrouping();
+          }
         } else {
           collapseAndSortByScore(state.sort);
+          if (state.search) {
+            // Score sort + active search: relabel the single visible group so
+            // it reads as a search result set rather than a global "Sorted by X".
+            var firstGroup = document.querySelector('.month-group');
+            if (firstGroup) {
+              firstGroup.querySelector('.month-head').textContent =
+                'Search results, sorted by ' + sortLabels[state.sort].toLowerCase();
+            }
+          }
         }
       }
     })();
