@@ -245,6 +245,19 @@
     }
     .month-group[hidden] { display: none; }
 
+    /* The .review-grid and .archive-list in styles.css both have a border-top +
+       72px padding-top, which stacks a second horizontal rule under each month
+       heading (which already carries its own border-bottom). Inside a month
+       group we don't need that second rule — drop it and tighten the spacing. */
+    .month-group .review-grid {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 28px;
+    }
+    .month-group .archive-list {
+      border-top: none;
+    }
+
     /* Grid view inherits existing .review-grid styles */
     .archive-reviews[data-view="grid"] .month-group .archive-list { display: none; }
     .archive-reviews[data-view="list"] .month-group .review-grid { display: none; }
