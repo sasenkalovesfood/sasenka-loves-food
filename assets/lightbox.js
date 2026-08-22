@@ -46,11 +46,18 @@
   var currentIndex = -1;
 
   function sourceFrom(photoEl) {
-    var bg = photoEl.style.backgroundImage || '';
-    var matches = bg.match(/url\(["']?([^"')]+)["']?\)/g) || [];
-    var last = matches[matches.length - 1] || '';
-    var m = last.match(/url\(["']?([^"')]+)["']?\)/);
-    var src = m ? m[1] : '';
+    // Support both <img class="photo" src="..."> and legacy
+    // <div class="photo" style="background-image:url(...)"> markup.
+    var src = '';
+    if (photoEl.tagName === 'IMG') {
+      src = photoEl.getAttribute('src') || photoEl.currentSrc || '';
+    } else {
+      var bg = photoEl.style.backgroundImage || '';
+      var matches = bg.match(/url\(["']?([^"')]+)["']?\)/g) || [];
+      var last = matches[matches.length - 1] || '';
+      var m = last.match(/url\(["']?([^"')]+)["']?\)/);
+      src = m ? m[1] : '';
+    }
     // Ask Unsplash for a larger version when enlarged
     src = src.replace(/([?&])w=\d+/, '$1w=1600');
     return src;

@@ -719,6 +719,13 @@ p + p { margin-top: 0; }
   background-color: var(--warm-cream);
   transition: opacity .25s ease;
   cursor: zoom-in;
+  /* Extra rules that activate when .photo is an <img> instead of a <div>.
+     No-ops on the div variant; on the img they preserve the same crop-to-fit
+     behaviour that background-image gave us. */
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 .gallery-grid .photo:hover { opacity: 0.88; }
 .gallery-grid figcaption {

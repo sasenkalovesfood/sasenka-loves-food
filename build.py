@@ -448,8 +448,8 @@ def render_cms_review_page(r: dict) -> str:
             caption = g.get("caption", "")
             figures.append(
                 f'          <figure>\n'
-                f'            <div class="photo" data-caption="{esc(caption)}" '
-                f'style="background-image:url(\'../{g["photo"]}\');"></div>\n'
+                f'            <img class="photo" data-caption="{esc(caption)}" '
+                f'src="../{g["photo"]}" alt="{esc(caption)}" loading="lazy">\n'
                 f'            <figcaption>{esc(caption)}</figcaption>\n'
                 f'          </figure>'
             )
