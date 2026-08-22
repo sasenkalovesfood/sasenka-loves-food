@@ -618,6 +618,54 @@ def _cms_archive_list_row(r: dict) -> str:
     )
 
 
+_BODY_RE = re.compile(r'<article class="review-body">(.+?)</article>', re.DOTALL)
+_TAG_RE = re.compile(r'<[^>]+>')
+_WS_RE = re.compile(r'\s+')
+_SEARCH_ATTR_RE = re.compile(r'(<a\s[^>]*?href="[^"]+")')
+
+
+def _extract_review_body_text(slug: str) -> str:
+    """Pull the review-body prose out of /reviews/<slug>.html as lowercased plaintext.
+    Returns empty string if the file or the body block isn't found."""
+    page = REVIEWS_DIR / f"{slug}.html"
+    if not page.exists():
+        return ""
+    html = page.read_text(encoding="utf-8", errors="replace")
+    m = _BODY_RE.search(html)
+    if not m:
+        return ""
+    text = _TAG_RE.sub(" ", m.group(1))
+    return _WS_RE.sub(" ", text).strip().lower()
+
+
+def _build_search_string(r: dict, body_text: str) -> str:
+    """Build the concatenated searchable text: name + cuisine + suburb + blurb + body.
+    Lowercased. Quotes stripped so the attribute value doesn't need extra escaping."""
+    parts = [
+        r.get("restaurant_name", ""),
+        r.get("cuisine_display", ""),
+        r.get("suburb_display", ""),
+        r.get("blurb", "") or r.get("tagline", ""),
+        body_text,
+    ]
+    joined = " ".join(p for p in parts if p).lower()
+    # Strip the double-quote char since we're embedding this in a "..."-quoted
+    # HTML attribute. Single quotes are fine.
+    return joined.replace('"', "")
+
+
+def _inject_search_attr(card_html: str, search_string: str) -> str:
+    """Splice a data-search="..." attribute into the opening <a> tag of a card.
+    Attribute lands right after the href="..." so it stays scannable."""
+    if not search_string:
+        return card_html
+    return _SEARCH_ATTR_RE.sub(
+        r'\1 data-search="' + esc(search_string) + '"',
+        card_html,
+        count=1,
+    )
+
+
 def render_archive(reviews: list[dict]) -> str:
     groups: dict[str, list[dict]] = {}
     for r in reviews:
@@ -630,14 +678,20 @@ def render_archive(reviews: list[dict]) -> str:
         grid_cards = []
         list_rows = []
         for r in entries:
+            body_text = _extract_review_body_text(r["slug"])
+            search_string = _build_search_string(r, body_text)
+
             if r["source"] == "legacy" and r.get("archive_grid_html"):
-                grid_cards.append("            " + r["archive_grid_html"])
+                card = "            " + r["archive_grid_html"]
             else:
-                grid_cards.append(_cms_archive_grid_card(r))
+                card = _cms_archive_grid_card(r)
+            grid_cards.append(_inject_search_attr(card, search_string))
+
             if r["source"] == "legacy" and r.get("archive_list_html"):
-                list_rows.append("            " + r["archive_list_html"])
+                row = "            " + r["archive_list_html"]
             else:
-                list_rows.append(_cms_archive_list_row(r))
+                row = _cms_archive_list_row(r)
+            list_rows.append(_inject_search_attr(row, search_string))
 
         label = month_label(entries[0]["date_iso"])
         sections.append(
